@@ -4,14 +4,14 @@
     "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\Models\\Models\\Models.csproj": {
+    "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\Models\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\Models\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\Models\\Models\\obj\\",
+        "outputPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -96,8 +96,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\Models\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\Models\\Models\\Models.csproj"
+              "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj"
               }
             }
           }
