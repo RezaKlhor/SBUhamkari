@@ -9,6 +9,17 @@ namespace Models.Models
     
     public class Skill: BaseEntity
     {
+        public Skill()
+        {
+        }
+
+        public Skill(string skillTitle, SkillLevel skillLevel, Person user)
+        {
+            SkillTitle = skillTitle;
+            SkillLevel = skillLevel;
+            User = user;
+        }
+
         public string SkillTitle { get; set; }
         public SkillLevel SkillLevel { get; set; }
        

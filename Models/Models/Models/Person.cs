@@ -10,6 +10,28 @@ namespace Models.Models
 {
     public class Person : User
     {
+        public Person()
+        {
+        }
+
+        public Person(string firstname, string lastname, int nationalIdNum, Gender gender)
+        {
+            Firstname = firstname;
+            Lastname = lastname;
+            NationalIdNum = nationalIdNum;
+            this.gender = gender;
+        }
+
+        public Person(DateTime birthDate, string firstname, string lastname, int nationalIdNum, Gender gender, byte[] cV)
+        {
+            BirthDate = birthDate;
+            Firstname = firstname;
+            Lastname = lastname;
+            NationalIdNum = nationalIdNum;
+            this.gender = gender;
+            CV = cV;
+        }
+
         [DisplayName("تاریخ تولد")]
         public DateTime BirthDate { get; set; }
 
@@ -34,10 +56,10 @@ namespace Models.Models
 
         [DisplayName("رزومه")]
         public Byte[] CV { get; set; }
-        public List<Skill> skills { get; set; }
+        public List<Skill>? skills { get; set; }
 
        
         public List<EducationRecord>? EducationRecords { get; set; }
-        public List<CoApplication> coApplications { get; set; }
+        public List<CoApplication>? coApplications { get; set; }
     }
 }

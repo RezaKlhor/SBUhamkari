@@ -36,6 +36,7 @@ namespace SBUhamkari.Controllers
             student.Username = "RezKalhor";
             student.Password = "65165";
             student.Faculty = new Faculty();
+            
             database.Students.Add(student);
             database.SaveChanges();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

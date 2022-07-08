@@ -23,7 +23,7 @@ namespace Models.Models
         [Required]
         public string Name { get; set; }
         public EducationInstitute EducationInstitute { get; set; }
-        public List<User> Users { get; set; }
+        public List<User>? Users { get; set; }
 
     }
 }

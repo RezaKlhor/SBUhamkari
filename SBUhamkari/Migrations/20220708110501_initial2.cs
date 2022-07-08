@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SBUhamkari.Migrations
 {
-    public partial class InitialMigrate : Migration
+    public partial class initial2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,11 +16,26 @@ namespace SBUhamkari.Migrations
                     guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EducationInstitutes", x => x.guid);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Followings",
+                columns: table => new
+                {
+                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FollowedID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Followings", x => x.guid);
                 });
 
             migrationBuilder.CreateTable(
@@ -32,7 +47,7 @@ namespace SBUhamkari.Migrations
                     ProjectExplain = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProjectState = table.Column<int>(type: "int", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,7 +62,7 @@ namespace SBUhamkari.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EducationInstituteguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,7 +83,7 @@ namespace SBUhamkari.Migrations
                     bytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,11 +103,10 @@ namespace SBUhamkari.Migrations
                     guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Facultyguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Companyguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CompanyID = table.Column<int>(type: "int", maxLength: 10, nullable: true),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -104,7 +118,7 @@ namespace SBUhamkari.Migrations
                     PersonnelID = table.Column<int>(type: "int", maxLength: 8, nullable: true),
                     StudentID = table.Column<int>(type: "int", maxLength: 8, nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -120,41 +134,6 @@ namespace SBUhamkari.Migrations
                         column: x => x.Companyguid,
                         principalTable: "Users",
                         principalColumn: "guid");
-                    table.ForeignKey(
-                        name: "FK_Users_Users_Userguid",
-                        column: x => x.Userguid,
-                        principalTable: "Users",
-                        principalColumn: "guid");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CoAnnouncements",
-                columns: table => new
-                {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    State = table.Column<int>(type: "int", nullable: false),
-                    Creatorguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CoAnnouncements", x => x.guid);
-                    table.ForeignKey(
-                        name: "FK_CoAnnouncements_Projects_Projectguid",
-                        column: x => x.Projectguid,
-                        principalTable: "Projects",
-                        principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CoAnnouncements_Users_Creatorguid",
-                        column: x => x.Creatorguid,
-                        principalTable: "Users",
-                        principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,7 +146,7 @@ namespace SBUhamkari.Migrations
                     ContactLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -187,10 +166,10 @@ namespace SBUhamkari.Migrations
                     guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Degree = table.Column<int>(type: "int", nullable: true),
                     EducationState = table.Column<int>(type: "int", nullable: false),
-                    EducationInstituteguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Personguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EducationInstituteguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Personguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -199,13 +178,13 @@ namespace SBUhamkari.Migrations
                         name: "FK_EducationRecords_EducationInstitutes_EducationInstituteguid",
                         column: x => x.EducationInstituteguid,
                         principalTable: "EducationInstitutes",
-                        principalColumn: "guid");
+                        principalColumn: "guid",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EducationRecords_Users_Personguid",
                         column: x => x.Personguid,
                         principalTable: "Users",
-                        principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "guid");
                 });
 
             migrationBuilder.CreateTable(
@@ -218,7 +197,7 @@ namespace SBUhamkari.Migrations
                     Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -246,7 +225,7 @@ namespace SBUhamkari.Migrations
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -269,7 +248,7 @@ namespace SBUhamkari.Migrations
                     Recieverguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Senderguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -296,7 +275,7 @@ namespace SBUhamkari.Migrations
                     Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -347,7 +326,7 @@ namespace SBUhamkari.Migrations
                     Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -375,7 +354,7 @@ namespace SBUhamkari.Migrations
                     SkillLevel = table.Column<int>(type: "int", nullable: false),
                     Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -397,7 +376,7 @@ namespace SBUhamkari.Migrations
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Professorguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -419,7 +398,7 @@ namespace SBUhamkari.Migrations
                     Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -438,31 +417,32 @@ namespace SBUhamkari.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CoApplication",
+                name: "CoAnnouncements",
                 columns: table => new
                 {
                     guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CV = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Applicantguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CoAnnouncementguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    State = table.Column<int>(type: "int", nullable: false),
+                    Creatorguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CoApplication", x => x.guid);
+                    table.PrimaryKey("PK_CoAnnouncements", x => x.guid);
                     table.ForeignKey(
-                        name: "FK_CoApplication_CoAnnouncements_CoAnnouncementguid",
-                        column: x => x.CoAnnouncementguid,
-                        principalTable: "CoAnnouncements",
-                        principalColumn: "guid");
-                    table.ForeignKey(
-                        name: "FK_CoApplication_Users_Applicantguid",
-                        column: x => x.Applicantguid,
-                        principalTable: "Users",
+                        name: "FK_CoAnnouncements_ProjectManagers_Creatorguid",
+                        column: x => x.Creatorguid,
+                        principalTable: "ProjectManagers",
                         principalColumn: "guid",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CoAnnouncements_Projects_Projectguid",
+                        column: x => x.Projectguid,
+                        principalTable: "Projects",
+                        principalColumn: "guid");
                 });
 
             migrationBuilder.CreateTable(
@@ -470,12 +450,12 @@ namespace SBUhamkari.Migrations
                 columns: table => new
                 {
                     guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Resume = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Studentguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Tarequestguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Studentguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Tarequestguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -484,13 +464,41 @@ namespace SBUhamkari.Migrations
                         name: "FK_TAapplications_TArequests_Tarequestguid",
                         column: x => x.Tarequestguid,
                         principalTable: "TArequests",
-                        principalColumn: "guid");
+                        principalColumn: "guid",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TAapplications_Users_Studentguid",
                         column: x => x.Studentguid,
                         principalTable: "Users",
+                        principalColumn: "guid");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CoApplications",
+                columns: table => new
+                {
+                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CV = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Applicantguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CoAnnouncementguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CoApplications", x => x.guid);
+                    table.ForeignKey(
+                        name: "FK_CoApplications_CoAnnouncements_CoAnnouncementguid",
+                        column: x => x.CoAnnouncementguid,
+                        principalTable: "CoAnnouncements",
                         principalColumn: "guid",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CoApplications_Users_Applicantguid",
+                        column: x => x.Applicantguid,
+                        principalTable: "Users",
+                        principalColumn: "guid");
                 });
 
             migrationBuilder.CreateIndex(
@@ -504,13 +512,13 @@ namespace SBUhamkari.Migrations
                 column: "Projectguid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoApplication_Applicantguid",
-                table: "CoApplication",
+                name: "IX_CoApplications_Applicantguid",
+                table: "CoApplications",
                 column: "Applicantguid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoApplication_CoAnnouncementguid",
-                table: "CoApplication",
+                name: "IX_CoApplications_CoAnnouncementguid",
+                table: "CoApplications",
                 column: "CoAnnouncementguid");
 
             migrationBuilder.CreateIndex(
@@ -619,11 +627,6 @@ namespace SBUhamkari.Migrations
                 column: "Facultyguid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Userguid",
-                table: "Users",
-                column: "Userguid");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_WorkFields_Projectguid",
                 table: "WorkFields",
                 column: "Projectguid");
@@ -637,7 +640,7 @@ namespace SBUhamkari.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CoApplication");
+                name: "CoApplications");
 
             migrationBuilder.DropTable(
                 name: "ContactInfos");
@@ -649,6 +652,9 @@ namespace SBUhamkari.Migrations
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
+                name: "Followings");
+
+            migrationBuilder.DropTable(
                 name: "News");
 
             migrationBuilder.DropTable(
@@ -656,9 +662,6 @@ namespace SBUhamkari.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProjectFiles");
-
-            migrationBuilder.DropTable(
-                name: "ProjectManagers");
 
             migrationBuilder.DropTable(
                 name: "ProjectUser");
@@ -680,6 +683,9 @@ namespace SBUhamkari.Migrations
 
             migrationBuilder.DropTable(
                 name: "TArequests");
+
+            migrationBuilder.DropTable(
+                name: "ProjectManagers");
 
             migrationBuilder.DropTable(
                 name: "Projects");

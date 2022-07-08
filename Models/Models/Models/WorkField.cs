@@ -10,6 +10,16 @@ namespace Models.Models
 {
     public class WorkField : BaseEntity
     {
+        public WorkField()
+        {
+        }
+
+        public WorkField(string name, User user)
+        {
+            Name = name;
+            User = user;
+        }
+
         [DisplayName("عنوان زمینه کاری")]
         [Required]
         public string Name { get; set; }

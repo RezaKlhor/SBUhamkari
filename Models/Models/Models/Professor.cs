@@ -10,12 +10,26 @@ namespace Models.Models
 {
     public class Professor : Person
     {
+        public Professor()
+        {
+        }
+
+        public Professor(int personnelID, List<TArequest> tArequests)
+        {
+            PersonnelID = personnelID;
+            TArequests = tArequests;
+        }
+
+        public Professor(int personnelID)
+        {
+            PersonnelID = personnelID;
+        }
 
         [Required]
         [StringLength(8, MinimumLength = 8, ErrorMessage = "طول شماره پرسنلی باید 8 رقم باشد")]
         [DisplayName("شماره پرسنلی")]
         public int PersonnelID { get; set; }
-        public List<TArequest> TArequests { get; set; }
+        public List<TArequest>? TArequests { get; set; }
 
 
     }

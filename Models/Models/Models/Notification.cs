@@ -10,6 +10,18 @@ namespace Models.Models
 {
     public class Notification : BaseEntity
     {
+        public Notification()
+        {
+        }
+
+        public Notification(string notifTittle, string notifText, User reciever, Project sender)
+        {
+            NotifTittle = notifTittle;
+            NotifText = notifText;
+            Reciever = reciever;
+            Sender = sender;
+        }
+
         [DisplayName("عنوان اعلان")]
         [Required]
         public string NotifTittle { get; set; }

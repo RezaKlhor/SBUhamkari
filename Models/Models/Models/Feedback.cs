@@ -10,6 +10,25 @@ namespace Models.Models
 {
     public class Feedback : BaseEntity
     {
+        public Feedback()
+        {
+        }
+
+        public Feedback(string? text, Score score, User user, Project project)
+        {
+            Text = text;
+            Score = score;
+            User = user;
+            Project = project;
+        }
+
+        public Feedback(Score score, User user, Project project)
+        {
+            Score = score;
+            User = user;
+            Project = project;
+        }
+
         [DisplayName("متن نظر")]
         public string? Text { get; set; }
 

@@ -14,7 +14,24 @@ namespace Models.Models
     }
     public class User: BaseEntity
     {
-       
+        public User()
+        {
+        }
+
+        public User(string username, string password, Faculty faculty)
+        {
+            Username = username;
+            Password = password;
+            Faculty = faculty;
+        }
+
+        public User(string username, string password, byte[]? avatar, Faculty faculty)
+        {
+            Username = username;
+            Password = password;
+            Avatar = avatar;
+            Faculty = faculty;
+        }
 
         [Required]
         [RegularExpression(@"({A-Za-z})+({A-Za-z}|(_)|(\.))*")]
@@ -36,7 +53,8 @@ namespace Models.Models
         public List<Notification>? notifications { get; set; }
         public List<News>? news { get; set; }
         public List<WorkField>? workFields { get; set; }
-        public List<User>? Following { get; set; }
+
+        
         
         public List<Feedback>? feedbacks { get; set; }
         public List<Project>? projects { get; set; }

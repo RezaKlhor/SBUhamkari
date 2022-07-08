@@ -11,6 +11,7 @@ namespace Models
 
 
         }
+       
         public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Professor> Professors { get; set; }
@@ -31,5 +32,6 @@ namespace Models
         public DbSet<TAapplication> TAapplications { get; set; }
         public DbSet<TArequest> TArequests { get; set; }
         public DbSet<WorkField> WorkFields { get; set; }
+        public DbSet<Following> Followings { get; set; }
     }
 }
