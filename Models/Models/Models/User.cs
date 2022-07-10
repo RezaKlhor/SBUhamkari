@@ -23,6 +23,7 @@ namespace Models.Models
             Username = username;
             Password = password;
             Faculty = faculty;
+
         }
 
         public User(string username, string password, byte[]? avatar, Faculty faculty)
@@ -52,14 +53,14 @@ namespace Models.Models
         public List<ContactInfo>? contactInfos { get; set; }
         public List<Notification>? notifications { get; set; }
         public List<News>? news { get; set; }
-        public List<WorkField>? workFields { get; set; }
+        public IList<WorkField>? workFields { get; set; }
 
         
         
         public List<Feedback>? feedbacks { get; set; }
         public List<Project>? projects { get; set; }
         public List<SavedProject>? SavedProjects { get; set; }
-        public Faculty Faculty { get; set; }
+        public Faculty? Faculty { get; set; }
 
 
 

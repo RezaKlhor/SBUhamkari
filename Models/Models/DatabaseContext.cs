@@ -11,7 +11,55 @@ namespace Models
 
 
         }
-       
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EducationInstitute>().HasData(new List<EducationInstitute>
+            {
+                new EducationInstitute
+                {
+                    Name="SBU"
+                }
+
+            });
+            //modelBuilder.Entity<Faculty>().HasData(new Faculty
+            //{
+            //    Name="CSE"
+
+            //});
+            modelBuilder.Entity<Student>().HasData(new Student
+            {
+                Username = "RezaKlhor",
+                Password = "324reza",
+                Firstname = "Reza",
+                Lastname = "Kalhori",
+                gender = Gender.male,
+                NationalIdNum = 3242115120,
+                StudentID = 96243057,
+                BirthDate = new DateTime(1999, 6, 10),
+
+            });
+            modelBuilder.Entity<Company>().HasData(new Company
+            {
+                CompanyName = "مرکز رشد دانشکده کامپیوتر",
+                CompanyIDnumber = 2222222222,
+                Username = "CSEroshd",
+                Password = "as6d4",
+                
+
+            });
+            modelBuilder.Entity<Professor>().HasData(new Professor
+            {
+                Username = "Dr.vahidi",
+                Password = "51324342",
+                Firstname = "Mojtaba",
+                Lastname = "Vahidi",
+                gender = Gender.male,
+                NationalIdNum = 1535132133,
+                PersonnelID = 235133212,
+                BirthDate = new DateTime(1980, 1, 1)
+            });
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Professor> Professors { get; set; }

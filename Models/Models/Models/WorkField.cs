@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Models.Models
@@ -24,6 +25,7 @@ namespace Models.Models
         [Required]
         public string Name { get; set; }
 
+        [JsonIgnore]
         public User User { get; set; }
 
     }

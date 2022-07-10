@@ -14,12 +14,12 @@ namespace Models.Models
         {
         }
 
-        public Student(int studentID)
+        public Student(uint studentID)
         {
             StudentID = studentID;
         }
 
-        public Student(int studentID, List<TAapplication>? taApplications) : this(studentID)
+        public Student(uint studentID, List<TAapplication>? taApplications) : this(studentID)
         {
             TaApplications = taApplications;
         }
@@ -27,7 +27,7 @@ namespace Models.Models
         [Required]
         [StringLength(8, MinimumLength = 8, ErrorMessage = "طول شماره دانشجویی باید 8 رقم باشد")]
         [DisplayName("شماره دانشجویی")]
-        public int StudentID { get; set; }
+        public uint StudentID { get; set; }
 
         public List<TAapplication>? TaApplications { get; set; }
 

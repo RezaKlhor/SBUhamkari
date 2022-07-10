@@ -14,7 +14,7 @@ namespace Models.Models
         {
         }
 
-        public Person(string firstname, string lastname, int nationalIdNum, Gender gender)
+        public Person(string username, string password, Faculty faculty,string firstname, string lastname, uint nationalIdNum, Gender gender):base( username,  password,  faculty)
         {
             Firstname = firstname;
             Lastname = lastname;
@@ -22,7 +22,7 @@ namespace Models.Models
             this.gender = gender;
         }
 
-        public Person(DateTime birthDate, string firstname, string lastname, int nationalIdNum, Gender gender, byte[] cV)
+        public Person(DateTime birthDate, string firstname, string lastname, uint nationalIdNum, Gender gender, byte[] cV)
         {
             BirthDate = birthDate;
             Firstname = firstname;
@@ -48,14 +48,14 @@ namespace Models.Models
         [Required]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "طول کد ملی باید ده رقم باشد")]
         [DisplayName("کد ملی")]
-        public int NationalIdNum { get; set; }
+        public uint NationalIdNum { get; set; }
 
         [Required]
         [DisplayName("جنسیت")]
         public Gender gender { get; set; }
 
         [DisplayName("رزومه")]
-        public Byte[] CV { get; set; }
+        public Byte[]? CV { get; set; }
         public List<Skill>? skills { get; set; }
 
        

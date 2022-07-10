@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,21 +11,22 @@ namespace Models.Models
         {
         }
 
-        public Company(int companyID, string companyName)
+        public Company(uint companyID, string companyName)
         {
-            CompanyID = companyID;
+            CompanyIDnumber = companyID;
             CompanyName = companyName;
         }
 
-        public Company(int companyID, string companyName, List<User>? companyMembers) : this(companyID, companyName)
+        public Company(uint companyID, string companyName, List<User>? companyMembers) : this(companyID, companyName)
         {
             CompanyMembers = companyMembers;
         }
+        
 
         [Required]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "طول شماره کسب شرکت باید ده رقم باشد")]
         [DisplayName("شماره کسب")]
-        public int CompanyID { get; set; }
+        public uint CompanyIDnumber { get; set; }
 
         [Required]
         [DisplayName("نام شرکت")]

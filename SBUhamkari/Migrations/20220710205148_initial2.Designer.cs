@@ -12,7 +12,7 @@ using Models;
 namespace SBUhamkari.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220708110501_initial2")]
+    [Migration("20220710205148_initial2")]
     partial class initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,20 +26,20 @@ namespace SBUhamkari.Migrations
 
             modelBuilder.Entity("Models.Models.CoAnnouncement", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Creatorguid")
+                    b.Property<Guid>("Creatorid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("Projectguid")
+                    b.Property<Guid?>("Projectid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("State")
@@ -53,29 +53,29 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Creatorguid");
+                    b.HasIndex("Creatorid");
 
-                    b.HasIndex("Projectguid");
+                    b.HasIndex("Projectid");
 
                     b.ToTable("CoAnnouncements");
                 });
 
             modelBuilder.Entity("Models.Models.CoApplication", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("Applicantguid")
+                    b.Property<Guid?>("Applicantid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("CV")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<Guid>("CoAnnouncementguid")
+                    b.Property<Guid>("CoAnnouncementid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreateTime")
@@ -88,18 +88,18 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Applicantguid");
+                    b.HasIndex("Applicantid");
 
-                    b.HasIndex("CoAnnouncementguid");
+                    b.HasIndex("CoAnnouncementid");
 
                     b.ToTable("CoApplications");
                 });
 
             modelBuilder.Entity("Models.Models.ContactInfo", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -119,19 +119,19 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Userguid")
+                    b.Property<Guid>("Userid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Userguid");
+                    b.HasIndex("Userid");
 
                     b.ToTable("ContactInfos");
                 });
 
             modelBuilder.Entity("Models.Models.EducationInstitute", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -145,14 +145,22 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
                     b.ToTable("EducationInstitutes");
+
+                    b.HasData(
+                        new
+                        {
+                            id = new Guid("4d0fa433-ff75-4585-b6e8-1fd4d3e91ba1"),
+                            CreateTime = new DateTime(2022, 7, 11, 1, 21, 47, 620, DateTimeKind.Local).AddTicks(3428),
+                            Name = "SBU"
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.EducationRecord", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -165,27 +173,27 @@ namespace SBUhamkari.Migrations
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("EducationInstituteguid")
+                    b.Property<Guid>("EducationInstituteid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("EducationState")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("Personguid")
+                    b.Property<Guid?>("Personid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("EducationInstituteguid");
+                    b.HasIndex("EducationInstituteid");
 
-                    b.HasIndex("Personguid");
+                    b.HasIndex("Personid");
 
                     b.ToTable("EducationRecords");
                 });
 
             modelBuilder.Entity("Models.Models.Faculty", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -195,23 +203,23 @@ namespace SBUhamkari.Migrations
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("EducationInstituteguid")
+                    b.Property<Guid>("EducationInstituteid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("EducationInstituteguid");
+                    b.HasIndex("EducationInstituteid");
 
                     b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("Models.Models.Feedback", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -221,7 +229,7 @@ namespace SBUhamkari.Migrations
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Projectguid")
+                    b.Property<Guid>("Projectid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Score")
@@ -230,21 +238,21 @@ namespace SBUhamkari.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Userguid")
+                    b.Property<Guid>("Userid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Projectguid");
+                    b.HasIndex("Projectid");
 
-                    b.HasIndex("Userguid");
+                    b.HasIndex("Userid");
 
                     b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("Models.Models.Following", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -260,14 +268,14 @@ namespace SBUhamkari.Migrations
                     b.Property<Guid>("UserID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
                     b.ToTable("Followings");
                 });
 
             modelBuilder.Entity("Models.Models.News", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -285,19 +293,19 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Userguid")
+                    b.Property<Guid>("Userid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Userguid");
+                    b.HasIndex("Userid");
 
                     b.ToTable("News");
                 });
 
             modelBuilder.Entity("Models.Models.Notification", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -315,24 +323,24 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Recieverguid")
+                    b.Property<Guid>("Recieverid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Senderguid")
+                    b.Property<Guid>("Senderid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Recieverguid");
+                    b.HasIndex("Recieverid");
 
-                    b.HasIndex("Senderguid");
+                    b.HasIndex("Senderid");
 
                     b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("Models.Models.Project", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -353,14 +361,14 @@ namespace SBUhamkari.Migrations
                     b.Property<int>("ProjectState")
                         .HasColumnType("int");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
                     b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Models.Models.ProjectFile", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -370,23 +378,23 @@ namespace SBUhamkari.Migrations
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Projectguid")
+                    b.Property<Guid>("Projectid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("bytes")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Projectguid");
+                    b.HasIndex("Projectid");
 
                     b.ToTable("ProjectFiles");
                 });
 
             modelBuilder.Entity("Models.Models.ProjectManager", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -396,24 +404,24 @@ namespace SBUhamkari.Migrations
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Projectguid")
+                    b.Property<Guid>("Projectid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Userguid")
+                    b.Property<Guid>("Userid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Projectguid");
+                    b.HasIndex("Projectid");
 
-                    b.HasIndex("Userguid");
+                    b.HasIndex("Userid");
 
                     b.ToTable("ProjectManagers");
                 });
 
             modelBuilder.Entity("Models.Models.SavedProject", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -423,24 +431,24 @@ namespace SBUhamkari.Migrations
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Projectguid")
+                    b.Property<Guid>("Projectid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Userguid")
+                    b.Property<Guid>("Userid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Projectguid");
+                    b.HasIndex("Projectid");
 
-                    b.HasIndex("Userguid");
+                    b.HasIndex("Userid");
 
                     b.ToTable("SavedProject");
                 });
 
             modelBuilder.Entity("Models.Models.Skill", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -457,19 +465,19 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Userguid")
+                    b.Property<Guid>("Userid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Userguid");
+                    b.HasIndex("Userid");
 
                     b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("Models.Models.TAapplication", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -483,27 +491,27 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<Guid?>("Studentguid")
+                    b.Property<Guid?>("Studentid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Tarequestguid")
+                    b.Property<Guid>("Tarequestid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("text")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Studentguid");
+                    b.HasIndex("Studentid");
 
-                    b.HasIndex("Tarequestguid");
+                    b.HasIndex("Tarequestid");
 
                     b.ToTable("TAapplications");
                 });
 
             modelBuilder.Entity("Models.Models.TArequest", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -513,7 +521,7 @@ namespace SBUhamkari.Migrations
                     b.Property<DateTime?>("DeleteTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Professorguid")
+                    b.Property<Guid>("Professorid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
@@ -524,23 +532,23 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Professorguid");
+                    b.HasIndex("Professorid");
 
                     b.ToTable("TArequests");
                 });
 
             modelBuilder.Entity("Models.Models.User", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("Avatar")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<Guid?>("Companyguid")
+                    b.Property<Guid?>("Companyid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreateTime")
@@ -553,7 +561,7 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Facultyguid")
+                    b.Property<Guid?>("Facultyid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Password")
@@ -564,11 +572,11 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Companyguid");
+                    b.HasIndex("Companyid");
 
-                    b.HasIndex("Facultyguid");
+                    b.HasIndex("Facultyid");
 
                     b.ToTable("Users");
 
@@ -577,7 +585,7 @@ namespace SBUhamkari.Migrations
 
             modelBuilder.Entity("Models.Models.WorkField", b =>
                 {
-                    b.Property<Guid>("guid")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -591,32 +599,32 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("Projectguid")
+                    b.Property<Guid?>("Projectid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Userguid")
+                    b.Property<Guid>("Userid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("guid");
+                    b.HasKey("id");
 
-                    b.HasIndex("Projectguid");
+                    b.HasIndex("Projectid");
 
-                    b.HasIndex("Userguid");
+                    b.HasIndex("Userid");
 
                     b.ToTable("WorkFields");
                 });
 
             modelBuilder.Entity("ProjectUser", b =>
                 {
-                    b.Property<Guid>("ProjectParticipantsguid")
+                    b.Property<Guid>("ProjectParticipantsid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("projectsguid")
+                    b.Property<Guid>("projectsid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ProjectParticipantsguid", "projectsguid");
+                    b.HasKey("ProjectParticipantsid", "projectsid");
 
-                    b.HasIndex("projectsguid");
+                    b.HasIndex("projectsid");
 
                     b.ToTable("ProjectUser");
                 });
@@ -625,15 +633,26 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasBaseType("Models.Models.User");
 
-                    b.Property<int>("CompanyID")
+                    b.Property<long>("CompanyIDnumber")
                         .HasMaxLength(10)
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Company");
+
+                    b.HasData(
+                        new
+                        {
+                            id = new Guid("d6adbd1b-dce4-43c6-8ed3-c0ea8a07e576"),
+                            CreateTime = new DateTime(2022, 7, 11, 1, 21, 47, 620, DateTimeKind.Local).AddTicks(3783),
+                            Password = "as6d4",
+                            Username = "CSEroshd",
+                            CompanyIDnumber = 2222222222L,
+                            CompanyName = "مرکز رشد دانشکده کامپیوتر"
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.Person", b =>
@@ -644,7 +663,6 @@ namespace SBUhamkari.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("CV")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Firstname")
@@ -657,9 +675,9 @@ namespace SBUhamkari.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("NationalIdNum")
+                    b.Property<long>("NationalIdNum")
                         .HasMaxLength(10)
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     b.Property<int>("gender")
                         .HasColumnType("int");
@@ -671,35 +689,65 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasBaseType("Models.Models.Person");
 
-                    b.Property<int>("PersonnelID")
+                    b.Property<long>("PersonnelID")
                         .HasMaxLength(8)
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     b.HasDiscriminator().HasValue("Professor");
+
+                    b.HasData(
+                        new
+                        {
+                            id = new Guid("cd17c714-f7ef-49b3-948c-4cbd5651a53f"),
+                            CreateTime = new DateTime(2022, 7, 11, 1, 21, 47, 620, DateTimeKind.Local).AddTicks(3831),
+                            Password = "51324342",
+                            Username = "Dr.vahidi",
+                            BirthDate = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Firstname = "Mojtaba",
+                            Lastname = "Vahidi",
+                            NationalIdNum = 1535132133L,
+                            gender = 0,
+                            PersonnelID = 235133212L
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.Student", b =>
                 {
                     b.HasBaseType("Models.Models.Person");
 
-                    b.Property<int>("StudentID")
+                    b.Property<long>("StudentID")
                         .HasMaxLength(8)
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     b.HasDiscriminator().HasValue("Student");
+
+                    b.HasData(
+                        new
+                        {
+                            id = new Guid("200352b9-a88f-43dd-9152-92667e7ab20e"),
+                            CreateTime = new DateTime(2022, 7, 11, 1, 21, 47, 620, DateTimeKind.Local).AddTicks(3538),
+                            Password = "324reza",
+                            Username = "RezaKlhor",
+                            BirthDate = new DateTime(1999, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Firstname = "Reza",
+                            Lastname = "Kalhori",
+                            NationalIdNum = 3242115120L,
+                            gender = 0,
+                            StudentID = 96243057L
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.CoAnnouncement", b =>
                 {
                     b.HasOne("Models.Models.ProjectManager", "Creator")
                         .WithMany("CoAnnouncements")
-                        .HasForeignKey("Creatorguid")
+                        .HasForeignKey("Creatorid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Models.Project", "Project")
                         .WithMany("CoAnnouncements")
-                        .HasForeignKey("Projectguid");
+                        .HasForeignKey("Projectid");
 
                     b.Navigation("Creator");
 
@@ -710,11 +758,11 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Person", "Applicant")
                         .WithMany("coApplications")
-                        .HasForeignKey("Applicantguid");
+                        .HasForeignKey("Applicantid");
 
                     b.HasOne("Models.Models.CoAnnouncement", "CoAnnouncement")
                         .WithMany("CoApplications")
-                        .HasForeignKey("CoAnnouncementguid")
+                        .HasForeignKey("CoAnnouncementid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -727,7 +775,7 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.User", "User")
                         .WithMany("contactInfos")
-                        .HasForeignKey("Userguid")
+                        .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -738,13 +786,13 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.EducationInstitute", "EducationInstitute")
                         .WithMany("EducationRecords")
-                        .HasForeignKey("EducationInstituteguid")
+                        .HasForeignKey("EducationInstituteid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Models.Person", "Person")
                         .WithMany("EducationRecords")
-                        .HasForeignKey("Personguid");
+                        .HasForeignKey("Personid");
 
                     b.Navigation("EducationInstitute");
 
@@ -755,7 +803,7 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.EducationInstitute", "EducationInstitute")
                         .WithMany("Faculties")
-                        .HasForeignKey("EducationInstituteguid")
+                        .HasForeignKey("EducationInstituteid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -766,13 +814,13 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Project", "Project")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("Projectguid")
+                        .HasForeignKey("Projectid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Models.User", "User")
                         .WithMany("feedbacks")
-                        .HasForeignKey("Userguid")
+                        .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -785,7 +833,7 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.User", "User")
                         .WithMany("news")
-                        .HasForeignKey("Userguid")
+                        .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -796,13 +844,13 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.User", "Reciever")
                         .WithMany("notifications")
-                        .HasForeignKey("Recieverguid")
+                        .HasForeignKey("Recieverid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Models.Project", "Sender")
                         .WithMany("Notifications")
-                        .HasForeignKey("Senderguid")
+                        .HasForeignKey("Senderid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -815,7 +863,7 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Project", "Project")
                         .WithMany("Filess")
-                        .HasForeignKey("Projectguid")
+                        .HasForeignKey("Projectid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -826,13 +874,13 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Project", "Project")
                         .WithMany("ProjectManagers")
-                        .HasForeignKey("Projectguid")
+                        .HasForeignKey("Projectid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("Userguid")
+                        .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -845,13 +893,13 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("Projectguid")
+                        .HasForeignKey("Projectid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Models.User", "User")
                         .WithMany("SavedProjects")
-                        .HasForeignKey("Userguid")
+                        .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -864,7 +912,7 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Person", "User")
                         .WithMany("skills")
-                        .HasForeignKey("Userguid")
+                        .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -875,11 +923,11 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Student", "Student")
                         .WithMany("TaApplications")
-                        .HasForeignKey("Studentguid");
+                        .HasForeignKey("Studentid");
 
                     b.HasOne("Models.Models.TArequest", "Tarequest")
                         .WithMany("TAapplications")
-                        .HasForeignKey("Tarequestguid")
+                        .HasForeignKey("Tarequestid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -892,7 +940,7 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Professor", "Professor")
                         .WithMany("TArequests")
-                        .HasForeignKey("Professorguid")
+                        .HasForeignKey("Professorid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -903,13 +951,11 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Company", null)
                         .WithMany("CompanyMembers")
-                        .HasForeignKey("Companyguid");
+                        .HasForeignKey("Companyid");
 
                     b.HasOne("Models.Models.Faculty", "Faculty")
                         .WithMany("Users")
-                        .HasForeignKey("Facultyguid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Facultyid");
 
                     b.Navigation("Faculty");
                 });
@@ -918,11 +964,11 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.Project", null)
                         .WithMany("WorkFields")
-                        .HasForeignKey("Projectguid");
+                        .HasForeignKey("Projectid");
 
                     b.HasOne("Models.Models.User", "User")
                         .WithMany("workFields")
-                        .HasForeignKey("Userguid")
+                        .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -933,13 +979,13 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasOne("Models.Models.User", null)
                         .WithMany()
-                        .HasForeignKey("ProjectParticipantsguid")
+                        .HasForeignKey("ProjectParticipantsid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.Models.Project", null)
                         .WithMany()
-                        .HasForeignKey("projectsguid")
+                        .HasForeignKey("projectsid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

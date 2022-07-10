@@ -14,13 +14,13 @@ namespace Models.Models
         {
         }
 
-        public Professor(int personnelID, List<TArequest> tArequests)
+        public Professor(uint personnelID, List<TArequest> tArequests)
         {
             PersonnelID = personnelID;
             TArequests = tArequests;
         }
 
-        public Professor(int personnelID)
+        public Professor(uint personnelID)
         {
             PersonnelID = personnelID;
         }
@@ -28,7 +28,7 @@ namespace Models.Models
         [Required]
         [StringLength(8, MinimumLength = 8, ErrorMessage = "طول شماره پرسنلی باید 8 رقم باشد")]
         [DisplayName("شماره پرسنلی")]
-        public int PersonnelID { get; set; }
+        public uint PersonnelID { get; set; }
         public List<TArequest>? TArequests { get; set; }
 
 

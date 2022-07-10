@@ -13,21 +13,21 @@ namespace SBUhamkari.Migrations
                 name: "EducationInstitutes",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EducationInstitutes", x => x.guid);
+                    table.PrimaryKey("PK_EducationInstitutes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Followings",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FollowedID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -35,14 +35,14 @@ namespace SBUhamkari.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Followings", x => x.guid);
+                    table.PrimaryKey("PK_Followings", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Projects",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProjectExplain = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProjectState = table.Column<int>(type: "int", nullable: false),
@@ -51,27 +51,27 @@ namespace SBUhamkari.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Projects", x => x.guid);
+                    table.PrimaryKey("PK_Projects", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Faculties",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EducationInstituteguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EducationInstituteid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Faculties", x => x.guid);
+                    table.PrimaryKey("PK_Faculties", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Faculties_EducationInstitutes_EducationInstituteguid",
-                        column: x => x.EducationInstituteguid,
+                        name: "FK_Faculties_EducationInstitutes_EducationInstituteid",
+                        column: x => x.EducationInstituteid,
                         principalTable: "EducationInstitutes",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -79,20 +79,20 @@ namespace SBUhamkari.Migrations
                 name: "ProjectFiles",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     bytes = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Projectid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectFiles", x => x.guid);
+                    table.PrimaryKey("PK_ProjectFiles", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ProjectFiles_Projects_Projectguid",
-                        column: x => x.Projectguid,
+                        name: "FK_ProjectFiles_Projects_Projectid",
+                        column: x => x.Projectid,
                         principalTable: "Projects",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -100,62 +100,61 @@ namespace SBUhamkari.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    Facultyguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Companyguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Facultyid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Companyid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyID = table.Column<int>(type: "int", maxLength: 10, nullable: true),
+                    CompanyIDnumber = table.Column<long>(type: "bigint", maxLength: 10, nullable: true),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Firstname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Lastname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    NationalIdNum = table.Column<int>(type: "int", maxLength: 10, nullable: true),
+                    NationalIdNum = table.Column<long>(type: "bigint", maxLength: 10, nullable: true),
                     gender = table.Column<int>(type: "int", nullable: true),
                     CV = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    PersonnelID = table.Column<int>(type: "int", maxLength: 8, nullable: true),
-                    StudentID = table.Column<int>(type: "int", maxLength: 8, nullable: true),
+                    PersonnelID = table.Column<long>(type: "bigint", maxLength: 8, nullable: true),
+                    StudentID = table.Column<long>(type: "bigint", maxLength: 8, nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.guid);
+                    table.PrimaryKey("PK_Users", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Users_Faculties_Facultyguid",
-                        column: x => x.Facultyguid,
+                        name: "FK_Users_Faculties_Facultyid",
+                        column: x => x.Facultyid,
                         principalTable: "Faculties",
-                        principalColumn: "guid",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
-                        name: "FK_Users_Users_Companyguid",
-                        column: x => x.Companyguid,
+                        name: "FK_Users_Users_Companyid",
+                        column: x => x.Companyid,
                         principalTable: "Users",
-                        principalColumn: "guid");
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "ContactInfos",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContactInfos", x => x.guid);
+                    table.PrimaryKey("PK_ContactInfos", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ContactInfos_Users_Userguid",
-                        column: x => x.Userguid,
+                        name: "FK_ContactInfos_Users_Userid",
+                        column: x => x.Userid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -163,56 +162,56 @@ namespace SBUhamkari.Migrations
                 name: "EducationRecords",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Degree = table.Column<int>(type: "int", nullable: true),
                     EducationState = table.Column<int>(type: "int", nullable: false),
-                    EducationInstituteguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Personguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EducationInstituteid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Personid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EducationRecords", x => x.guid);
+                    table.PrimaryKey("PK_EducationRecords", x => x.id);
                     table.ForeignKey(
-                        name: "FK_EducationRecords_EducationInstitutes_EducationInstituteguid",
-                        column: x => x.EducationInstituteguid,
+                        name: "FK_EducationRecords_EducationInstitutes_EducationInstituteid",
+                        column: x => x.EducationInstituteid,
                         principalTable: "EducationInstitutes",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EducationRecords_Users_Personguid",
-                        column: x => x.Personguid,
+                        name: "FK_EducationRecords_Users_Personid",
+                        column: x => x.Personid,
                         principalTable: "Users",
-                        principalColumn: "guid");
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Feedbacks",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<int>(type: "int", nullable: false),
-                    Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Projectid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Feedbacks", x => x.guid);
+                    table.PrimaryKey("PK_Feedbacks", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Feedbacks_Projects_Projectguid",
-                        column: x => x.Projectguid,
+                        name: "FK_Feedbacks_Projects_Projectid",
+                        column: x => x.Projectid,
                         principalTable: "Projects",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Feedbacks_Users_Userguid",
-                        column: x => x.Userguid,
+                        name: "FK_Feedbacks_Users_Userid",
+                        column: x => x.Userid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -220,21 +219,21 @@ namespace SBUhamkari.Migrations
                 name: "News",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_News", x => x.guid);
+                    table.PrimaryKey("PK_News", x => x.id);
                     table.ForeignKey(
-                        name: "FK_News_Users_Userguid",
-                        column: x => x.Userguid,
+                        name: "FK_News_Users_Userid",
+                        column: x => x.Userid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -242,28 +241,28 @@ namespace SBUhamkari.Migrations
                 name: "Notifications",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NotifTittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NotifText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Recieverguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Senderguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Recieverid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Senderid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Notifications", x => x.guid);
+                    table.PrimaryKey("PK_Notifications", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Notifications_Projects_Senderguid",
-                        column: x => x.Senderguid,
+                        name: "FK_Notifications_Projects_Senderid",
+                        column: x => x.Senderid,
                         principalTable: "Projects",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Notifications_Users_Recieverguid",
-                        column: x => x.Recieverguid,
+                        name: "FK_Notifications_Users_Recieverid",
+                        column: x => x.Recieverid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -271,26 +270,26 @@ namespace SBUhamkari.Migrations
                 name: "ProjectManagers",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Projectid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectManagers", x => x.guid);
+                    table.PrimaryKey("PK_ProjectManagers", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ProjectManagers_Projects_Projectguid",
-                        column: x => x.Projectguid,
+                        name: "FK_ProjectManagers_Projects_Projectid",
+                        column: x => x.Projectid,
                         principalTable: "Projects",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectManagers_Users_Userguid",
-                        column: x => x.Userguid,
+                        name: "FK_ProjectManagers_Users_Userid",
+                        column: x => x.Userid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -298,23 +297,23 @@ namespace SBUhamkari.Migrations
                 name: "ProjectUser",
                 columns: table => new
                 {
-                    ProjectParticipantsguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    projectsguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ProjectParticipantsid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    projectsid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectUser", x => new { x.ProjectParticipantsguid, x.projectsguid });
+                    table.PrimaryKey("PK_ProjectUser", x => new { x.ProjectParticipantsid, x.projectsid });
                     table.ForeignKey(
-                        name: "FK_ProjectUser_Projects_projectsguid",
-                        column: x => x.projectsguid,
+                        name: "FK_ProjectUser_Projects_projectsid",
+                        column: x => x.projectsid,
                         principalTable: "Projects",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectUser_Users_ProjectParticipantsguid",
-                        column: x => x.ProjectParticipantsguid,
+                        name: "FK_ProjectUser_Users_ProjectParticipantsid",
+                        column: x => x.ProjectParticipantsid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -322,26 +321,26 @@ namespace SBUhamkari.Migrations
                 name: "SavedProject",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Projectid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SavedProject", x => x.guid);
+                    table.PrimaryKey("PK_SavedProject", x => x.id);
                     table.ForeignKey(
-                        name: "FK_SavedProject_Projects_Projectguid",
-                        column: x => x.Projectguid,
+                        name: "FK_SavedProject_Projects_Projectid",
+                        column: x => x.Projectid,
                         principalTable: "Projects",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SavedProject_Users_Userguid",
-                        column: x => x.Userguid,
+                        name: "FK_SavedProject_Users_Userid",
+                        column: x => x.Userid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -349,21 +348,21 @@ namespace SBUhamkari.Migrations
                 name: "Skills",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SkillTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SkillLevel = table.Column<int>(type: "int", nullable: false),
-                    Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Skills", x => x.guid);
+                    table.PrimaryKey("PK_Skills", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Skills_Users_Userguid",
-                        column: x => x.Userguid,
+                        name: "FK_Skills_Users_Userid",
+                        column: x => x.Userid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -371,21 +370,21 @@ namespace SBUhamkari.Migrations
                 name: "TArequests",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Professorguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Professorid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TArequests", x => x.guid);
+                    table.PrimaryKey("PK_TArequests", x => x.id);
                     table.ForeignKey(
-                        name: "FK_TArequests_Users_Professorguid",
-                        column: x => x.Professorguid,
+                        name: "FK_TArequests_Users_Professorid",
+                        column: x => x.Professorid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -393,26 +392,26 @@ namespace SBUhamkari.Migrations
                 name: "WorkFields",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Userguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Projectid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkFields", x => x.guid);
+                    table.PrimaryKey("PK_WorkFields", x => x.id);
                     table.ForeignKey(
-                        name: "FK_WorkFields_Projects_Projectguid",
-                        column: x => x.Projectguid,
+                        name: "FK_WorkFields_Projects_Projectid",
+                        column: x => x.Projectid,
                         principalTable: "Projects",
-                        principalColumn: "guid");
+                        principalColumn: "id");
                     table.ForeignKey(
-                        name: "FK_WorkFields_Users_Userguid",
-                        column: x => x.Userguid,
+                        name: "FK_WorkFields_Users_Userid",
+                        column: x => x.Userid,
                         principalTable: "Users",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -420,221 +419,241 @@ namespace SBUhamkari.Migrations
                 name: "CoAnnouncements",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     State = table.Column<int>(type: "int", nullable: false),
-                    Creatorguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Projectguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Creatorid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Projectid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CoAnnouncements", x => x.guid);
+                    table.PrimaryKey("PK_CoAnnouncements", x => x.id);
                     table.ForeignKey(
-                        name: "FK_CoAnnouncements_ProjectManagers_Creatorguid",
-                        column: x => x.Creatorguid,
+                        name: "FK_CoAnnouncements_ProjectManagers_Creatorid",
+                        column: x => x.Creatorid,
                         principalTable: "ProjectManagers",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CoAnnouncements_Projects_Projectguid",
-                        column: x => x.Projectguid,
+                        name: "FK_CoAnnouncements_Projects_Projectid",
+                        column: x => x.Projectid,
                         principalTable: "Projects",
-                        principalColumn: "guid");
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "TAapplications",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Resume = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Studentguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Tarequestguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Studentid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Tarequestid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TAapplications", x => x.guid);
+                    table.PrimaryKey("PK_TAapplications", x => x.id);
                     table.ForeignKey(
-                        name: "FK_TAapplications_TArequests_Tarequestguid",
-                        column: x => x.Tarequestguid,
+                        name: "FK_TAapplications_TArequests_Tarequestid",
+                        column: x => x.Tarequestid,
                         principalTable: "TArequests",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TAapplications_Users_Studentguid",
-                        column: x => x.Studentguid,
+                        name: "FK_TAapplications_Users_Studentid",
+                        column: x => x.Studentid,
                         principalTable: "Users",
-                        principalColumn: "guid");
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "CoApplications",
                 columns: table => new
                 {
-                    guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CV = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    Applicantguid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CoAnnouncementguid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Applicantid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CoAnnouncementid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CoApplications", x => x.guid);
+                    table.PrimaryKey("PK_CoApplications", x => x.id);
                     table.ForeignKey(
-                        name: "FK_CoApplications_CoAnnouncements_CoAnnouncementguid",
-                        column: x => x.CoAnnouncementguid,
+                        name: "FK_CoApplications_CoAnnouncements_CoAnnouncementid",
+                        column: x => x.CoAnnouncementid,
                         principalTable: "CoAnnouncements",
-                        principalColumn: "guid",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CoApplications_Users_Applicantguid",
-                        column: x => x.Applicantguid,
+                        name: "FK_CoApplications_Users_Applicantid",
+                        column: x => x.Applicantid,
                         principalTable: "Users",
-                        principalColumn: "guid");
+                        principalColumn: "id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "EducationInstitutes",
+                columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
+                values: new object[] { new Guid("4d0fa433-ff75-4585-b6e8-1fd4d3e91ba1"), new DateTime(2022, 7, 11, 1, 21, 47, 620, DateTimeKind.Local).AddTicks(3428), null, "SBU" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "id", "Avatar", "CompanyIDnumber", "CompanyName", "Companyid", "CreateTime", "DeleteTime", "Discriminator", "Facultyid", "Password", "Username" },
+                values: new object[] { new Guid("d6adbd1b-dce4-43c6-8ed3-c0ea8a07e576"), null, 2222222222L, "مرکز رشد دانشکده کامپیوتر", null, new DateTime(2022, 7, 11, 1, 21, 47, 620, DateTimeKind.Local).AddTicks(3783), null, "Company", null, "as6d4", "CSEroshd" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "id", "Avatar", "BirthDate", "CV", "Companyid", "CreateTime", "DeleteTime", "Discriminator", "Facultyid", "Firstname", "Lastname", "NationalIdNum", "Password", "PersonnelID", "Username", "gender" },
+                values: new object[] { new Guid("cd17c714-f7ef-49b3-948c-4cbd5651a53f"), null, new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 7, 11, 1, 21, 47, 620, DateTimeKind.Local).AddTicks(3831), null, "Professor", null, "Mojtaba", "Vahidi", 1535132133L, "51324342", 235133212L, "Dr.vahidi", 0 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "id", "Avatar", "BirthDate", "CV", "Companyid", "CreateTime", "DeleteTime", "Discriminator", "Facultyid", "Firstname", "Lastname", "NationalIdNum", "Password", "StudentID", "Username", "gender" },
+                values: new object[] { new Guid("200352b9-a88f-43dd-9152-92667e7ab20e"), null, new DateTime(1999, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 7, 11, 1, 21, 47, 620, DateTimeKind.Local).AddTicks(3538), null, "Student", null, "Reza", "Kalhori", 3242115120L, "324reza", 96243057L, "RezaKlhor", 0 });
+
             migrationBuilder.CreateIndex(
-                name: "IX_CoAnnouncements_Creatorguid",
+                name: "IX_CoAnnouncements_Creatorid",
                 table: "CoAnnouncements",
-                column: "Creatorguid");
+                column: "Creatorid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoAnnouncements_Projectguid",
+                name: "IX_CoAnnouncements_Projectid",
                 table: "CoAnnouncements",
-                column: "Projectguid");
+                column: "Projectid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoApplications_Applicantguid",
+                name: "IX_CoApplications_Applicantid",
                 table: "CoApplications",
-                column: "Applicantguid");
+                column: "Applicantid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoApplications_CoAnnouncementguid",
+                name: "IX_CoApplications_CoAnnouncementid",
                 table: "CoApplications",
-                column: "CoAnnouncementguid");
+                column: "CoAnnouncementid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContactInfos_Userguid",
+                name: "IX_ContactInfos_Userid",
                 table: "ContactInfos",
-                column: "Userguid");
+                column: "Userid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EducationRecords_EducationInstituteguid",
+                name: "IX_EducationRecords_EducationInstituteid",
                 table: "EducationRecords",
-                column: "EducationInstituteguid");
+                column: "EducationInstituteid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EducationRecords_Personguid",
+                name: "IX_EducationRecords_Personid",
                 table: "EducationRecords",
-                column: "Personguid");
+                column: "Personid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Faculties_EducationInstituteguid",
+                name: "IX_Faculties_EducationInstituteid",
                 table: "Faculties",
-                column: "EducationInstituteguid");
+                column: "EducationInstituteid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Feedbacks_Projectguid",
+                name: "IX_Feedbacks_Projectid",
                 table: "Feedbacks",
-                column: "Projectguid");
+                column: "Projectid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Feedbacks_Userguid",
+                name: "IX_Feedbacks_Userid",
                 table: "Feedbacks",
-                column: "Userguid");
+                column: "Userid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_News_Userguid",
+                name: "IX_News_Userid",
                 table: "News",
-                column: "Userguid");
+                column: "Userid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notifications_Recieverguid",
+                name: "IX_Notifications_Recieverid",
                 table: "Notifications",
-                column: "Recieverguid");
+                column: "Recieverid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notifications_Senderguid",
+                name: "IX_Notifications_Senderid",
                 table: "Notifications",
-                column: "Senderguid");
+                column: "Senderid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectFiles_Projectguid",
+                name: "IX_ProjectFiles_Projectid",
                 table: "ProjectFiles",
-                column: "Projectguid");
+                column: "Projectid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectManagers_Projectguid",
+                name: "IX_ProjectManagers_Projectid",
                 table: "ProjectManagers",
-                column: "Projectguid");
+                column: "Projectid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectManagers_Userguid",
+                name: "IX_ProjectManagers_Userid",
                 table: "ProjectManagers",
-                column: "Userguid");
+                column: "Userid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectUser_projectsguid",
+                name: "IX_ProjectUser_projectsid",
                 table: "ProjectUser",
-                column: "projectsguid");
+                column: "projectsid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SavedProject_Projectguid",
+                name: "IX_SavedProject_Projectid",
                 table: "SavedProject",
-                column: "Projectguid");
+                column: "Projectid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SavedProject_Userguid",
+                name: "IX_SavedProject_Userid",
                 table: "SavedProject",
-                column: "Userguid");
+                column: "Userid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Skills_Userguid",
+                name: "IX_Skills_Userid",
                 table: "Skills",
-                column: "Userguid");
+                column: "Userid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TAapplications_Studentguid",
+                name: "IX_TAapplications_Studentid",
                 table: "TAapplications",
-                column: "Studentguid");
+                column: "Studentid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TAapplications_Tarequestguid",
+                name: "IX_TAapplications_Tarequestid",
                 table: "TAapplications",
-                column: "Tarequestguid");
+                column: "Tarequestid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TArequests_Professorguid",
+                name: "IX_TArequests_Professorid",
                 table: "TArequests",
-                column: "Professorguid");
+                column: "Professorid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Companyguid",
+                name: "IX_Users_Companyid",
                 table: "Users",
-                column: "Companyguid");
+                column: "Companyid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Facultyguid",
+                name: "IX_Users_Facultyid",
                 table: "Users",
-                column: "Facultyguid");
+                column: "Facultyid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkFields_Projectguid",
+                name: "IX_WorkFields_Projectid",
                 table: "WorkFields",
-                column: "Projectguid");
+                column: "Projectid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkFields_Userguid",
+                name: "IX_WorkFields_Userid",
                 table: "WorkFields",
-                column: "Userguid");
+                column: "Userid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
