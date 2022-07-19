@@ -10,7 +10,7 @@ using Models;
 
 namespace SBUhamkari.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(HamkariContext))]
     partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

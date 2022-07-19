@@ -16,9 +16,9 @@ namespace SBUhamkari.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly DatabaseContext database;
+        private readonly HamkariContext database;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger,DatabaseContext databaseContext)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,HamkariContext databaseContext)
         {
             database = databaseContext;
             _logger = logger;

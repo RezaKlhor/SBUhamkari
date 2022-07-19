@@ -194,6 +194,19 @@
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
         }
+      },
+      "Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Models.dll": {}
+        }
       }
     }
   },
@@ -520,11 +533,16 @@
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Models/1.0.0": {
+      "type": "project",
+      "path": "../Models/Models/Models.csproj",
+      "msbuildProject": "../Models/Models/Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Microsoft.EntityFrameworkCore >= 6.0.6"
+      "Models >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -534,11 +552,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj",
-      "projectName": "Models",
-      "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj",
+      "projectUniqueName": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\DAL\\DAL.csproj",
+      "projectName": "DAL",
+      "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\DAL\\DAL.csproj",
       "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\obj\\",
+      "outputPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -558,7 +576,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -570,12 +592,6 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[6.0.6, )"
-          }
-        },
         "imports": [
           "net461",
           "net462",

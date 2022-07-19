@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uxt9R0Mm1cE2KO2v+oO05LvaGVx7BIxZ0ele1BA11DVhPCBzab0UXQ1g6p2WNDIq5TeCEbqI+4yKgmnveQgkeg==",
+  "dgSpecHash": "k4DvPrbSOX49Z2miFJ80oWLmzSowEtJ6p+Kf8Id/RozGeOuIxfeww+klNeP/z/wOhTe5pzf+3sSIOy9PjEPIgw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj",
+  "projectFilePath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dell\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.6\\microsoft.entityframeworkcore.abstractions.6.0.6.nupkg.sha512",

@@ -11,7 +11,7 @@ using Models;
 
 namespace SBUhamkari.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
+    [DbContext(typeof(HamkariContext))]
     [Migration("20220710205148_initial2")]
     partial class initial2
     {

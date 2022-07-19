@@ -4,9 +4,9 @@ using Models.Models;
 
 namespace Models
 {
-    public class DatabaseContext : DbContext
+    public class HamkariContext : DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)
+        public HamkariContext(DbContextOptions<HamkariContext> options):base(options)
         {
 
 
