@@ -24,7 +24,7 @@ namespace Models.Models
         public SkillLevel SkillLevel { get; set; }
        
         //public DefaultSkills?  DefaultMappedSkill{ get; set; }
-        public Person User { get; set; }
+        public Person Person { get; set; }
 
 
 

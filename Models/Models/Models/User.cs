@@ -53,7 +53,7 @@ namespace Models.Models
         public List<ContactInfo>? contactInfos { get; set; }
         public List<Notification>? notifications { get; set; }
         public List<News>? news { get; set; }
-        public IList<WorkField>? workFields { get; set; }
+        
 
         
         

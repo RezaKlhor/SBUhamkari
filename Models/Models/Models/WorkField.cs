@@ -13,6 +13,7 @@ namespace Models.Models
     {
         public WorkField()
         {
+
         }
 
         public WorkField(string name, User user)
@@ -26,7 +27,7 @@ namespace Models.Models
         public string Name { get; set; }
 
         [JsonIgnore]
-        public User User { get; set; }
+        public List<Person>  People { get; set; }
 
     }
 }

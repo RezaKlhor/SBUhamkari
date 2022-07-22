@@ -57,8 +57,8 @@ namespace Models.Models
         [DisplayName("رزومه")]
         public Byte[]? CV { get; set; }
         public List<Skill>? skills { get; set; }
+        public List<WorkField> WorkFields { get; set; }
 
-       
         public List<EducationRecord>? EducationRecords { get; set; }
         public List<CoApplication>? coApplications { get; set; }
     }
