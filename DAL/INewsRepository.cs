@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class INewsRepository
+    public interface INewsRepository : IRepository<News>
     {
+        
+        
     }
 }
