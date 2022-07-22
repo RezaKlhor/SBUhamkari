@@ -15,7 +15,7 @@ namespace DAL
             _entities = Context.Set<TEntity>();
         }
 
-        public TEntity Get(int id)
+        public TEntity Get(Guid id)
         {
             
             return _entities.Find(id);
