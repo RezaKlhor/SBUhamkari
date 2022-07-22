@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class IFacultyRepository
+    public interface IFacultyRepository: IRepository<Faculty>
     {
+        List<Faculty> GetFacultiesinInstitue(Guid id);
+
     }
 }

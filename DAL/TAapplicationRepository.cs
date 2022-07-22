@@ -8,5 +8,6 @@ namespace DAL
 {
     internal class TAapplicationRepository
     {
+
     }
 }
