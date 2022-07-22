@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -16,10 +17,10 @@ namespace Models.Models
 
         }
 
-        public WorkField(string name, User user)
+        public WorkField(string name, List<Person> people)
         {
             Name = name;
-            User = user;
+            People = people;
         }
 
         [DisplayName("عنوان زمینه کاری")]
@@ -27,7 +28,10 @@ namespace Models.Models
         public string Name { get; set; }
 
         [JsonIgnore]
-        public List<Person>  People { get; set; }
+        [ForeignKey("PersonID")]
+        public List<Person>?  People { get; set; }
 
+        [ForeignKey("ProjectID")]
+        public List<Project>? Projects { get; set; }
     }
 }

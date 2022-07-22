@@ -13,11 +13,11 @@ namespace Models.Models
         {
         }
 
-        public Skill(string skillTitle, SkillLevel skillLevel, Person user)
+        public Skill(string skillTitle, SkillLevel skillLevel, Person person)
         {
             SkillTitle = skillTitle;
             SkillLevel = skillLevel;
-            User = user;
+            Person = person;
         }
 
         public string SkillTitle { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,8 @@ namespace Models.Models
         [DisplayName("رزومه")]
         public Byte[]? CV { get; set; }
         public List<Skill>? skills { get; set; }
+
+        [ForeignKey("WorkfieldID")]
         public List<WorkField> WorkFields { get; set; }
 
         public List<EducationRecord>? EducationRecords { get; set; }

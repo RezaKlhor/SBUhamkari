@@ -58,6 +58,11 @@ namespace Models
                 PersonnelID = 235133212,
                 BirthDate = new DateTime(1980, 1, 1)
             });
+            modelBuilder.Entity<WorkField>().HasData(new List<WorkField> { new WorkField{
+                Name="AI",
+            },new WorkField{Name="Software"},new WorkField{Name="Hardware"},new WorkField{Name="Network"}
+
+            });
         }
 
         public DbSet<User> Users { get; set; }
