@@ -11,10 +11,10 @@ namespace Models.Models
     {
 
 
-        [ForeignKey("UserID")]
-        public Guid UserID { get; set; }
+        
+        public User Follower { get; set; }
 
-        [ForeignKey("FollowedID")]
+        
         public Guid FollowedID { get; set; }
     }
 }

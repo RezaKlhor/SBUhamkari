@@ -62,6 +62,8 @@ namespace Models.Models
         public List<SavedProject>? SavedProjects { get; set; }
         public Faculty? Faculty { get; set; }
 
+        public  List<Following> Following { get; set; }
+
 
 
 
