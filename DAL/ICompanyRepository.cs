@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class ICompanyRepository
+    public interface ICompanyRepository : IRepository<Company>
     {
     }
 }

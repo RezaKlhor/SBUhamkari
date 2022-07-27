@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class WorkFieldRepository : IWorkFieldRepository
+    public class WorkFieldRepository : Repository<WorkField> ,IWorkFieldRepository
     {
+        public WorkFieldRepository(DbContext context) : base(context)
+        {
+        }
+        public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
     }
 }
