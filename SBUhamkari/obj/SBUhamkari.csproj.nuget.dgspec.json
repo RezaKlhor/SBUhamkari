@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj": {}
+    "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj": {
+    "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\Models\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\Models\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\obj\\",
+        "projectPath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\Models\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\rezak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\Models\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rezak\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -64,24 +64,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj": {
+    "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj",
+        "projectUniqueName": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj",
         "projectName": "SBUhamkari",
-        "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj",
-        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\SBUhamkari\\obj\\",
+        "projectPath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj",
+        "packagesPath": "C:\\Users\\rezak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\SBUhamkari\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\rezak\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -96,8 +96,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\dell\\OneDrive\\Desktop\\HamkariSBU\\SBUhamkari2\\SBUhamkari\\Models\\Models\\Models.csproj"
+              "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\Models\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\Models\\Models\\Models.csproj"
               }
             }
           }
@@ -159,7 +159,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

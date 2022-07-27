@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Models;
+
 
 namespace DAL
 {
-    internal class UserFollowerFollowing
+    public class UserFollowerFollowing : Repository<Following>,IUserFollowerFollowing
     {
+        public UserFollowerFollowing(DbContext context) : base(context)
+        {
+        }
+
         public User User { get; set; }
         public List<User> Followers { get; set; }
         public List<User> Followings { get; set; }
 
+        public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
     }
 }

@@ -7,11 +7,11 @@ namespace DAL
 {
     public class UserRepository : Repository<User>, IUserReopsitory
     {
-        public UserRepository(HamkariContext context) : base(context)
+        public UserRepository(DbContext context) : base(context)
         {
         }
 
-       
+
 
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
     }

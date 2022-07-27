@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class ITAapplicationRepository
+    public interface ITAapplicationRepository : IRepository<TAapplication>
     {
     }
 }

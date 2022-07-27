@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class TArequestRepository
+    public class TArequestRepository :Repository<TArequest>, ITArequestRepository
     {
     }
 }

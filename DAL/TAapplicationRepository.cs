@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class TAapplicationRepository
+    public class TAapplicationRepository : Repository<TAapplication>, ITAapplicationRepository
     {
-
+        public TAapplicationRepository(DbContext context) : base(context)
+        {
+        }
+        public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
     }
 }
