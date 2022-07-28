@@ -15,6 +15,7 @@ namespace DAL.ProjectRepos
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
+        //Tested
         public List<Project> GetProjectsByManager(Guid projectManagerID)
         {
             var projectmanagers = HamkariContext.ProjectManagers.Where<ProjectManager>(m => m.id== projectManagerID).Include(m=> m.Project).ToList();
@@ -26,9 +27,16 @@ namespace DAL.ProjectRepos
             return projects;
         }
 
-        public List<Project> GetProjectsByManagerType(UserType userType)
+        public List<Project> GetProjectsByManagerType(Guid RoleID)
         {
-            throw new NotImplementedException();
+            var projectmanagers = HamkariContext.ProjectManagers.Where<ProjectManager>
+                (m => m.User.Role.id==RoleID).Include(m => m.Project).ToList();
+            List<Project> projects = new List<Project>();
+            foreach (var item in projectmanagers)
+            {
+                projects.Add(item.Project);
+            }
+            return projects;
         }
 
         public List<Project> GetProjectsByParticipator(Guid userID)

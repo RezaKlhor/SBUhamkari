@@ -17,7 +17,7 @@ namespace SBUhamkari.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -150,14 +150,14 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("0996bd5f-4ea5-4f15-8b28-56a4de2305f2"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5707),
+                            id = new Guid("1c045765-f599-4e9e-8675-c35850e7bd7e"),
+                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(163),
                             Name = "SBU"
                         },
                         new
                         {
-                            id = new Guid("d4b2f6fd-5eae-4de0-935d-593fd1aad955"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5763),
+                            id = new Guid("14318a28-cdc6-42ad-b79b-7d66354f7c20"),
+                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(221),
                             Name = "PNU"
                         });
                 });
@@ -559,26 +559,26 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("50134c68-4ca6-49ea-8171-f6dd1187de0f"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5813),
+                            id = new Guid("ca605958-d455-453a-8647-94bfdb604dca"),
+                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(278),
                             Name = "Admin"
                         },
                         new
                         {
-                            id = new Guid("3b217189-8e6c-4e25-9cb5-766d5654062b"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5823),
+                            id = new Guid("299eb75d-d8c5-4b31-a92c-5bb3760f8b6b"),
+                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(312),
                             Name = "Student"
                         },
                         new
                         {
-                            id = new Guid("11c46ad6-de26-40dd-bfd0-6167616d2bb2"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5828),
-                            Name = "teacher"
+                            id = new Guid("a2f679aa-9e3c-42b6-919a-4b08e455d714"),
+                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(317),
+                            Name = "Professor"
                         },
                         new
                         {
-                            id = new Guid("2ba5d976-2404-4537-a190-fa2ded8f4621"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5852),
+                            id = new Guid("df959137-65ce-4387-a057-2e60d986cbac"),
+                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(323),
                             Name = "Company"
                         });
                 });
@@ -737,7 +737,7 @@ namespace SBUhamkari.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("id");
 
@@ -746,6 +746,9 @@ namespace SBUhamkari.Migrations
                     b.HasIndex("Facultyid");
 
                     b.HasIndex("Roleid");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Users");
 
@@ -771,32 +774,6 @@ namespace SBUhamkari.Migrations
                     b.HasKey("id");
 
                     b.ToTable("WorkFields");
-
-                    b.HasData(
-                        new
-                        {
-                            id = new Guid("c639c78d-e2a2-40c6-82fd-6ee30a893440"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5894),
-                            Name = "AI"
-                        },
-                        new
-                        {
-                            id = new Guid("afeb9131-f0e3-425d-995e-48b734cd943c"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5904),
-                            Name = "Software"
-                        },
-                        new
-                        {
-                            id = new Guid("2d92fece-d45e-4d56-a347-6059653cba9d"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5908),
-                            Name = "Hardware"
-                        },
-                        new
-                        {
-                            id = new Guid("2abcf5fc-7b59-40cb-aff6-2c850f5a2653"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5912),
-                            Name = "Network"
-                        });
                 });
 
             modelBuilder.Entity("Models.Models.Company", b =>
@@ -810,6 +787,10 @@ namespace SBUhamkari.Migrations
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("CompanyIDnumber")
+                        .IsUnique()
+                        .HasFilter("[CompanyIDnumber] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("Company");
                 });
@@ -840,6 +821,10 @@ namespace SBUhamkari.Migrations
 
                     b.Property<int>("gender")
                         .HasColumnType("int");
+
+                    b.HasIndex("NationalIdNum")
+                        .IsUnique()
+                        .HasFilter("[NationalIdNum] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("Person");
                 });

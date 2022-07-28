@@ -28,56 +28,18 @@ namespace Models
                 }
 
             });
-            //modelBuilder.Entity<Faculty>().HasData(new Faculty
-            //{
-            //    Name = "CSE",
-
-
-            //});
+            
             modelBuilder.Entity<Role>().HasData(new List<Role>
             {
-                new Role{Name="Admin"},new Role{Name="Student"},new Role{Name="teacher"},new Role{Name="Company"}
+                new Role{Name="Admin"},new Role{Name="Student"},new Role{Name="Professor"},new Role{Name="Company"}
             });
-            //modelBuilder.Entity<Student>().HasData(new Student
-            //{
-            //    Username = "RezaKlhor",
-            //    Password = "324reza",
-            //    Firstname = "Reza",
-            //    Lastname = "Kalhori",
-            //    gender = Gender.male,
-            //    NationalIdNum = 3242115120,
-            //    StudentID = 96243057,
-            //    BirthDate = new DateTime(1999, 6, 10),
-                
 
-            //});
-            //modelBuilder.Entity<Company>().HasData(new Company
-            //{
-            //    CompanyName = "مرکز رشد دانشکده کامپیوتر",
-            //    CompanyIDnumber = 2222222222,
-            //    Username = "CSEroshd",
-            //    Password = "as6d4",
-                
+            modelBuilder.Entity<Company>().HasIndex(m => m.CompanyIDnumber).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(m => m.Username).IsUnique();
+            modelBuilder.Entity<Person>().HasIndex(m => m.NationalIdNum).IsUnique();
+            
 
-            //});
-            //modelBuilder.Entity<Professor>().HasData(new Professor
-            //{
-            //    Username = "Dr.vahidi",
-            //    Password = "51324342",
-            //    Firstname = "Mojtaba",
-            //    Lastname = "Vahidi",
-            //    gender = Gender.male,
-            //    NationalIdNum = 1535132133,
-            //    PersonnelID = 235133212,
-            //    BirthDate = new DateTime(1980, 1, 1)
-            //});
-            modelBuilder.Entity<WorkField>().HasData(new List<WorkField> { new WorkField{
-                Name="AI",
-            },new WorkField{Name="Software"},new WorkField{Name="Hardware"},new WorkField{Name="Network"}
 
-            });
-            //modelBuilder.Entity<>().HasData()
-           
         }
 
         public DbSet<User> Users { get; set; }

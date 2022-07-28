@@ -13,9 +13,9 @@ namespace DAL.ProjectRepos
         public List<Project> GetProjectsByManager(Guid projectManagerID);
         public List<Project> GetProjectsByProjectState(ProjectState projectState);
         public List<Project> GetProjectsInSavedBox(Guid userID);
-        public List<Project> GetProjectsByManagerType(UserType userType);
+        public List<Project> GetProjectsByManagerType(Guid RoleID);
        
 
     }
-    public enum UserType { Teacher,Student,Company}
+    
 }

@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DAL.ProjectRepos.ProjectRepos.Tests;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -31,7 +32,8 @@ namespace SBUhamkari.Controllers
 
 
 
-
+            //ProjectRepositoryTests projectRepositoryTests = new ProjectRepositoryTests(database);
+            //projectRepositoryTests.
 
             using (var unitOfWork = new UnitOfWork(database))
             {
