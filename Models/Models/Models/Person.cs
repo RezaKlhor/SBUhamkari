@@ -60,7 +60,7 @@ namespace Models.Models
         public List<Skill>? skills { get; set; }
 
         [ForeignKey("WorkfieldID")]
-        public List<WorkField> WorkFields { get; set; }
+        public List<PersonWorkField> PersonWorkFields { get; set; }
 
         public List<EducationRecord>? EducationRecords { get; set; }
         public List<CoApplication>? coApplications { get; set; }

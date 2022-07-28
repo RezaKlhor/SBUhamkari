@@ -8,5 +8,8 @@ namespace DAL
 {
     public interface IProjectRepository : IRepository<Project>
     {
+        public List<Project> GetProjectsByWorkfield(Guid WorkFieldID);
+        public List<Project> GetProjectsBy { get; set; }
+
     }
 }

@@ -29,9 +29,9 @@ namespace Models.Models
 
         [JsonIgnore]
         [ForeignKey("PersonID")]
-        public List<Person>?  People { get; set; }
+        public List<PersonWorkField>? PersonWorkFields   { get; set; }
 
         [ForeignKey("ProjectID")]
-        public List<Project>? Projects { get; set; }
+        public List<ProjectWorkFields>? ProjectWorkFields { get; set; }
     }
 }

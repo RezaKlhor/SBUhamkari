@@ -21,8 +21,7 @@ namespace DAL
 
         public List<CoAnnouncement> GetCoAnnouncementsByWorkField(Guid WorkFieldID)
         {
-            var ProjectWorkField = HamkariContext.WorkFields.Where<WorkField>(m => m.id == WorkFieldID).FirstOrDefault();
-
+            var projectsByWorkField= 
             throw new NotImplementedException();
         }
 
