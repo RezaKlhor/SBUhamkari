@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
@@ -11,9 +12,10 @@ using Models;
 namespace SBUhamkari.Migrations
 {
     [DbContext(typeof(HamkariContext))]
-    partial class HamkariContextModelSnapshot : ModelSnapshot
+    [Migration("20220728192204_init9")]
+    partial class init9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,14 +152,14 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("0996bd5f-4ea5-4f15-8b28-56a4de2305f2"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5707),
+                            id = new Guid("98325204-3865-4038-838c-35ff67d0ad51"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(6560),
                             Name = "SBU"
                         },
                         new
                         {
-                            id = new Guid("d4b2f6fd-5eae-4de0-935d-593fd1aad955"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5763),
+                            id = new Guid("2ff3126b-0f23-418a-9247-90234066b197"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(6644),
                             Name = "PNU"
                         });
                 });
@@ -555,32 +557,6 @@ namespace SBUhamkari.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            id = new Guid("50134c68-4ca6-49ea-8171-f6dd1187de0f"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5813),
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            id = new Guid("3b217189-8e6c-4e25-9cb5-766d5654062b"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5823),
-                            Name = "Student"
-                        },
-                        new
-                        {
-                            id = new Guid("11c46ad6-de26-40dd-bfd0-6167616d2bb2"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5828),
-                            Name = "teacher"
-                        },
-                        new
-                        {
-                            id = new Guid("2ba5d976-2404-4537-a190-fa2ded8f4621"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5852),
-                            Name = "Company"
-                        });
                 });
 
             modelBuilder.Entity("Models.Models.SavedProject", b =>
@@ -732,7 +708,7 @@ namespace SBUhamkari.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Roleid")
+                    b.Property<Guid?>("Roleid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Username")
@@ -775,26 +751,26 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("c639c78d-e2a2-40c6-82fd-6ee30a893440"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5894),
+                            id = new Guid("908a1a43-c354-46cb-a598-3f2dea35b1cc"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(7591),
                             Name = "AI"
                         },
                         new
                         {
-                            id = new Guid("afeb9131-f0e3-425d-995e-48b734cd943c"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5904),
+                            id = new Guid("3b133e33-1343-4fee-8f20-fe6bf047d00b"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(7614),
                             Name = "Software"
                         },
                         new
                         {
-                            id = new Guid("2d92fece-d45e-4d56-a347-6059653cba9d"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5908),
+                            id = new Guid("6bfb351f-3127-4d21-9b5c-209d4cac58e9"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(7619),
                             Name = "Hardware"
                         },
                         new
                         {
-                            id = new Guid("2abcf5fc-7b59-40cb-aff6-2c850f5a2653"),
-                            CreateTime = new DateTime(2022, 7, 29, 0, 8, 28, 634, DateTimeKind.Local).AddTicks(5912),
+                            id = new Guid("6730cbe5-19e5-4e36-bbd8-c0983ad4de8c"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(7624),
                             Name = "Network"
                         });
                 });
@@ -812,6 +788,17 @@ namespace SBUhamkari.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Company");
+
+                    b.HasData(
+                        new
+                        {
+                            id = new Guid("d5fa8e73-b372-4b4f-8a55-e0d635965ba4"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(7392),
+                            Password = "as6d4",
+                            Username = "CSEroshd",
+                            CompanyIDnumber = 2222222222L,
+                            CompanyName = "مرکز رشد دانشکده کامپیوتر"
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.Person", b =>
@@ -853,6 +840,21 @@ namespace SBUhamkari.Migrations
                         .HasColumnType("bigint");
 
                     b.HasDiscriminator().HasValue("Professor");
+
+                    b.HasData(
+                        new
+                        {
+                            id = new Guid("93c798fe-053a-4f1a-af3c-42d9617a5ba4"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(7501),
+                            Password = "51324342",
+                            Username = "Dr.vahidi",
+                            BirthDate = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Firstname = "Mojtaba",
+                            Lastname = "Vahidi",
+                            NationalIdNum = 1535132133L,
+                            gender = 0,
+                            PersonnelID = 235133212L
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.Student", b =>
@@ -864,6 +866,21 @@ namespace SBUhamkari.Migrations
                         .HasColumnType("bigint");
 
                     b.HasDiscriminator().HasValue("Student");
+
+                    b.HasData(
+                        new
+                        {
+                            id = new Guid("1e3bc656-e89e-40ad-856b-e00b129dec4b"),
+                            CreateTime = new DateTime(2022, 7, 28, 23, 52, 2, 956, DateTimeKind.Local).AddTicks(6786),
+                            Password = "324reza",
+                            Username = "RezaKlhor",
+                            BirthDate = new DateTime(1999, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Firstname = "Reza",
+                            Lastname = "Kalhori",
+                            NationalIdNum = 3242115120L,
+                            gender = 0,
+                            StudentID = 96243057L
+                        });
                 });
 
             modelBuilder.Entity("Models.Models.CoAnnouncement", b =>
@@ -1165,15 +1182,11 @@ namespace SBUhamkari.Migrations
                         .WithMany("Users")
                         .HasForeignKey("Facultyid");
 
-                    b.HasOne("Models.Models.Role", "Role")
+                    b.HasOne("Models.Models.Role", null)
                         .WithMany("Users")
-                        .HasForeignKey("Roleid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Roleid");
 
                     b.Navigation("Faculty");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Models.Models.CoAnnouncement", b =>

@@ -38,6 +38,7 @@ namespace DAL
             ProjectManagers = new ProjectManagerRepository(_context);
             ProjectParticapations = new ProjectParticapationRepository(_context);
             ProjectWorkFields = new ProjectWorkFieldRepository(_context);
+            Roles = new RoleRepository(_context);
 
             
         }
@@ -88,6 +89,7 @@ namespace DAL
         public IProjectParticapationRepository ProjectParticapations { get; private set; }
 
         public IProjectWorkFieldRepository ProjectWorkFields { get; private set; }
+        public IRoleRepository Roles { get; private set; }
 
         public int Complete()
         {

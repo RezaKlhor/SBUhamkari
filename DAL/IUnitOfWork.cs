@@ -33,6 +33,7 @@ namespace DAL
         IProjectManagerRepository ProjectManagers { get; }
         IProjectParticapationRepository ProjectParticapations { get; }
         IProjectWorkFieldRepository ProjectWorkFields { get; }
+        IRoleRepository Roles { get; }
         
 
 

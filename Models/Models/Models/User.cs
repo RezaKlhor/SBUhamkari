@@ -63,7 +63,7 @@ namespace Models.Models
         public Faculty? Faculty { get; set; }
 
         public  List<Following> Following { get; set; }
-
+        public Role Role { get; set; }
 
 
 
