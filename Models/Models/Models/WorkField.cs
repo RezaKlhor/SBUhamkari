@@ -17,11 +17,7 @@ namespace Models.Models
 
         }
 
-        public WorkField(string name, List<Person> people)
-        {
-            Name = name;
-            People = people;
-        }
+       
 
         [DisplayName("عنوان زمینه کاری")]
         [Required]
@@ -32,6 +28,6 @@ namespace Models.Models
         public List<PersonWorkField>? PersonWorkFields   { get; set; }
 
         [ForeignKey("ProjectID")]
-        public List<ProjectWorkFields>? ProjectWorkFields { get; set; }
+        public List<ProjectWorkField>? ProjectWorkFields { get; set; }
     }
 }

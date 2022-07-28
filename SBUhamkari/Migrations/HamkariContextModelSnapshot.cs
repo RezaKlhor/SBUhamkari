@@ -150,8 +150,8 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("b3c1a0d0-87e8-4519-84e9-ef286cb60136"),
-                            CreateTime = new DateTime(2022, 7, 27, 17, 4, 6, 942, DateTimeKind.Local).AddTicks(8116),
+                            id = new Guid("b3804a49-7d6b-4a44-bfdc-4a848eb0c438"),
+                            CreateTime = new DateTime(2022, 7, 28, 14, 13, 11, 728, DateTimeKind.Local).AddTicks(4973),
                             Name = "SBU"
                         });
                 });
@@ -338,6 +338,33 @@ namespace SBUhamkari.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("Models.Models.PersonWorkField", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PersonID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("WorkfieldID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("PersonID");
+
+                    b.HasIndex("WorkfieldID");
+
+                    b.ToTable("PersonWorkField");
+                });
+
             modelBuilder.Entity("Models.Models.Project", b =>
                 {
                     b.Property<Guid>("id")
@@ -474,6 +501,33 @@ namespace SBUhamkari.Migrations
                     b.HasIndex("Userid");
 
                     b.ToTable("ProjectParticapation");
+                });
+
+            modelBuilder.Entity("Models.Models.ProjectWorkField", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ProjectID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("WorkfieldID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("ProjectID");
+
+                    b.HasIndex("WorkfieldID");
+
+                    b.ToTable("ProjectWorkField");
                 });
 
             modelBuilder.Entity("Models.Models.SavedProject", b =>
@@ -663,58 +717,28 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("224e1cbf-41aa-484a-a3a2-ec7d5266214e"),
-                            CreateTime = new DateTime(2022, 7, 27, 17, 4, 6, 942, DateTimeKind.Local).AddTicks(8624),
+                            id = new Guid("57da3ff8-388b-419f-8d7f-10bcfe36d3d2"),
+                            CreateTime = new DateTime(2022, 7, 28, 14, 13, 11, 728, DateTimeKind.Local).AddTicks(5567),
                             Name = "AI"
                         },
                         new
                         {
-                            id = new Guid("ae0117ee-1b3b-40fc-a7cc-6c7d95782ead"),
-                            CreateTime = new DateTime(2022, 7, 27, 17, 4, 6, 942, DateTimeKind.Local).AddTicks(8634),
+                            id = new Guid("79597811-8380-4e70-977f-9c21fad5e5c8"),
+                            CreateTime = new DateTime(2022, 7, 28, 14, 13, 11, 728, DateTimeKind.Local).AddTicks(5593),
                             Name = "Software"
                         },
                         new
                         {
-                            id = new Guid("805d7d2a-cbad-4a28-b94c-a4bbb03a0f15"),
-                            CreateTime = new DateTime(2022, 7, 27, 17, 4, 6, 942, DateTimeKind.Local).AddTicks(8638),
+                            id = new Guid("5bcd4200-657c-434d-b6d2-75849ffac2ef"),
+                            CreateTime = new DateTime(2022, 7, 28, 14, 13, 11, 728, DateTimeKind.Local).AddTicks(5608),
                             Name = "Hardware"
                         },
                         new
                         {
-                            id = new Guid("a902c126-8ad2-454a-934d-58b6e789b53d"),
-                            CreateTime = new DateTime(2022, 7, 27, 17, 4, 6, 942, DateTimeKind.Local).AddTicks(8642),
+                            id = new Guid("2d94a1ef-6372-47b6-b0e2-a5f92324e2e3"),
+                            CreateTime = new DateTime(2022, 7, 28, 14, 13, 11, 728, DateTimeKind.Local).AddTicks(5635),
                             Name = "Network"
                         });
-                });
-
-            modelBuilder.Entity("PersonWorkField", b =>
-                {
-                    b.Property<Guid>("PersonID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("WorkfieldID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PersonID", "WorkfieldID");
-
-                    b.HasIndex("WorkfieldID");
-
-                    b.ToTable("PersonWorkField");
-                });
-
-            modelBuilder.Entity("ProjectWorkField", b =>
-                {
-                    b.Property<Guid>("ProjectID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("WorkfieldID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ProjectID", "WorkfieldID");
-
-                    b.HasIndex("WorkfieldID");
-
-                    b.ToTable("ProjectWorkField");
                 });
 
             modelBuilder.Entity("Models.Models.Company", b =>
@@ -734,8 +758,8 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("ea9083c3-2abb-43b9-b29f-83de7b75be86"),
-                            CreateTime = new DateTime(2022, 7, 27, 17, 4, 6, 942, DateTimeKind.Local).AddTicks(8448),
+                            id = new Guid("980bfb4a-d858-4c31-8011-8d16303372e7"),
+                            CreateTime = new DateTime(2022, 7, 28, 14, 13, 11, 728, DateTimeKind.Local).AddTicks(5467),
                             Password = "as6d4",
                             Username = "CSEroshd",
                             CompanyIDnumber = 2222222222L,
@@ -786,8 +810,8 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("12734467-a1ee-440c-a4e9-811d75d2d20c"),
-                            CreateTime = new DateTime(2022, 7, 27, 17, 4, 6, 942, DateTimeKind.Local).AddTicks(8568),
+                            id = new Guid("11e6c0a1-a088-4175-bf88-3aaa563dccb9"),
+                            CreateTime = new DateTime(2022, 7, 28, 14, 13, 11, 728, DateTimeKind.Local).AddTicks(5518),
                             Password = "51324342",
                             Username = "Dr.vahidi",
                             BirthDate = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -812,8 +836,8 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("bcbc0008-48aa-414c-a529-e90aefff2e49"),
-                            CreateTime = new DateTime(2022, 7, 27, 17, 4, 6, 942, DateTimeKind.Local).AddTicks(8250),
+                            id = new Guid("6ed481e5-1640-4584-b162-a38adb9057cc"),
+                            CreateTime = new DateTime(2022, 7, 28, 14, 13, 11, 728, DateTimeKind.Local).AddTicks(5106),
                             Password = "324reza",
                             Username = "RezaKlhor",
                             BirthDate = new DateTime(1999, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -958,6 +982,25 @@ namespace SBUhamkari.Migrations
                     b.Navigation("Sender");
                 });
 
+            modelBuilder.Entity("Models.Models.PersonWorkField", b =>
+                {
+                    b.HasOne("Models.Models.WorkField", "WorkField")
+                        .WithMany("PersonWorkFields")
+                        .HasForeignKey("PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Models.Person", "Person")
+                        .WithMany("PersonWorkFields")
+                        .HasForeignKey("WorkfieldID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("WorkField");
+                });
+
             modelBuilder.Entity("Models.Models.ProjectFile", b =>
                 {
                     b.HasOne("Models.Models.Project", "Project")
@@ -1016,6 +1059,25 @@ namespace SBUhamkari.Migrations
                     b.Navigation("Project");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.Models.ProjectWorkField", b =>
+                {
+                    b.HasOne("Models.Models.WorkField", "WorkField")
+                        .WithMany("ProjectWorkFields")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Models.Project", "Project")
+                        .WithMany("ProjectWorkFields")
+                        .HasForeignKey("WorkfieldID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+
+                    b.Navigation("WorkField");
                 });
 
             modelBuilder.Entity("Models.Models.SavedProject", b =>
@@ -1089,36 +1151,6 @@ namespace SBUhamkari.Migrations
                     b.Navigation("Faculty");
                 });
 
-            modelBuilder.Entity("PersonWorkField", b =>
-                {
-                    b.HasOne("Models.Models.WorkField", null)
-                        .WithMany()
-                        .HasForeignKey("PersonID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Models.Person", null)
-                        .WithMany()
-                        .HasForeignKey("WorkfieldID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProjectWorkField", b =>
-                {
-                    b.HasOne("Models.Models.WorkField", null)
-                        .WithMany()
-                        .HasForeignKey("ProjectID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Models.Project", null)
-                        .WithMany()
-                        .HasForeignKey("WorkfieldID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Models.Models.CoAnnouncement", b =>
                 {
                     b.Navigation("CoApplications");
@@ -1151,6 +1183,8 @@ namespace SBUhamkari.Migrations
                     b.Navigation("ProjectNews");
 
                     b.Navigation("ProjectParticipants");
+
+                    b.Navigation("ProjectWorkFields");
                 });
 
             modelBuilder.Entity("Models.Models.ProjectManager", b =>
@@ -1180,6 +1214,13 @@ namespace SBUhamkari.Migrations
                     b.Navigation("notifications");
                 });
 
+            modelBuilder.Entity("Models.Models.WorkField", b =>
+                {
+                    b.Navigation("PersonWorkFields");
+
+                    b.Navigation("ProjectWorkFields");
+                });
+
             modelBuilder.Entity("Models.Models.Company", b =>
                 {
                     b.Navigation("CompanyMembers");
@@ -1188,6 +1229,8 @@ namespace SBUhamkari.Migrations
             modelBuilder.Entity("Models.Models.Person", b =>
                 {
                     b.Navigation("EducationRecords");
+
+                    b.Navigation("PersonWorkFields");
 
                     b.Navigation("coApplications");
 

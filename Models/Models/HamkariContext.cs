@@ -18,13 +18,18 @@ namespace Models
                 new EducationInstitute
                 {
                     Name="SBU"
+                },
+                new EducationInstitute
+                {
+                    Name="PNU"
                 }
 
             });
             //modelBuilder.Entity<Faculty>().HasData(new Faculty
             //{
-            //    Name="CSE"
-
+            //    Name = "CSE",
+                
+                
             //});
             modelBuilder.Entity<Student>().HasData(new Student
             {
@@ -63,6 +68,7 @@ namespace Models
             },new WorkField{Name="Software"},new WorkField{Name="Hardware"},new WorkField{Name="Network"}
 
             });
+            //modelBuilder.Entity<>().HasData()
         }
 
         public DbSet<User> Users { get; set; }
