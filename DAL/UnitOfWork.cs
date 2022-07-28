@@ -1,6 +1,6 @@
 ﻿
 using DAL.ProjectRepos;
-using DAL.User;
+using DAL.UserRepos;
 using Models;
 
 namespace DAL

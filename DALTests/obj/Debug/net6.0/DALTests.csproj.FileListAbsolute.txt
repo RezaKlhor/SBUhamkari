@@ -1,0 +1,6 @@
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Debug\net6.0\DALTests.csproj.AssemblyReference.cache
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Debug\net6.0\DALTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Debug\net6.0\DALTests.AssemblyInfoInputs.cache
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Debug\net6.0\DALTests.AssemblyInfo.cs
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Debug\net6.0\DALTests.csproj.CoreCompileInputs.cache

@@ -2,7 +2,7 @@
 
 
 using DAL.ProjectRepos;
-using DAL.User;
+using DAL.UserRepos;
 
 namespace DAL
 {
