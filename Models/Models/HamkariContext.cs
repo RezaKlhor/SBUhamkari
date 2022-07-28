@@ -11,6 +11,9 @@ namespace Models
 
 
         }
+
+        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EducationInstitute>().HasData(new List<EducationInstitute>

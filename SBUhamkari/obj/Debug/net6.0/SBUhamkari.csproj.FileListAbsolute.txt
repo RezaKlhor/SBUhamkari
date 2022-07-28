@@ -187,3 +187,5 @@ C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\obj\Debug\net6.0\sco
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\obj\Debug\net6.0\SBUhamkari.csproj.CopyComplete
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\obj\Debug\net6.0\SBUhamkari.genruntimeconfig.cache
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\obj\Debug\net6.0\ref\SBUhamkari.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\DAL.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\DAL.pdb

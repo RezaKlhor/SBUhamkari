@@ -706,6 +706,19 @@
           }
         }
       },
+      "DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DAL.dll": {}
+        }
+      },
       "Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -2064,6 +2077,11 @@
         "version.txt"
       ]
     },
+    "DAL/1.0.0": {
+      "type": "project",
+      "path": "../DAL/DAL.csproj",
+      "msbuildProject": "../DAL/DAL.csproj"
+    },
     "Models/1.0.0": {
       "type": "project",
       "path": "../Models/Models/Models.csproj",
@@ -2072,6 +2090,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "DAL >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.6",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.6",
       "Microsoft.EntityFrameworkCore.Relational >= 6.0.6",
@@ -2113,6 +2132,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\DAL\\DAL.csproj": {
+              "projectPath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\DAL\\DAL.csproj"
+            },
             "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\Models\\Models\\Models.csproj": {
               "projectPath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\Models\\Models\\Models.csproj"
             }

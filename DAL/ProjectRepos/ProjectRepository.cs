@@ -17,11 +17,11 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByManager(Guid projectManagerID)
         {
-            var projectmanagers = HamkariContext.ProjectManagers.Where(m => m.User.id == projectManagerID);
+            var projectmanagers = HamkariContext.ProjectManagers.Where<ProjectManager>(m => m.id== projectManagerID).Include(m=> m.Project).ToList();
             List<Project> projects = new List<Project>();
             foreach (var item in projectmanagers)
             {
-                projects.Add(Get(item.Project.id));
+                projects.Add(item.Project);
             }
             return projects;
         }
