@@ -1,0 +1,5 @@
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache

@@ -19,6 +19,6 @@ namespace DAL
             return Find(a => a.EducationInstitute.id == id).ToList();
            
         }
-        public HamkariContext  HamkariContext { get { return Context as HamkariContext; }; }
+        public HamkariContext  HamkariContext { get { return Context as HamkariContext; } }
     }
 }

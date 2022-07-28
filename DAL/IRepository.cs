@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace DAL
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         TEntity Get(Guid id);
         IEnumerable<TEntity> GetAll();

@@ -72,27 +72,38 @@ namespace SBUhamkari.Controllers
             //    PersonnelID = 235133212,
             //    BirthDate = new DateTime(1980, 1, 1)
             //});
-            Student student = database.Students.Where<Student>(s => s.Username == "RezaKlhor").FirstOrDefault();
-            List<WorkField> workFields = database.WorkFields.ToList<WorkField>();
-            foreach (WorkField item in workFields)
-            {
-                Console.WriteLine(item.Name);
 
-            }
             //WorkField workField = new WorkField("AI", student);
             //database.WorkFields.Add(workField);
 
-            database.SaveChanges();
-            database.Dispose();
-            var d = workFields.ToArray();
-            return d;
-            //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var user = database.Users.Where<User>(m => m.Username == "RezaKlhor").FirstOrDefault();
+            //database.ProjectManagers.Add(new ProjectManager
             //{
-            //    Date = DateTime.Now.AddDays(index),
-            //    TemperatureC = Random.Shared.Next(-20, 55),
-            //    Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            //})
-            //.ToArray();
+            //    Project = database.Projects.First(),
+            //    User= user
+            //}) ;
+            ////user.projects.Add(new Project
+            ////{
+            ////    Name="jashuid",
+            ////    ProjectExplain="asbdusa",
+            ////    ProjectState=ProjectState.Ongoing,
+
+            ////});
+            ////
+
+            //database.SaveChanges();
+            //var projectmanagers = database.ProjectManagers.Where(m=>m.Project.Name== "Billak"&& m.User.Username=="RezaKlhor").FirstOrDefault();
+            var userw2 = database.Projects.First().ProjectParticipants;
+            //var projects = user.projects.ToList<Project>();
+            return null;
+        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        //    {
+        //        Date = DateTime.Now.AddDays(index),
+        //        TemperatureC = Random.Shared.Next(-20, 55),
+        //        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        //    })
+        //    .ToArray();
+        //
         }
     }
 }

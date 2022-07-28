@@ -58,7 +58,7 @@ namespace Models.Models
         
         
         public List<Feedback>? feedbacks { get; set; }
-        public List<Project>? projects { get; set; }
+        public List<ProjectParticapation>? ProjectParticapations { get; set; }
         public List<SavedProject>? SavedProjects { get; set; }
         public Faculty? Faculty { get; set; }
 

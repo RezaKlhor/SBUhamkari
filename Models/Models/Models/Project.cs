@@ -25,7 +25,7 @@ namespace Models.Models
 
         [ForeignKey("WorkfieldID")]
         public List<WorkField>? WorkFields { get; set; }
-        public List<User> ProjectParticipants { get; set; }
+        public List<ProjectParticapation>? ProjectParticipants { get; set; }
         public List<Feedback>? Feedbacks { get; set; }
         public List<ProjectManager> ProjectManagers { get; set; }
 

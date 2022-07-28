@@ -4,7 +4,7 @@ using Models;
 
 namespace DAL
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbContext Context;
         private DbSet<TEntity> _entities; 
