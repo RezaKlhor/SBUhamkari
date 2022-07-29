@@ -66,7 +66,7 @@ namespace Models.Models
         public  List<Following> Following { get; set; }
         public Role Role { get; set; }
 
-
+        
 
 
     }

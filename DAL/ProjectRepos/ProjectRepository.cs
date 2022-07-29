@@ -41,7 +41,13 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByParticipator(Guid userID)
         {
-            throw new NotImplementedException();
+            var projectParticipation = HamkariContext.ProjectParticapations.Where<ProjectParticapation>(m => m.id==userID).Include(m => m.Project).ToList();
+            var projects = new List<Project>();
+            foreach (var item in projectParticipation)
+            {
+                projects.Add(item.Project);
+            }
+            return projects;
         }
 
         public List<Project> GetProjectsByProjectState(ProjectState projectState)

@@ -8,5 +8,6 @@ namespace DAL.UserRepos
 {
     public interface IRoleRepository : IRepository<Role>
     {
+        Guid GetStudentRoleID(string role);
     }
 }

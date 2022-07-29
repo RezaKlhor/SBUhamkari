@@ -64,5 +64,10 @@ namespace Models
         public DbSet<WorkField> WorkFields { get; set; }
         public DbSet<Following> Followings { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<ProjectParticapation> ProjectParticapations { get; set; }
+        public DbSet<ProjectWorkField> ProjectWorkFields { get; set; }
+        public DbSet<PersonWorkField> PersonWorkFields { get; set; }
+        public DbSet<ProjectNews> ProjectNews { get; set; }
+        
     }
 }

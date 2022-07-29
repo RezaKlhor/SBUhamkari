@@ -150,14 +150,14 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("1c045765-f599-4e9e-8675-c35850e7bd7e"),
-                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(163),
+                            id = new Guid("f8eeb179-8a8a-4c49-8ccd-a18b8a2a1525"),
+                            CreateTime = new DateTime(2022, 7, 29, 12, 17, 3, 263, DateTimeKind.Local).AddTicks(8248),
                             Name = "SBU"
                         },
                         new
                         {
-                            id = new Guid("14318a28-cdc6-42ad-b79b-7d66354f7c20"),
-                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(221),
+                            id = new Guid("03b58f46-67e5-4c69-afd3-30f91ee88d5d"),
+                            CreateTime = new DateTime(2022, 7, 29, 12, 17, 3, 263, DateTimeKind.Local).AddTicks(8300),
                             Name = "PNU"
                         });
                 });
@@ -368,7 +368,7 @@ namespace SBUhamkari.Migrations
 
                     b.HasIndex("WorkfieldID");
 
-                    b.ToTable("PersonWorkField");
+                    b.ToTable("PersonWorkFields");
                 });
 
             modelBuilder.Entity("Models.Models.Project", b =>
@@ -506,7 +506,7 @@ namespace SBUhamkari.Migrations
 
                     b.HasIndex("Userid");
 
-                    b.ToTable("ProjectParticapation");
+                    b.ToTable("ProjectParticapations");
                 });
 
             modelBuilder.Entity("Models.Models.ProjectWorkField", b =>
@@ -533,7 +533,7 @@ namespace SBUhamkari.Migrations
 
                     b.HasIndex("WorkfieldID");
 
-                    b.ToTable("ProjectWorkField");
+                    b.ToTable("ProjectWorkFields");
                 });
 
             modelBuilder.Entity("Models.Models.Role", b =>
@@ -559,26 +559,26 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("ca605958-d455-453a-8647-94bfdb604dca"),
-                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(278),
+                            id = new Guid("39098579-ea42-47ae-a347-330593a20136"),
+                            CreateTime = new DateTime(2022, 7, 29, 12, 17, 3, 263, DateTimeKind.Local).AddTicks(8361),
                             Name = "Admin"
                         },
                         new
                         {
-                            id = new Guid("299eb75d-d8c5-4b31-a92c-5bb3760f8b6b"),
-                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(312),
+                            id = new Guid("93a2984c-b007-41d0-901d-a931de077720"),
+                            CreateTime = new DateTime(2022, 7, 29, 12, 17, 3, 263, DateTimeKind.Local).AddTicks(8371),
                             Name = "Student"
                         },
                         new
                         {
-                            id = new Guid("a2f679aa-9e3c-42b6-919a-4b08e455d714"),
-                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(317),
+                            id = new Guid("19499498-e498-44a9-b549-6ff1fe92f933"),
+                            CreateTime = new DateTime(2022, 7, 29, 12, 17, 3, 263, DateTimeKind.Local).AddTicks(8376),
                             Name = "Professor"
                         },
                         new
                         {
-                            id = new Guid("df959137-65ce-4387-a057-2e60d986cbac"),
-                            CreateTime = new DateTime(2022, 7, 29, 2, 48, 40, 166, DateTimeKind.Local).AddTicks(323),
+                            id = new Guid("773e6b8b-252d-4e4d-b0f3-3548bef43472"),
+                            CreateTime = new DateTime(2022, 7, 29, 12, 17, 3, 263, DateTimeKind.Local).AddTicks(8402),
                             Name = "Company"
                         });
                 });
