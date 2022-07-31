@@ -8,7 +8,6 @@ namespace DAL.UserRepos
 {
     public interface IFacultyRepository : IRepository<Faculty>
     {
-        List<Faculty> GetFacultiesinInstitue(Guid id);
-
+       
     }
 }

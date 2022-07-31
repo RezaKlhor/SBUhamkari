@@ -14,11 +14,7 @@ namespace DAL.UserRepos
         {
         }
 
-        public List<Faculty> GetFacultiesinInstitue(Guid id)
-        {
-            return Find(a => a.EducationInstitute.id == id).ToList();
-
-        }
+        
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
     }
 }

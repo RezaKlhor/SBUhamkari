@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SBUhamkari.Migrations
 {
-    public partial class InitialCre : Migration
+    public partial class init2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,18 +24,17 @@ namespace SBUhamkari.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Followings",
+                name: "Faculties",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FollowedID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Followings", x => x.id);
+                    table.PrimaryKey("PK_Faculties", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,6 +54,20 @@ namespace SBUhamkari.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "WorkFields",
                 columns: table => new
                 {
@@ -66,27 +79,6 @@ namespace SBUhamkari.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkFields", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Faculties",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EducationInstituteid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Faculties", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Faculties_EducationInstitutes_EducationInstituteid",
-                        column: x => x.EducationInstituteid,
-                        principalTable: "EducationInstitutes",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,25 +103,23 @@ namespace SBUhamkari.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectWorkField",
+                name: "ProjectNews",
                 columns: table => new
                 {
-                    ProjectID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    WorkfieldID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Tittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Projectid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectWorkField", x => new { x.ProjectID, x.WorkfieldID });
+                    table.PrimaryKey("PK_ProjectNews", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ProjectWorkField_Projects_WorkfieldID",
-                        column: x => x.WorkfieldID,
+                        name: "FK_ProjectNews_Projects_Projectid",
+                        column: x => x.Projectid,
                         principalTable: "Projects",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProjectWorkField_WorkFields_ProjectID",
-                        column: x => x.ProjectID,
-                        principalTable: "WorkFields",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -139,10 +129,11 @@ namespace SBUhamkari.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Facultyid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Roleid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Companyid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyIDnumber = table.Column<long>(type: "bigint", maxLength: 10, nullable: true),
@@ -167,10 +158,43 @@ namespace SBUhamkari.Migrations
                         principalTable: "Faculties",
                         principalColumn: "id");
                     table.ForeignKey(
+                        name: "FK_Users_Roles_Roleid",
+                        column: x => x.Roleid,
+                        principalTable: "Roles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Users_Users_Companyid",
                         column: x => x.Companyid,
                         principalTable: "Users",
                         principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectWorkFields",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WorkfieldID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProjectID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectWorkFields", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_ProjectWorkFields_Projects_WorkfieldID",
+                        column: x => x.WorkfieldID,
+                        principalTable: "Projects",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectWorkFields_WorkFields_ProjectID",
+                        column: x => x.ProjectID,
+                        principalTable: "WorkFields",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,6 +206,7 @@ namespace SBUhamkari.Migrations
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EntityState = table.Column<int>(type: "int", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -254,6 +279,27 @@ namespace SBUhamkari.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Followings",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Followerid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FollowedID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Followings", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Followings_Users_Followerid",
+                        column: x => x.Followerid,
+                        principalTable: "Users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "News",
                 columns: table => new
                 {
@@ -282,6 +328,8 @@ namespace SBUhamkari.Migrations
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NotifTittle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NotifText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SenderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RecieverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Recieverid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Senderid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -305,23 +353,26 @@ namespace SBUhamkari.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PersonWorkField",
+                name: "PersonWorkFields",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WorkfieldID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PersonID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    WorkfieldID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonWorkField", x => new { x.PersonID, x.WorkfieldID });
+                    table.PrimaryKey("PK_PersonWorkFields", x => x.id);
                     table.ForeignKey(
-                        name: "FK_PersonWorkField_Users_WorkfieldID",
+                        name: "FK_PersonWorkFields_Users_WorkfieldID",
                         column: x => x.WorkfieldID,
                         principalTable: "Users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PersonWorkField_WorkFields_PersonID",
+                        name: "FK_PersonWorkFields_WorkFields_PersonID",
                         column: x => x.PersonID,
                         principalTable: "WorkFields",
                         principalColumn: "id",
@@ -356,24 +407,27 @@ namespace SBUhamkari.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectUser",
+                name: "ProjectParticapations",
                 columns: table => new
                 {
-                    ProjectParticipantsid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    projectsid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Userid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Projectid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectUser", x => new { x.ProjectParticipantsid, x.projectsid });
+                    table.PrimaryKey("PK_ProjectParticapations", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ProjectUser_Projects_projectsid",
-                        column: x => x.projectsid,
+                        name: "FK_ProjectParticapations_Projects_Projectid",
+                        column: x => x.Projectid,
                         principalTable: "Projects",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectUser_Users_ProjectParticipantsid",
-                        column: x => x.ProjectParticipantsid,
+                        name: "FK_ProjectParticapations_Users_Userid",
+                        column: x => x.Userid,
                         principalTable: "Users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -480,6 +534,33 @@ namespace SBUhamkari.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ParticipationInvitations",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InvitationState = table.Column<int>(type: "int", nullable: false),
+                    ProjectManagerid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InvitedUserid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParticipationInvitations", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_ParticipationInvitations_ProjectManagers_ProjectManagerid",
+                        column: x => x.ProjectManagerid,
+                        principalTable: "ProjectManagers",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ParticipationInvitations_Users_InvitedUserid",
+                        column: x => x.InvitedUserid,
+                        principalTable: "Users",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TAapplications",
                 columns: table => new
                 {
@@ -538,22 +619,52 @@ namespace SBUhamkari.Migrations
             migrationBuilder.InsertData(
                 table: "EducationInstitutes",
                 columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
-                values: new object[] { new Guid("92f2070b-defe-4477-b381-5b52f686e408"), new DateTime(2022, 7, 22, 13, 58, 8, 19, DateTimeKind.Local).AddTicks(1854), null, "SBU" });
+                values: new object[,]
+                {
+                    { new Guid("6076e225-b8e2-4da2-80ed-4147c32cd605"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7480), null, "دانشگاه علم و صنعت" },
+                    { new Guid("6f4b0c64-bc5d-4d8a-a9cd-1e29bace261e"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7450), null, "دانشگاه تهران" },
+                    { new Guid("acf727a7-a55a-4af5-8167-0eb61bc9d916"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7475), null, "دانشگاه صنعتی امیرکبیر" },
+                    { new Guid("c1f0c206-d1d3-4bd0-9c9a-5b4e61649fdf"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7398), null, "دانشگاه شهید بهشتی" },
+                    { new Guid("f8004ff8-c898-4fcd-9f32-1d6740d2eafe"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7483), null, "دانشگاه صنعتی صنعتی شریف" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "id", "Avatar", "CompanyIDnumber", "CompanyName", "Companyid", "CreateTime", "DeleteTime", "Discriminator", "Facultyid", "Password", "Username" },
-                values: new object[] { new Guid("65eefde7-1b06-44dd-b9eb-7c7dda9f6e09"), null, 2222222222L, "مرکز رشد دانشکده کامپیوتر", null, new DateTime(2022, 7, 22, 13, 58, 8, 19, DateTimeKind.Local).AddTicks(2282), null, "Company", null, "as6d4", "CSEroshd" });
+                table: "Faculties",
+                columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("1eee1ee5-e2d6-44bd-ae5c-72606c6c7ddb"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7610), null, "دانشکده رواشناسی و علوم تربیتی" },
+                    { new Guid("380a5ee6-8701-4203-ad7b-e9651d88e63c"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7614), null, "دانشکده معماری" },
+                    { new Guid("7e1fe968-e3c7-4e51-8360-7bfbc72cc555"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7605), null, "دانشکده حقوق" },
+                    { new Guid("d1208c45-9f94-468f-a881-0c7bc8b52701"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7618), null, "دانشکده علوم پایه" },
+                    { new Guid("f27ddd1d-03b1-44d4-bb9e-3f9375b25206"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7594), null, "دانشکده برق و کامپیوتر" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "id", "Avatar", "BirthDate", "CV", "Companyid", "CreateTime", "DeleteTime", "Discriminator", "Facultyid", "Firstname", "Lastname", "NationalIdNum", "Password", "PersonnelID", "Username", "gender" },
-                values: new object[] { new Guid("37c5427f-bf18-4835-b80b-d68649fe0f06"), null, new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 7, 22, 13, 58, 8, 19, DateTimeKind.Local).AddTicks(2328), null, "Professor", null, "Mojtaba", "Vahidi", 1535132133L, "51324342", 235133212L, "Dr.vahidi", 0 });
+                table: "Roles",
+                columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("79e8d250-cd9d-45f2-b0b9-efedb4942e81"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7680), null, "Student" },
+                    { new Guid("985518f0-3d57-417b-98ec-bf5b9e22d8f8"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7688), null, "Company" },
+                    { new Guid("fdcf3bfc-7468-4a54-b9bf-6cbd3b649396"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7671), null, "Admin" },
+                    { new Guid("ffda95ea-8f3d-4fc2-904b-22be34e6bd94"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7684), null, "Professor" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "id", "Avatar", "BirthDate", "CV", "Companyid", "CreateTime", "DeleteTime", "Discriminator", "Facultyid", "Firstname", "Lastname", "NationalIdNum", "Password", "StudentID", "Username", "gender" },
-                values: new object[] { new Guid("101bbe1a-79b1-46ce-8877-5de93e666675"), null, new DateTime(1999, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 7, 22, 13, 58, 8, 19, DateTimeKind.Local).AddTicks(2042), null, "Student", null, "Reza", "Kalhori", 3242115120L, "324reza", 96243057L, "RezaKlhor", 0 });
+                table: "WorkFields",
+                columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("1bac87f0-89d8-49d3-8a1f-edd7100a19f3"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7759), null, "هوش مصنوعی" },
+                    { new Guid("22b09c11-4191-42cf-bea0-1dffb5c1f754"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7753), null, "شبکه" },
+                    { new Guid("3a042889-093e-490e-b471-16dab03a0040"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7763), null, "شبکه‌های پیچیده" },
+                    { new Guid("3bbc344d-5003-423b-91f1-fbcd6d22ff61"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7738), null, "نرم افزار" },
+                    { new Guid("850b5e1e-096d-49bf-aed3-a8e86c32470a"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7745), null, "علوم داده" },
+                    { new Guid("a9f948c9-f793-428d-982c-ccf479df720f"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7742), null, "سخت افزار" },
+                    { new Guid("c9e5bab2-778a-47a3-865e-dbfd9d250f95"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7728), null, "هوش مصنوعی" },
+                    { new Guid("dd2a1d73-e4fa-4639-b87f-0674cce6ab00"), new DateTime(2022, 7, 31, 20, 31, 38, 387, DateTimeKind.Local).AddTicks(7767), null, "فناوری اطلاعات" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CoAnnouncements_Creatorid",
@@ -591,11 +702,6 @@ namespace SBUhamkari.Migrations
                 column: "Personid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Faculties_EducationInstituteid",
-                table: "Faculties",
-                column: "EducationInstituteid");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_Projectid",
                 table: "Feedbacks",
                 column: "Projectid");
@@ -604,6 +710,11 @@ namespace SBUhamkari.Migrations
                 name: "IX_Feedbacks_Userid",
                 table: "Feedbacks",
                 column: "Userid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Followings_Followerid",
+                table: "Followings",
+                column: "Followerid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_News_Userid",
@@ -621,8 +732,23 @@ namespace SBUhamkari.Migrations
                 column: "Senderid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonWorkField_WorkfieldID",
-                table: "PersonWorkField",
+                name: "IX_ParticipationInvitations_InvitedUserid",
+                table: "ParticipationInvitations",
+                column: "InvitedUserid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ParticipationInvitations_ProjectManagerid",
+                table: "ParticipationInvitations",
+                column: "ProjectManagerid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonWorkFields_PersonID",
+                table: "PersonWorkFields",
+                column: "PersonID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonWorkFields_WorkfieldID",
+                table: "PersonWorkFields",
                 column: "WorkfieldID");
 
             migrationBuilder.CreateIndex(
@@ -641,13 +767,28 @@ namespace SBUhamkari.Migrations
                 column: "Userid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectUser_projectsid",
-                table: "ProjectUser",
-                column: "projectsid");
+                name: "IX_ProjectNews_Projectid",
+                table: "ProjectNews",
+                column: "Projectid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectWorkField_WorkfieldID",
-                table: "ProjectWorkField",
+                name: "IX_ProjectParticapations_Projectid",
+                table: "ProjectParticapations",
+                column: "Projectid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectParticapations_Userid",
+                table: "ProjectParticapations",
+                column: "Userid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectWorkFields_ProjectID",
+                table: "ProjectWorkFields",
+                column: "ProjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectWorkFields_WorkfieldID",
+                table: "ProjectWorkFields",
                 column: "WorkfieldID");
 
             migrationBuilder.CreateIndex(
@@ -686,9 +827,34 @@ namespace SBUhamkari.Migrations
                 column: "Companyid");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_CompanyIDnumber",
+                table: "Users",
+                column: "CompanyIDnumber",
+                unique: true,
+                filter: "[CompanyIDnumber] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_Facultyid",
                 table: "Users",
                 column: "Facultyid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_NationalIdNum",
+                table: "Users",
+                column: "NationalIdNum",
+                unique: true,
+                filter: "[NationalIdNum] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Roleid",
+                table: "Users",
+                column: "Roleid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Username",
+                table: "Users",
+                column: "Username",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -715,16 +881,22 @@ namespace SBUhamkari.Migrations
                 name: "Notifications");
 
             migrationBuilder.DropTable(
-                name: "PersonWorkField");
+                name: "ParticipationInvitations");
+
+            migrationBuilder.DropTable(
+                name: "PersonWorkFields");
 
             migrationBuilder.DropTable(
                 name: "ProjectFiles");
 
             migrationBuilder.DropTable(
-                name: "ProjectUser");
+                name: "ProjectNews");
 
             migrationBuilder.DropTable(
-                name: "ProjectWorkField");
+                name: "ProjectParticapations");
+
+            migrationBuilder.DropTable(
+                name: "ProjectWorkFields");
 
             migrationBuilder.DropTable(
                 name: "SavedProject");
@@ -737,6 +909,9 @@ namespace SBUhamkari.Migrations
 
             migrationBuilder.DropTable(
                 name: "CoAnnouncements");
+
+            migrationBuilder.DropTable(
+                name: "EducationInstitutes");
 
             migrationBuilder.DropTable(
                 name: "WorkFields");
@@ -757,7 +932,7 @@ namespace SBUhamkari.Migrations
                 name: "Faculties");
 
             migrationBuilder.DropTable(
-                name: "EducationInstitutes");
+                name: "Roles");
         }
     }
 }

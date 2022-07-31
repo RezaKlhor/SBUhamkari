@@ -53,11 +53,22 @@ namespace Models
             {
                 new Role{Name="Admin"},new Role{Name="Student"},new Role{Name="Professor"},new Role{Name="Company"}
             });
+            modelBuilder.Entity<WorkField>().HasData(new List<WorkField> { 
+                new WorkField{Name="هوش مصنوعی"},
+                new WorkField{Name="نرم افزار"},
+                new WorkField{Name="سخت افزار"},
+                new WorkField{Name="علوم داده"},
+                new WorkField{Name="شبکه"},
+                new WorkField{Name="هوش مصنوعی"},
+                new WorkField{Name="شبکه‌های پیچیده"},
+                new WorkField{Name="فناوری اطلاعات"},
+            });
+            
 
             modelBuilder.Entity<Company>().HasIndex(m => m.CompanyIDnumber).IsUnique();
             modelBuilder.Entity<User>().HasIndex(m => m.Username).IsUnique();
             modelBuilder.Entity<Person>().HasIndex(m => m.NationalIdNum).IsUnique();
-            
+            modelBuilder.Entity<User>().HasMany<ParticipationInvitation>(m=> m.ParticipationInvitations).WithOne(m => m.InvitedUser).OnDelete(DeleteBehavior.NoAction);
 
 
         }
@@ -88,6 +99,7 @@ namespace Models
         public DbSet<ProjectWorkField> ProjectWorkFields { get; set; }
         public DbSet<PersonWorkField> PersonWorkFields { get; set; }
         public DbSet<ProjectNews> ProjectNews { get; set; }
-        
+        public DbSet<ParticipationInvitation> ParticipationInvitations { get; set; }
+
     }
 }
