@@ -10,24 +10,7 @@ namespace Models.Models
 {
     public class ContactInfo: BaseEntity
     {
-        public ContactInfo()
-        {
-        }
-
-        public ContactInfo(string name, string? contactNumber, string? contactLink, User user)
-        {
-            Name = name;
-            ContactNumber = contactNumber;
-            ContactLink = contactLink;
-            User = user;
-        }
-
-        public ContactInfo(string name, string? contactLink, User user)
-        {
-            Name = name;
-            ContactLink = contactLink;
-            User = user;
-        }
+        
 
         [DisplayName("عنوان راه ارتباطی")]
         [Required]
@@ -40,6 +23,8 @@ namespace Models.Models
         public string? ContactLink { get; set; }
 
         public User User { get; set; }
+        public EntityState EntityState { get; set; }
 
     }
+    public enum EntityState { Public, Private }
 }

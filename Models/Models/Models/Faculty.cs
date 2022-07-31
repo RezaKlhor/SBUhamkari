@@ -22,7 +22,7 @@ namespace Models.Models
         [DisplayName("نام دانشکده")]
         [Required]
         public string Name { get; set; }
-        public EducationInstitute EducationInstitute { get; set; }
+        
         public List<User>? Users { get; set; }
 
     }

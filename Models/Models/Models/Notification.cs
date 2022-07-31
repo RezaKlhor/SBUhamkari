@@ -30,7 +30,8 @@ namespace Models.Models
         [Required]
         public string NotifText { get; set; }
 
-
+        public string SenderName { get; set; }
+        public string RecieverName { get; set; }
         public User Reciever { get; set; }
         public Project Sender{ get; set; }
     }

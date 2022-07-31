@@ -19,7 +19,7 @@ namespace Models.Models
         [DisplayName("نام موسسه آموزشی")]
         public string Name { get; set; }
         public List<EducationRecord>? EducationRecords { get; set; }
-        public List<Faculty>? Faculties { get; set; }
+        
 
     }
 }

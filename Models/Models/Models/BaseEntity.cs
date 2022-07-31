@@ -9,6 +9,7 @@ namespace Models.Models
         {
             id = System.Guid.NewGuid();
             CreateTime = DateTime.Now;
+            
         }
         [Key]
         public System.Guid id { get; set; }
@@ -19,5 +20,7 @@ namespace Models.Models
         
         public DateTime? DeleteTime { get; set; }
         
+
     }
+   
 }

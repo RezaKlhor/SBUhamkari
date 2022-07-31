@@ -20,15 +20,35 @@ namespace Models
             {
                 new EducationInstitute
                 {
-                    Name="SBU"
+                    Name="دانشگاه شهید بهشتی"
                 },
                 new EducationInstitute
                 {
-                    Name="PNU"
-                }
+                    Name="دانشگاه تهران"
+                },
+                new EducationInstitute
+                {
+                    Name="دانشگاه صنعتی امیرکبیر"
+                },
+                new EducationInstitute
+                {
+                    Name="دانشگاه علم و صنعت"
+                },
+                new EducationInstitute
+                {
+                    Name="دانشگاه صنعتی صنعتی شریف"
+                },
+            });
+            modelBuilder.Entity<Faculty>().HasData(new List<Faculty> {
+                new Faculty{Name="دانشکده برق و کامپیوتر"},
+                new Faculty{Name="دانشکده حقوق"},
+                new Faculty{Name="دانشکده رواشناسی و علوم تربیتی"},
+                new Faculty{Name="دانشکده معماری"},
+                new Faculty{Name="دانشکده علوم پایه"},
+                
+
 
             });
-            
             modelBuilder.Entity<Role>().HasData(new List<Role>
             {
                 new Role{Name="Admin"},new Role{Name="Student"},new Role{Name="Professor"},new Role{Name="Company"}

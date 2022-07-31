@@ -34,7 +34,7 @@ namespace Models.Models
         }
 
         [DisplayName("تاریخ تولد")]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         [Required]
         [StringLength(20, ErrorMessage = "طول نام بیشتر از حد مجاز میباشد")]
