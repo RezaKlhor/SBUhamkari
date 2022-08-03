@@ -52,12 +52,24 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByProjectState(ProjectState projectState)
         {
-            throw new NotImplementedException();
+            return HamkariContext.Projects.Where(m => m.ProjectState == projectState).ToList();
         }
 
-        public List<Project> GetProjectsByWorkfield(Guid workFieldID)
+        public List<Project> GetProjectsByWorkfield(List<Guid> workfields)
         {
-            throw new NotImplementedException();
+            
+            var projects = HamkariContext.Projects;
+            foreach (var item in projects)
+            {
+                var projectWorkFields = HamkariContext.ProjectWorkFields.Where(s => s.Project.id == item.id).ToList();
+                foreach (var item2 in workfields)
+                {
+                    if (projectWorkFields.Contains())
+                    {
+
+                    }
+                }
+            }
         }
 
         public List<Project> GetProjectsInSavedBox(Guid userID)
