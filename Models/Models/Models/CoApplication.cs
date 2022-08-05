@@ -26,8 +26,8 @@ namespace Models.Models
         public string Text { get; set; }
 
         [DisplayName("رزومه")]
-        [Required]
         public Byte[] CV { get; set; }
+
         public Person? Applicant { get; set; }
         public CoAnnouncement CoAnnouncement { get; set; }
     }

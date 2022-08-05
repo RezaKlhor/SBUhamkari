@@ -14,21 +14,18 @@ namespace Models.Models
         {
         }
 
-        public CoAnnouncement(string tittle, string text, State state, ProjectManager creator, Project project)
+        public CoAnnouncement(string tittle, string text, State state, ProjectManager creator)
         {
             Tittle = tittle;
             Text = text;
             State = state;
             Creator = creator;
-            Project = project;
         }
 
         [DisplayName("عنوان درخواست همکاری")]
-        [Required]
         public string Tittle { get; set; }
 
         [DisplayName("متن درخواست")]
-        [Required]
         public string Text { get; set; }
 
         public State State { get; set; }
