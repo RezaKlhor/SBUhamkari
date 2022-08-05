@@ -57,17 +57,18 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByWorkfield(List<Guid> workfields)
         {
-            
+            var workfieldslis = new List<ProjectWorkField>();
+            foreach (var item in collection)
+            {
+
+            }
             var projects = HamkariContext.Projects;
             foreach (var item in projects)
             {
                 var projectWorkFields = HamkariContext.ProjectWorkFields.Where(s => s.Project.id == item.id).ToList();
-                foreach (var item2 in workfields)
+                if (Tools<WorkField>())
                 {
-                    if (projectWorkFields.Contains())
-                    {
 
-                    }
                 }
             }
         }
