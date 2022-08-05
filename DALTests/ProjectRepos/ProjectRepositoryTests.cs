@@ -82,7 +82,8 @@ namespace DAL.ProjectRepos.Tests
 
             var student = new Student
             {
-                Faculty = unitOfWork.FacultyRecords.SingleOrDefault(m => m.Name == "دانشکده مهندسی برق و کامپیوتر");
+                Faculty = unitOfWork.FacultyRecords.SingleOrDefault(m => m.Name == "دانشکده مهندسی برق و کامپیوتر"),
+
                 
             }
             

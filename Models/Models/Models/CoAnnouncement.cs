@@ -34,7 +34,7 @@ namespace Models.Models
         public State State { get; set; }
 
         public ProjectManager Creator { get; set; }
-        public Project? Project { get; set; }
+        
         public List<CoApplication>? CoApplications { get; set; }
     }
     public enum State

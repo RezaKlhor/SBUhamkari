@@ -31,7 +31,7 @@ namespace Models.Models
 
         public List<ProjectFile>? Filess { get; set; }
         public List<Notification>? Notifications { get; set; }
-        public List<CoAnnouncement>? CoAnnouncements { get; set; }
+    
         public List<ProjectNews>? ProjectNews { get; set; }
     }
     public enum ProjectState
