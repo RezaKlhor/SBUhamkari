@@ -55,22 +55,34 @@ namespace DAL.ProjectRepos
             return HamkariContext.Projects.Where(m => m.ProjectState == projectState).ToList();
         }
 
-        public List<Project> GetProjectsByWorkfield(List<Guid> workfields)
+        public List<Project> GetProjectsByWorkField(Guid workFieldID)
         {
-            var workfieldslis = new List<ProjectWorkField>();
-            foreach (var item in collection)
+            var target = HamkariContext.ProjectWorkFields.Where<ProjectWorkField>(m => m.WorkField.id == workFieldID).ToList();
+            var projects = new List<Project>();
+            foreach (var item in target)
             {
-
+                projects.Add(item.Project);
             }
-            var projects = HamkariContext.Projects;
-            foreach (var item in projects)
-            {
-                var projectWorkFields = HamkariContext.ProjectWorkFields.Where(s => s.Project.id == item.id).ToList();
-                if (Tools<WorkField>())
-                {
+            return projects;
+        }
 
-                }
-            }
+        public List<Project> GetProjectsByWorkfields(List<Guid> workfields)
+        {
+            //var workfieldslis = new List<ProjectWorkField>();
+            //foreach (var item in collection)
+            //{
+
+            //}
+            //var projects = HamkariContext.Projects;
+            //foreach (var item in projects)
+            //{
+            //  var projectWorkFields = HamkariContext.ProjectWorkFields.Where(s => s.Project.id == item.id).ToList();
+            //if (Tools<WorkField>())
+            //{
+
+            //}
+            //  }
+            return null;
         }
 
         public List<Project> GetProjectsInSavedBox(Guid userID)

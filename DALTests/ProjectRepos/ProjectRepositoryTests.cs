@@ -29,8 +29,8 @@ namespace DAL.ProjectRepos.Tests
 
             using (var unitOfWork = new UnitOfWork(database))
             {
-                
-               
+
+
                 var projects = unitOfWork.Projects.GetProjectsByManager(unitOfWork.ProjectManagers.GetAll().First().id);
 
                 Assert.IsNotNull(projects);
@@ -51,8 +51,8 @@ namespace DAL.ProjectRepos.Tests
             }
         }
 
-        
-        
+
+
 
         [TestMethod()]
         public void GetProjectsByParticipatorTest()
@@ -66,13 +66,26 @@ namespace DAL.ProjectRepos.Tests
                 Assert.IsNotNull(projects);
 
             }
-            
+
         }
 
         [TestMethod()]
         public void GetProjectsByProjectStateTest()
         {
             Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void GetProjectsByWorkFieldTest()
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(database);
+
+            var student = new Student
+            {
+                Faculty = unitOfWork.FacultyRecords.SingleOrDefault(m => m.Name == "دانشکده مهندسی برق و کامپیوتر");
+                
+            }
+            
         }
     }
 }

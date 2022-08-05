@@ -8,12 +8,14 @@ namespace DAL.ProjectRepos
 {
     public interface IProjectRepository : IRepository<Project>
     {
-        public List<Project> GetProjectsByWorkfield(Guid workFieldID);
-        public List<Project> GetProjectsByParticipator(Guid userID);
-        public List<Project> GetProjectsByManager(Guid projectManagerID);
-        public List<Project> GetProjectsByProjectState(ProjectState projectState);
-        public List<Project> GetProjectsInSavedBox(Guid userID);
-        public List<Project> GetProjectsByManagerType(Guid RoleID);
+
+        List<Project> GetProjectsByWorkField(Guid workFieldID);
+        List<Project> GetProjectsByWorkfields(List<Guid> workFieldID);
+        List<Project> GetProjectsByParticipator(Guid userID);
+        List<Project> GetProjectsByManager(Guid projectManagerID);
+        List<Project> GetProjectsByProjectState(ProjectState projectState);
+        List<Project> GetProjectsInSavedBox(Guid userID);
+        List<Project> GetProjectsByManagerType(Guid RoleID);
        
 
     }
