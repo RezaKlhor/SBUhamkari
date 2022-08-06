@@ -157,24 +157,38 @@ namespace DAL.ProjectRepos.Tests
             //};
             //unitOfWork.ProjectManagers.Add(projectManager);
             //unitOfWork.Complete();
-            var projectWorkFields = new List<ProjectWorkField>
-            {
-                new ProjectWorkField{
-                    Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
-                    WorkField=unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField)
-                    
+            //var projectWorkFields = new List<ProjectWorkField>
+            //{
+            //    new ProjectWorkField{
+            //        Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
+            //        WorkField=unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField)
 
-                },
-                new ProjectWorkField
-                {
-                    Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
-                    WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField)
-                }
-            };
-            unitOfWork.ProjectWorkFields.AddRange(projectWorkFields);
-            unitOfWork.Complete();
+
+            //    },
+            //    new ProjectWorkField
+            //    {
+            //        Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
+            //        WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField)
+            //    }
+            //};
+            //unitOfWork.ProjectWorkFields.AddRange(projectWorkFields);
+            //unitOfWork.Complete();
             var projects = unitOfWork.Projects.GetProjectsByWorkField(unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField).id);
             Assert.IsNotNull(projects);
+        }
+
+        [TestMethod()]
+        public void GetProjectsByWorkfieldsTest()
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(database);
+            var workFields = new List<Guid>
+            {
+                 unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField).id,
+                 unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField).id,
+            };
+            var projects = unitOfWork.Projects.GetProjectsByWorkfields(workFields);
+            Assert.IsNotNull(projects);
+            
         }
     }
 }

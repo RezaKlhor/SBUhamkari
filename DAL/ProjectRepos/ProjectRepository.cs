@@ -62,7 +62,7 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByWorkField(Guid workFieldID)
         {
-            var target = HamkariContext.ProjectWorkFields.Where<ProjectWorkField>(m => m.WorkField.id == workFieldID).ToList();
+            var target = HamkariContext.ProjectWorkFields.Include(m=>m.Project).Where<ProjectWorkField>(m => m.WorkField.id == workFieldID).ToList();
             var projects = new List<Project>();
             foreach (var item in target)
             {
@@ -73,21 +73,14 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByWorkfields(List<Guid> workfields)
         {
-            //var workfieldslis = new List<ProjectWorkField>();
-            //foreach (var item in collection)
-            //{
+            var projectLists = new List<List<Project>>();
+            foreach (var item in workfields)
+            {
+                projectLists.Add(GetProjectsByWorkField(item));
+            }
+            return Tools<Project>.FindCommon(projectLists);
 
-            //}
-            //var projects = HamkariContext.Projects;
-            //foreach (var item in projects)
-            //{
-            //  var projectWorkFields = HamkariContext.ProjectWorkFields.Where(s => s.Project.id == item.id).ToList();
-            //if (Tools<WorkField>())
-            //{
-
-            //}
-            //  }
-            return null;
+            
         }
 
         public List<Project> GetProjectsInSavedBox(Guid userID)
