@@ -14,7 +14,7 @@ namespace Models.Models
         {
         }
 
-        public EducationRecord(EducationDegree? degree, EducationState educationState, EducationInstitute? educationInstitute, Person person)
+        public EducationRecord(EducationDegree degree, EducationState educationState, EducationInstitute educationInstitute, Person person)
         {
             Degree = degree;
             EducationState = educationState;
@@ -22,15 +22,10 @@ namespace Models.Models
             Person = person;
         }
 
-        public EducationRecord(EducationState educationState, EducationInstitute educationInstitute, Person person)
-        {
-            EducationState = educationState;
-            EducationInstitute = educationInstitute;
-            Person = person;
-        }
+        
 
         [DisplayName("مدرک تحصیلی")]
-        public EducationDegree? Degree { get; set; }// degree?
+        public EducationDegree Degree { get; set; }
 
         [DisplayName("وضعیت")]
         public EducationState EducationState { get; set; }

@@ -10,10 +10,9 @@ namespace Models.Models
         {
         }
 
-        public EducationInstitute(string name, List<EducationRecord>? educationRecords)
+        public EducationInstitute(string name)
         {
             Name = name;
-            EducationRecords = educationRecords;
         }
 
         [DisplayName("نام موسسه آموزشی")]

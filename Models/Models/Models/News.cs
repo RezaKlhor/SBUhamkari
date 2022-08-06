@@ -23,10 +23,9 @@ namespace Models.Models
         }
 
         [DisplayName("عنوان اطلاعیه")]
-        [Required]
         public string Tittle { get; set; }
 
-        [Required]
+        
         [DisplayName("متن اطلاعیه")]
         public string Text { get; set; }
 

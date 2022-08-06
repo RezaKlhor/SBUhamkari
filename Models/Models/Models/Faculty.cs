@@ -14,13 +14,12 @@ namespace Models.Models
         {
 
         }
-        public Faculty(string name,EducationInstitute educationInstitute)
+        public Faculty(string name)
         {
             Name = name;
-            educationInstitute = new EducationInstitute();
+            
         }
         [DisplayName("نام دانشکده")]
-        [Required]
         public string Name { get; set; }
         
         public List<User>? Users { get; set; }

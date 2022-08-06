@@ -14,24 +14,26 @@ namespace Models.Models
         {
         }
 
-        public Notification(string notifTittle, string notifText, User reciever, Project sender)
+        public Notification(string notifTittle, string notifText, string senderName, string recieverName, User reciever, Project sender)
         {
             NotifTittle = notifTittle;
             NotifText = notifText;
+            SenderName = senderName;
+            RecieverName = recieverName;
             Reciever = reciever;
             Sender = sender;
         }
 
         [DisplayName("عنوان اعلان")]
-        [Required]
         public string NotifTittle { get; set; }
 
         [DisplayName("متن اعلان")]
-        [Required]
         public string NotifText { get; set; }
 
         public string SenderName { get; set; }
+
         public string RecieverName { get; set; }
+
         public User Reciever { get; set; }
         public Project Sender{ get; set; }
     }

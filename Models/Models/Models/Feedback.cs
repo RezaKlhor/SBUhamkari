@@ -14,13 +14,7 @@ namespace Models.Models
         {
         }
 
-        public Feedback(string? text, Score score, User user, Project project)
-        {
-            Text = text;
-            Score = score;
-            User = user;
-            Project = project;
-        }
+        
 
         public Feedback(Score score, User user, Project project)
         {
