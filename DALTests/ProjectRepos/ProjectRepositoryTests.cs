@@ -60,7 +60,13 @@ namespace DAL.ProjectRepos.Tests
             using (var unitOfWork = new UnitOfWork(database))
             {
 
-
+                //var participation = new ProjectParticapation
+                //{
+                //    Project = unitOfWork.Projects.GetProjectByName("همکاری بهشتی"),
+                //    User = unitOfWork.Users.SingleOrDefault(m => m.Username == "RezaKlhor")
+                //};
+                //unitOfWork.ProjectParticapations.Add(participation);
+                //unitOfWork.Complete();
                 var projects = unitOfWork.Projects.GetProjectsByParticipator(unitOfWork.Students.GetAll().FirstOrDefault().id);
 
                 Assert.IsNotNull(projects);
@@ -72,7 +78,17 @@ namespace DAL.ProjectRepos.Tests
         [TestMethod()]
         public void GetProjectsByProjectStateTest()
         {
-            Assert.Fail();
+            //var project = new Project
+            //{
+            //    Name = "گلستان",
+            //    ProjectExplain = "سییسیشسیشسیشسیشسیسش",
+            //    ProjectState = ProjectState.Ended
+            //};
+            UnitOfWork unitOfWork = new UnitOfWork(database);
+            //unitOfWork.Projects.Add(project);
+            //unitOfWork.Complete();
+            var projects = unitOfWork.Projects.GetProjectsByProjectState(ProjectState.Ended);
+            Assert.IsNotNull(projects);
         }
 
         [TestMethod()]
@@ -80,13 +96,85 @@ namespace DAL.ProjectRepos.Tests
         {
             UnitOfWork unitOfWork = new UnitOfWork(database);
 
-            var student = new Student
-            {
-                Faculty = unitOfWork.FacultyRecords.SingleOrDefault(m => m.Name == "دانشکده مهندسی برق و کامپیوتر"),
+            //var student = new Student
+            //{
+            //    Faculty = unitOfWork.FacultyRecords.SingleOrDefault(m => m.Name == "دانشکده مهندسی برق و کامپیوتر"),
+            //    Firstname = "رضا",
+            //    Lastname = "کلهری",
+            //    Username = "RezaKlhor",
+            //    Password = "12345678",
+            //    Role = unitOfWork.Roles.SingleOrDefault(m => m.Name == "Student"),
+            //    gender = Gender.male,
+            //    StudentID=96243057,
+            //    NationalIdNum= 3242115120
 
-                
-            }
-            
+
+            //};
+            //unitOfWork.Students.Add(student);
+            //unitOfWork.Complete();
+            //var professor = new Professor
+            //{
+            //    Firstname = "مجتبی",
+            //    Lastname = "وحیدی",
+            //    Username = "m.vahidi",
+            //    Password = "12345678",
+            //    Role = unitOfWork.Roles.SingleOrDefault(m => m.Name == "Professor"),
+            //    gender = Gender.male,
+            //    PersonnelID = 96243057,
+            //    Faculty= unitOfWork.FacultyRecords.SingleOrDefault(m => m.Name == "دانشکده مهندسی برق و کامپیوتر"),
+            //    NationalIdNum= 3242561341
+
+            //};
+            //unitOfWork.Professors.Add(professor);
+            //unitOfWork.Complete();
+            //var company = new Company
+            //{
+            //    CompanyName = "پارک",
+            //    CompanyIDnumber = 12345678,
+            //    Role = unitOfWork.Roles.SingleOrDefault(m => m.Name == "Company"),
+            //    Faculty = unitOfWork.FacultyRecords.SingleOrDefault(m => m.Name == "دانشکده مهندسی برق و کامپیوتر"),
+            //    Password = "12345678",
+            //    Username = "Park",
+
+            //};
+            //unitOfWork.Companies.Add(company);
+            //unitOfWork.Complete();
+            //var project = new Project
+            //{
+            //    Name = "همکاری بهشتی",
+            //    ProjectExplain = "سامانه همکاری بهشتی یک سامانه تحت وب می‌باشد",
+            //    ProjectState = ProjectState.Ongoing,
+
+
+
+            //};
+            //unitOfWork.Projects.Add(project);
+            //unitOfWork.Complete();
+            //var projectManager = new ProjectManager
+            //{
+            //    Project = unitOfWork.Projects.GetProjectByName("همکاری بهشتی"),
+            //    User = unitOfWork.Users.SingleOrDefault(m => m.Username == "RezaKlhor")
+            //};
+            //unitOfWork.ProjectManagers.Add(projectManager);
+            //unitOfWork.Complete();
+            var projectWorkFields = new List<ProjectWorkField>
+            {
+                new ProjectWorkField{
+                    Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
+                    WorkField=unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField)
+                    
+
+                },
+                new ProjectWorkField
+                {
+                    Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
+                    WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField)
+                }
+            };
+            unitOfWork.ProjectWorkFields.AddRange(projectWorkFields);
+            unitOfWork.Complete();
+            var projects = unitOfWork.Projects.GetProjectsByWorkField(unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField).id);
+            Assert.IsNotNull(projects);
         }
     }
 }

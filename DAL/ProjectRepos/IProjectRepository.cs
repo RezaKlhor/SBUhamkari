@@ -16,6 +16,7 @@ namespace DAL.ProjectRepos
         List<Project> GetProjectsByProjectState(ProjectState projectState);
         List<Project> GetProjectsInSavedBox(Guid userID);
         List<Project> GetProjectsByManagerType(Guid RoleID);
+        Project GetProjectByName(string name);
        
 
     }

@@ -15,6 +15,11 @@ namespace DAL.ProjectRepos
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
+        public Project GetProjectByName(string name)
+        {
+            return HamkariContext.Projects.SingleOrDefault(x => x.Name == name);
+        }
+
         //Tested
         public List<Project> GetProjectsByManager(Guid projectManagerID)
         {
@@ -41,7 +46,7 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByParticipator(Guid userID)
         {
-            var projectParticipation = HamkariContext.ProjectParticapations.Where<ProjectParticapation>(m => m.id==userID).Include(m => m.Project).ToList();
+            var projectParticipation = HamkariContext.ProjectParticapations.Where<ProjectParticapation>(m => m.User.id==userID).Include(m => m.Project).ToList();
             var projects = new List<Project>();
             foreach (var item in projectParticipation)
             {

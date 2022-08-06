@@ -14,5 +14,10 @@ namespace DAL
         {
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
+
+        public WorkField GetWorkFieldByName(string name)
+        {
+            return HamkariContext.WorkFields.SingleOrDefault(m => m.Name == name);
+        }
     }
 }

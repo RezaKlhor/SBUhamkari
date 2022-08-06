@@ -8,5 +8,6 @@ namespace DAL.ProjectRepos
 {
     public interface IProjectWorkFieldRepository : IRepository<ProjectWorkField>
     {
+        
     }
 }
