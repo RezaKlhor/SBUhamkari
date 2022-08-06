@@ -27,7 +27,7 @@ namespace DAL
         public static readonly string ItWorkField = "فناوری اطلاعات";
         public static readonly string NetworkWorkField = "شبکه";
         public static readonly string DataScWorkField = "علوم داده";
-        public static readonly string HardwareWorkField = "سخت‌‌افزار";
+        public static readonly string HardwareWorkField = "سخت افزار";
         public static readonly string SoftwareWorkField = "نرم افزار";
         public static readonly string ComplicatedNetworksWorkField = "شبکه‌های پیچیده";
         

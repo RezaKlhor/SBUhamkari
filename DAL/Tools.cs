@@ -20,16 +20,21 @@
             lists.RemoveAt(0);
             foreach (var list in lists)
             {
-                foreach (var item in common)
+                for (int i = 0; i < common.Count; i++)
                 {
-                    if (!list.Contains(item))
+                    if (!list.Contains(common.ElementAt(i)))
                     {
-                        common.Remove(item as T);
+                        common.RemoveAt(i);
+                        if (common.Count == 0)
+                        {
+                            common = null;
+                            break;
+                        }
                     }
                 }
-                if (common.Count == 0)
+                
+                if (common==null)
                 {
-                    common = null;
                     break;
                 }
             }

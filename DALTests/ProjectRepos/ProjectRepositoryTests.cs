@@ -169,7 +169,23 @@ namespace DAL.ProjectRepos.Tests
             //    {
             //        Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
             //        WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField)
+            //    },
+            //    new ProjectWorkField
+            //    {
+            //        Project=unitOfWork.Projects.GetProjectByName("گلستان"),
+            //        WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField)
+            //    },
+            //    new ProjectWorkField
+            //    {
+            //        Project=unitOfWork.Projects.GetProjectByName("گلستان"),
+            //        WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField)
+            //    },
+            //    new ProjectWorkField
+            //    {
+            //        Project=unitOfWork.Projects.GetProjectByName("گلستان"),
+            //        WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.ItWorkField)
             //    }
+                
             //};
             //unitOfWork.ProjectWorkFields.AddRange(projectWorkFields);
             //unitOfWork.Complete();
@@ -181,10 +197,16 @@ namespace DAL.ProjectRepos.Tests
         public void GetProjectsByWorkfieldsTest()
         {
             UnitOfWork unitOfWork = new UnitOfWork(database);
+            //unitOfWork.ProjectWorkFields.Add(new ProjectWorkField {
+            //    Project= unitOfWork.Projects.GetProjectByName("گلستان"),
+            //    WorkField=unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField)
+            //});
+            //unitOfWork.Complete();
             var workFields = new List<Guid>
             {
                  unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField).id,
                  unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField).id,
+                 
             };
             var projects = unitOfWork.Projects.GetProjectsByWorkfields(workFields);
             Assert.IsNotNull(projects);
