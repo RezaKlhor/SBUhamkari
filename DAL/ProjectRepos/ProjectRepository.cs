@@ -85,7 +85,13 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsInSavedBox(Guid userID)
         {
-            throw new NotImplementedException();
+            var Usersaves = HamkariContext.SavedProjects.Include(m => m.Project).Where(m => m.User.id == userID).ToList();
+            var projects = new List<Project>();
+            foreach (var item in Usersaves)
+            {
+                projects.Add(item.Project);
+            }
+            return projects;
         }
     }
 }

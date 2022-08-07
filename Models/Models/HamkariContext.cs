@@ -100,6 +100,7 @@ namespace Models
         public DbSet<PersonWorkField> PersonWorkFields { get; set; }
         public DbSet<ProjectNews> ProjectNews { get; set; }
         public DbSet<ParticipationInvitation> ParticipationInvitations { get; set; }
+        public DbSet<SavedProject> SavedProjects { get; set; }
 
     }
 }
