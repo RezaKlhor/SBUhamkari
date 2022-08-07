@@ -8,8 +8,11 @@ namespace DAL.ProjectRepos
 {
     public interface ICoAnnouncementRepository : IRepository<CoAnnouncement>
     {
-        public List<CoAnnouncement> GetProjectsCoAnnouncement(Guid ProjectID);
-        public List<CoAnnouncement> GetCoAnnouncementsByWorkField(Guid WorkFieldID);
+        List<CoAnnouncement> GetProjectsCoAnnouncement(Guid ProjectID);
+        List<CoAnnouncement> GetCoAnnouncementsByWorkField(Guid WorkFieldID);
+        List<CoAnnouncement> GetCoAnnouncementsByFollow(Guid userID);
+        List<CoAnnouncement> GetCoAnnouncementsByProject(Guid projectID);
+
 
 
 
