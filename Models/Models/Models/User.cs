@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Models.Models
@@ -44,6 +45,7 @@ namespace Models.Models
         [Required]
         [MinLength(8,ErrorMessage ="رمز عبور باید حداقل 8 رقم باشد")]
         [DisplayName("رمز عبور")]
+        [JsonIgnore]
         public String Password { get; set; }
 
         [DisplayName("تصویر نمایه")]

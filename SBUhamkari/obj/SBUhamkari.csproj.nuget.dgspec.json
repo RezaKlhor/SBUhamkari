@@ -296,6 +296,10 @@
               "target": "Package",
               "version": "[6.0.7, )"
             },
+            "ServiceStack": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"

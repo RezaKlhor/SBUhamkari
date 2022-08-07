@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Models.Models;
+using ServiceStack.Host;
 using System.Linq;
 
 namespace SBUhamkari.Controllers
@@ -15,7 +16,7 @@ namespace SBUhamkari.Controllers
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        };
 
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly HamkariContext database;
@@ -27,30 +28,20 @@ namespace SBUhamkari.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WorkField> Get()
+        public User Get(string username)
         {
-
-
-
-            //ProjectRepositoryTests projectRepositoryTests = new ProjectRepositoryTests(database);
-            //projectRepositoryTests.
-
-            using (var unitOfWork = new UnitOfWork(database))
+            UnitOfWork unitOfWork = new UnitOfWork(database);
+            var user = unitOfWork.Users.GetUserByUsername(username);
+            if (user==null)
             {
-                var projects = unitOfWork.Projects.GetProjectsByManager(
-                    unitOfWork.ProjectManagers.GetAll().FirstOrDefault().id);
-                    
+                throw new HttpException("sdas");
             }
-            //var projects = user.projects.ToList<Project>();
-            return null;
-        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //    {
-        //        Date = DateTime.Now.AddDays(index),
-        //        TemperatureC = Random.Shared.Next(-20, 55),
-        //        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //
+            return user;
+
+
+
+
+
         }
     }
 }

@@ -276,3 +276,8 @@ C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\run
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\ServiceStack.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\ServiceStack.Client.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\ServiceStack.Common.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\ServiceStack.Interfaces.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\ServiceStack.Text.dll
