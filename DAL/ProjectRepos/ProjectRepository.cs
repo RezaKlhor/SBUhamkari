@@ -20,6 +20,16 @@ namespace DAL.ProjectRepos
             return HamkariContext.Projects.SingleOrDefault(x => x.Name == name);
         }
 
+        public List<Project> GetProjectsByAll(List<Guid> workFieldsID, Guid ManagerRoleID, ProjectState projectState)
+        {
+            return Tools<Project>.FindCommon(new List<List<Project>> {
+                GetProjectsByWorkfields(workFieldsID),
+                GetProjectsByManagerType(ManagerRoleID),
+                GetProjectsByProjectState(projectState)
+            
+            });
+        }
+
         //Tested
         public List<Project> GetProjectsByManager(Guid projectManagerID)
         {
@@ -93,5 +103,6 @@ namespace DAL.ProjectRepos
             }
             return projects;
         }
+        
     }
 }

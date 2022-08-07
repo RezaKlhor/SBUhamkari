@@ -15,9 +15,17 @@
         }
         public static List<T> FindCommon(List<List<T>> lists)
         {
+            List<T> minCount = lists.ElementAt(0);
+            for (int i = 0; i < lists.Count; i++)
+            {
+                if (lists.ElementAt(i).Count< minCount.Count)
+                {
+                    minCount = lists.ElementAt(i);
+                }
+            }
             var common = new List<T>();
-            common.AddRange(lists.ElementAt(0));
-            lists.RemoveAt(0);
+            common.AddRange(minCount);
+            lists.Remove(minCount);
             foreach (var list in lists)
             {
                 for (int i = 0; i < common.Count; i++)

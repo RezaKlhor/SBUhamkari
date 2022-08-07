@@ -17,7 +17,6 @@ namespace DAL.ProjectRepos.Tests
         {
 
             var options = new DbContextOptionsBuilder<HamkariContext>().UseSqlServer("Server=DESKTOP-NLOGANE;database=SBUhamkari;trusted_connection=true;", b => b.MigrationsAssembly("SBUhamkari"));
-
             database = new HamkariContext(options.Options);
 
 
@@ -44,7 +43,7 @@ namespace DAL.ProjectRepos.Tests
             {
 
 
-                var projects = unitOfWork.Projects.GetProjectsByManagerType(unitOfWork.Roles.GetStudentRoleID("Professor"));
+                var projects = unitOfWork.Projects.GetProjectsByManagerType(unitOfWork.Roles.GetRoleID("Professor"));
 
                 Assert.IsNotNull(projects);
 
@@ -216,7 +215,7 @@ namespace DAL.ProjectRepos.Tests
         [TestMethod()]
         public void GetProjectsInSavedBoxTest()
         {
-           UnitOfWork unitOfWork = new UnitOfWork(database);
+            UnitOfWork unitOfWork = new UnitOfWork(database);
             //var project = new Project
             //{
             //    Name = "همکاری بهشتی",
@@ -285,11 +284,56 @@ namespace DAL.ProjectRepos.Tests
             //unitOfWork.SavedProjects.Add(new SavedProject { Project = project2, User = student });
             //unitOfWork.Complete();
             var projects = unitOfWork.Projects.GetProjectsInSavedBox(unitOfWork.Students.Find(m => m.Firstname == "رضا").First().id);
-            if (projects.Count==0)
+            if (projects.Count == 0)
             {
                 projects = null;
             }
             Assert.IsNotNull(projects);
+        }
+
+        [TestMethod()]
+        public void GetProjectsByAllTest()
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(database);
+            var projectWorkFields = new List<ProjectWorkField>
+            {
+                new ProjectWorkField{
+                    Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
+                    WorkField=unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField)
+
+
+                },
+                new ProjectWorkField
+                {
+                    Project=unitOfWork.Projects.GetProjectByName(Constants.HamkariProject),
+                    WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField)
+                },
+                new ProjectWorkField
+                {
+                    Project=unitOfWork.Projects.GetProjectByName("گلستان"),
+                    WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.NetworkWorkField)
+                },
+                new ProjectWorkField
+                {
+                    Project=unitOfWork.Projects.GetProjectByName("گلستان"),
+                    WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField)
+                },
+                new ProjectWorkField
+                {
+                    Project=unitOfWork.Projects.GetProjectByName("گلستان"),
+                    WorkField= unitOfWork.WorkFields.GetWorkFieldByName(Constants.ItWorkField)
+                }
+
+            };
+            unitOfWork.ProjectWorkFields.AddRange(projectWorkFields);
+            unitOfWork.Complete();
+            var projects = unitOfWork.Projects.GetProjectsByAll(new List<Guid>
+            {
+                unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField).id
+
+            },unitOfWork.Roles.GetRoleID(Constants.StudentRole),ProjectState.Ongoing);
+            Assert.IsNotNull(projects);
+
         }
     }
 }

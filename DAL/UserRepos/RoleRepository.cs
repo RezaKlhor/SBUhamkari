@@ -15,7 +15,7 @@ namespace DAL.UserRepos
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
-        public Guid GetStudentRoleID(string role)
+        public Guid GetRoleID(string role)
         {
             return SingleOrDefault(m => m.Name == role).id;
         }
