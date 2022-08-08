@@ -14,5 +14,15 @@ namespace DAL.UserRepos
         {
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
+
+        public List<TArequest> GetTArequestsByProfessor(Guid professorID)
+        {
+            return Find(m => m.Professor.id == professorID).ToList();
+        }
+
+        public List<TArequest> GetTArequestsByProfessorWithTAapplications(Guid professorID)
+        {
+            return HamkariContext.TArequests.Where(m => m.Professor.id == professorID).Include(m => m.TAapplications).ToList();
+        }
     }
 }
