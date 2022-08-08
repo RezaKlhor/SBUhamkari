@@ -16,5 +16,13 @@ namespace DAL.UserRepos
 
         
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
+
+        
+
+        public Faculty GetFacultyByUserId(Guid userID)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
+            return unitOfWork.Users.Get(userID).Faculty;
+        }
     }
 }
