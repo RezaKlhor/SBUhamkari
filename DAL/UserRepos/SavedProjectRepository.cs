@@ -14,5 +14,10 @@ namespace DAL.UserRepos
         {
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
+
+        public List<SavedProject> GetSavedProjectsByUserWithProject(Guid userID)
+        {
+            return HamkariContext.SavedProjects.Where(m => m.User.id == userID).Include(m => m.Project).ToList();
+        }
     }
 }
