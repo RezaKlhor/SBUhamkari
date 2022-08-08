@@ -9,5 +9,15 @@ namespace DAL.UserRepos
         {
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
+
+        public List<PersonWorkField> GetAllPersonWorkFieldsByWorkFieldWithPerson(Guid WorkFieldID)
+        {
+            return HamkariContext.PersonWorkFields.Where(m => m.WorkField.id == WorkFieldID).Include(m => m.Person).ToList();
+        }
+
+        public List<PersonWorkField> GetPersonWorkFieldsByPersonWithWorkField(Guid personID)
+        {
+            return HamkariContext.PersonWorkFields.Where(m=> m.Person.id==personID).Include(m=>m.WorkField).ToList();
+        }
     }
 }
