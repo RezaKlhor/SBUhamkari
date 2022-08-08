@@ -27,7 +27,7 @@ namespace Models.Models
 
 
 
-        public List<User>? CompanyMembers { get; set; }
+        
 
     }
 }
