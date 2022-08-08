@@ -14,5 +14,10 @@ namespace DAL.UserRepos
         {
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
+
+        public List<ContactInfo> GetContactInfosByUser(Guid userId, ContactInfoState contactInfoState)
+        {
+            return Find(m=>m.User.id==userId&&m.EntityState==contactInfoState).ToList();
+        }
     }
 }

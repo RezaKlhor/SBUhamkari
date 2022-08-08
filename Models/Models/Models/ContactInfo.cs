@@ -14,7 +14,7 @@ namespace Models.Models
         {
         }
 
-        public ContactInfo(string name, string? contactNumber, string? contactLink, User user, EntityState entityState)
+        public ContactInfo(string name, string? contactNumber, string? contactLink, User user, ContactInfoState entityState)
         {
             Name = name;
             ContactNumber = contactNumber;
@@ -33,8 +33,8 @@ namespace Models.Models
         public string? ContactLink { get; set; }
 
         public User User { get; set; }
-        public EntityState EntityState { get; set; }
+        public ContactInfoState EntityState { get; set; }
 
     }
-    public enum EntityState { Public, Private }
+    public enum ContactInfoState { Public, Private }
 }
