@@ -15,6 +15,11 @@ namespace DAL.UserRepos
 
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
+        public void AddUserInit()
+        {
+            throw new NotImplementedException();
+        }
+
         public User GetUserByUsername(string username)
         {
             return HamkariContext.Users.SingleOrDefault(m => m.Username == username);

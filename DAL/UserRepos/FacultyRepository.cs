@@ -22,7 +22,9 @@ namespace DAL.UserRepos
         public Faculty GetFacultyByUserId(Guid userID)
         {
             UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
-            return unitOfWork.Users.Get(userID).Faculty;
+            var user = unitOfWork.Users.Get(userID);
+            user.Faculty = new Faculty();
+            return user.Faculty;
         }
     }
 }
