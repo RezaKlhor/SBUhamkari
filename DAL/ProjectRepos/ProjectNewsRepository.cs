@@ -12,20 +12,22 @@ namespace DAL.ProjectRepos
 
         public List<ProjectNews> GetProjectNewsByFollow(Guid userID)
         {
-            var projectNews = new List<ProjectNews>();
-            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
-            var followings = unitOfWork.UserFollowerFollowings.GetFollowingsByFollowerID(userID);
-            foreach (var item in followings)
+            using(UnitOfWork unitOfWork = new UnitOfWork(HamkariContext))
             {
-
-                var projects = unitOfWork.Projects.GetProjectsByParticipator(item.FollowedID);
-                foreach (var item2 in projects)
+                var projectNews = new List<ProjectNews>();
+                var followings = unitOfWork.UserFollowerFollowings.GetFollowingsByFollowerID(userID);
+                foreach (var item in followings)
                 {
-                    projectNews.AddRange(unitOfWork.ProjectNews.GetProjectNewsByProject(item2.id));
+
+                    var projects = unitOfWork.Projects.GetProjectsByParticipator(item.FollowedID);
+                    foreach (var item2 in projects)
+                    {
+                        projectNews.AddRange(unitOfWork.ProjectNews.GetProjectNewsByProject(item2.id));
+                    }
                 }
+                return projectNews;
             }
-            unitOfWork.Dispose();
-            return projectNews;
+            
         }
 
         public List<ProjectNews> GetProjectNewsByProject(Guid projectID)

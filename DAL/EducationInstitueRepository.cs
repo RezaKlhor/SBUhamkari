@@ -12,8 +12,10 @@ namespace DAL
 
         public EducationInstitute GetEducationInstituteByEducationRecord(Guid educationRecordID)
         {
-            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
-            return unitOfWork.EducationRecords.Get(educationRecordID).EducationInstitute;
+            using(UnitOfWork unitOfWork = new UnitOfWork(HamkariContext))
+            {
+                return unitOfWork.EducationRecords.Get(educationRecordID).EducationInstitute;
+            }
         }
 
         public EducationInstitute GetEducationInstituteByName(string name)
