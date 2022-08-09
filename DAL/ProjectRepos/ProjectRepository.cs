@@ -22,6 +22,7 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByAll(List<Guid> workFieldsID, Guid ManagerRoleID, ProjectState projectState)
         {
+           
             return Tools<Project>.FindCommon(new List<List<Project>> {
                 GetProjectsByWorkfields(workFieldsID),
                 GetProjectsByManagerType(ManagerRoleID),
@@ -33,30 +34,31 @@ namespace DAL.ProjectRepos
         //Tested
         public List<Project> GetProjectsByManager(Guid projectManagerID)
         {
-            var projectmanagers = HamkariContext.ProjectManagers.Where<ProjectManager>(m => m.id== projectManagerID).Include(m=> m.Project).ToList();
-            List<Project> projects = new List<Project>();
-            foreach (var item in projectmanagers)
-            {
-                projects.Add(item.Project);
-            }
-            return projects;
+            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
+
+            var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(projectManagerID);
+            return GetProjectsByManage(projectmanagers);
         }
 
-        public List<Project> GetProjectsByManagerType(Guid RoleID)
+        public List<Project> GetProjectsByManagerType(Guid roleID)
         {
-            var projectmanagers = HamkariContext.ProjectManagers.Where<ProjectManager>
-                (m => m.User.Role.id==RoleID).Include(m => m.Project).ToList();
+            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
+            var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerRoleWithProject(roleID);
+            return GetProjectsByManage(projectmanagers);
+        }
+        private List<Project> GetProjectsByManage(List<ProjectManager> projectManagers)
+        {
             List<Project> projects = new List<Project>();
-            foreach (var item in projectmanagers)
+            foreach (var item in projectManagers)
             {
                 projects.Add(item.Project);
             }
             return projects;
         }
-
         public List<Project> GetProjectsByParticipator(Guid userID)
         {
-            var projectParticipation = HamkariContext.ProjectParticapations.Where<ProjectParticapation>(m => m.User.id==userID).Include(m => m.Project).ToList();
+            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
+            var projectParticipation = unitOfWork.ProjectParticapations.GetProjectParticapationsByUserWithProject(userID);
             var projects = new List<Project>();
             foreach (var item in projectParticipation)
             {
