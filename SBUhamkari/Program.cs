@@ -1,12 +1,12 @@
-using Models;
 using Microsoft.EntityFrameworkCore;
+using Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<HamkariContext>(options=>
+builder.Services.AddDbContext<HamkariContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b=>b.MigrationsAssembly("SBUhamkari"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("SBUhamkari"));
 });
 
 builder.Services.AddControllers();

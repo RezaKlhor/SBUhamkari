@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.ProjectRepos
 {
@@ -22,7 +17,7 @@ namespace DAL.ProjectRepos
             var followings = unitOfWork.UserFollowerFollowings.GetFollowingsByFollowerID(userID);
             foreach (var item in followings)
             {
-                
+
                 var projects = unitOfWork.Projects.GetProjectsByParticipator(item.FollowedID);
                 foreach (var item2 in projects)
                 {
@@ -42,7 +37,7 @@ namespace DAL.ProjectRepos
         {
             UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
             var projects = unitOfWork.Projects.GetProjectsByWorkField(WorkFieldID);
-            var CoAnnouncements= new List<CoAnnouncement>();
+            var CoAnnouncements = new List<CoAnnouncement>();
             foreach (var item in projects)
             {
                 CoAnnouncements.AddRange(unitOfWork.CoAnnouncements.GetProjectsCoAnnouncement(item.id));

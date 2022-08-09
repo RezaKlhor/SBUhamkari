@@ -1,14 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class WorkFieldRepository : Repository<WorkField> ,IWorkFieldRepository
+    public class WorkFieldRepository : Repository<WorkField>, IWorkFieldRepository
     {
         public WorkFieldRepository(DbContext context) : base(context)
         {

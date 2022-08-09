@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.Models
 {
@@ -14,7 +9,7 @@ namespace Models.Models
         {
         }
 
-        
+
 
         public Feedback(Score score, User user, Project project)
         {
@@ -41,6 +36,6 @@ namespace Models.Models
     }
     public enum Score
     {
-        onestar=1,twostar=2,threestar=3,fourstar=4,fivestar=5
+        onestar = 1, twostar = 2, threestar = 3, fourstar = 4, fivestar = 5
     }
 }

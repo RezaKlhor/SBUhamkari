@@ -9,7 +9,7 @@ namespace DAL.UserRepos
         {
         }
 
-       
+
 
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 

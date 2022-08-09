@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Models.Models
 {
@@ -31,11 +25,11 @@ namespace Models.Models
         public State State { get; set; }
 
         public ProjectManager Creator { get; set; }
-        
+
         public List<CoApplication>? CoApplications { get; set; }
     }
     public enum State
     {
-        Open,Closed
+        Open, Closed
     }
 }

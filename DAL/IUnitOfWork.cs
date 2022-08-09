@@ -34,11 +34,11 @@ namespace DAL
         IProjectParticapationRepository ProjectParticapations { get; }
         IProjectWorkFieldRepository ProjectWorkFields { get; }
         IRoleRepository Roles { get; }
-        
 
 
 
-        
+
+
         int Complete();
     }
 }

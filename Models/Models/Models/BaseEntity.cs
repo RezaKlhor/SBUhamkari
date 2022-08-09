@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Models.Models
 {
@@ -9,7 +8,7 @@ namespace Models.Models
         {
             id = System.Guid.NewGuid();
             CreateTime = DateTime.Now;
-            
+
         }
         [Key]
         public System.Guid id { get; set; }
@@ -17,10 +16,10 @@ namespace Models.Models
         [Required]
         public DateTime CreateTime { get; set; }
 
-        
+
         public DateTime? DeleteTime { get; set; }
-        
+
 
     }
-   
+
 }

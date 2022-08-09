@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL.ProjectRepos
+﻿namespace DAL.ProjectRepos
 {
     public interface IProjectRepository : IRepository<Project>
     {
@@ -19,8 +13,8 @@ namespace DAL.ProjectRepos
         List<Project> GetProjectsByAll(List<Guid> workFieldsID, Guid ManagerRoleID, ProjectState projectState);
         Project GetProjectByName(string name);
 
-       
+
 
     }
-    
+
 }

@@ -9,22 +9,22 @@ namespace DAL
     {
         private readonly HamkariContext _context;
 
-       
+
         public UnitOfWork(HamkariContext context)
         {
             _context = context;
             Projects = new ProjectRepository(_context);
-            Users= new UserRepository(_context);
-            TArequests= new TArequestRepository(_context);
+            Users = new UserRepository(_context);
+            TArequests = new TArequestRepository(_context);
             TAapplications = new TAapplicationRepository(_context);
-            Students= new StudentRepository(_context);
+            Students = new StudentRepository(_context);
             Skills = new SkillRepository(_context);
             WorkFields = new WorkFieldRepository(_context);
-            ContactInfos= new ContactInfoRepository(_context);
+            ContactInfos = new ContactInfoRepository(_context);
             CoAnnouncements = new CoAnnouncementRepository(_context);
-            CoApplications= new CoApplicationRepository(_context);
+            CoApplications = new CoApplicationRepository(_context);
             Notifications = new NotificationRepository(_context);
-            ProjectNews= new ProjectNewsRepository(_context);
+            ProjectNews = new ProjectNewsRepository(_context);
             Companies = new CompanyRepository(_context);
             EducationRecords = new EducationRecordRepository(_context);
             FacultyRecords = new FacultyRepository(_context);
@@ -40,7 +40,7 @@ namespace DAL
             ProjectWorkFields = new ProjectWorkFieldRepository(_context);
             Roles = new RoleRepository(_context);
 
-            
+
         }
 
         public IProjectRepository Projects { get; private set; }

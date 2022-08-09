@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Models.Models
+﻿namespace Models.Models
 {
-    
-    public class Skill: BaseEntity
+
+    public class Skill : BaseEntity
     {
         public Skill()
         {
@@ -22,7 +16,7 @@ namespace Models.Models
 
         public string SkillTitle { get; set; }
         public SkillLevel SkillLevel { get; set; }
-       
+
         //public DefaultSkills?  DefaultMappedSkill{ get; set; }
         public Person Person { get; set; }
 
@@ -31,6 +25,6 @@ namespace Models.Models
     }
     public enum SkillLevel
     {
-        Novice,AdvancedBeginner,Competent,Proficient,Expert
+        Novice, AdvancedBeginner, Competent, Proficient, Expert
     }
 }

@@ -1,13 +1,12 @@
-﻿using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using Models;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DAL
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbContext Context;
-        private DbSet<TEntity> _entities; 
+        private DbSet<TEntity> _entities;
 
         public Repository(DbContext context)
         {
@@ -17,12 +16,12 @@ namespace DAL
 
         public TEntity Get(Guid id)
         {
-            
+
             return _entities.Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
-        { 
+        {
             return _entities.ToList();
         }
 

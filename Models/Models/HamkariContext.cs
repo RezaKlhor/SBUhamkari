@@ -6,13 +6,13 @@ namespace Models
 {
     public class HamkariContext : DbContext
     {
-        public HamkariContext(DbContextOptions<HamkariContext> options):base(options)
+        public HamkariContext(DbContextOptions<HamkariContext> options) : base(options)
         {
 
 
         }
 
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,7 @@ namespace Models
                 new Faculty{Name="دانشکده رواشناسی و علوم تربیتی"},
                 new Faculty{Name="دانشکده معماری"},
                 new Faculty{Name="دانشکده علوم پایه"},
-                
+
 
 
             });
@@ -53,7 +53,7 @@ namespace Models
             {
                 new Role{Name="Admin"},new Role{Name="Student"},new Role{Name="Professor"},new Role{Name="Company"}
             });
-            modelBuilder.Entity<WorkField>().HasData(new List<WorkField> { 
+            modelBuilder.Entity<WorkField>().HasData(new List<WorkField> {
                 new WorkField{Name="هوش مصنوعی"},
                 new WorkField{Name="نرم افزار"},
                 new WorkField{Name="سخت افزار"},
@@ -63,12 +63,12 @@ namespace Models
                 new WorkField{Name="شبکه‌های پیچیده"},
                 new WorkField{Name="فناوری اطلاعات"},
             });
-            
+
 
             modelBuilder.Entity<Company>().HasIndex(m => m.CompanyIDnumber).IsUnique();
             modelBuilder.Entity<User>().HasIndex(m => m.Username).IsUnique();
             modelBuilder.Entity<Person>().HasIndex(m => m.NationalIdNum).IsUnique();
-            modelBuilder.Entity<User>().HasMany<ParticipationInvitation>(m=> m.ParticipationInvitations).WithOne(m => m.InvitedUser).OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<User>().HasMany<ParticipationInvitation>(m => m.ParticipationInvitations).WithOne(m => m.InvitedUser).OnDelete(DeleteBehavior.NoAction);
 
 
         }

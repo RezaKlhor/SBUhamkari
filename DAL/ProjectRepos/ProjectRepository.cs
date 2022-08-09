@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.ProjectRepos
 {
@@ -22,12 +17,12 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByAll(List<Guid> workFieldsID, Guid ManagerRoleID, ProjectState projectState)
         {
-           
+
             return Tools<Project>.FindCommon(new List<List<Project>> {
                 GetProjectsByWorkfields(workFieldsID),
                 GetProjectsByManagerType(ManagerRoleID),
                 GetProjectsByProjectState(projectState)
-            
+
             });
         }
 
@@ -57,14 +52,19 @@ namespace DAL.ProjectRepos
         }
         public List<Project> GetProjectsByParticipator(Guid userID)
         {
-            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
-            var projectParticipation = unitOfWork.ProjectParticapations.GetProjectParticapationsByUserWithProject(userID);
-            var projects = new List<Project>();
-            foreach (var item in projectParticipation)
+            using (UnitOfWork unitOfWork = new UnitOfWork(HamkariContext))
             {
-                projects.Add(item.Project);
+
+                var projectParticipation = unitOfWork.ProjectParticapations.GetProjectParticapationsByUserWithProject(userID);
+                var projects = new List<Project>();
+                foreach (var item in projectParticipation)
+                {
+                    projects.Add(item.Project);
+                }
+                return projects;
+
+
             }
-            return projects;
         }
 
         public List<Project> GetProjectsByProjectState(ProjectState projectState)
@@ -74,13 +74,18 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByWorkField(Guid workFieldID)
         {
-            var target = HamkariContext.ProjectWorkFields.Include(m=>m.Project).Where<ProjectWorkField>(m => m.WorkField.id == workFieldID).ToList();
-            var projects = new List<Project>();
-            foreach (var item in target)
+
+            using (UnitOfWork unitOfWork = new UnitOfWork(HamkariContext))
             {
-                projects.Add(item.Project);
+                var target = unitOfWork.ProjectWorkFields.GetProjectWorkFieldsByWorkFieldWithProject(workFieldID);
+                var projects = new List<Project>();
+                foreach (var item in target)
+                {
+                    projects.Add(item.Project);
+                }
+                return projects;
             }
-            return projects;
+
         }
 
         public List<Project> GetProjectsByWorkfields(List<Guid> workfields)
@@ -92,7 +97,7 @@ namespace DAL.ProjectRepos
             }
             return Tools<Project>.FindCommon(projectLists);
 
-            
+
         }
 
         public List<Project> GetProjectsInSavedBox(Guid userID)
@@ -105,6 +110,6 @@ namespace DAL.ProjectRepos
             }
             return projects;
         }
-        
+
     }
 }

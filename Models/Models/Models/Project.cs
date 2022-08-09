@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.Models
 {
@@ -31,11 +26,11 @@ namespace Models.Models
 
         public List<ProjectFile>? Filess { get; set; }
         public List<Notification>? Notifications { get; set; }
-    
+
         public List<ProjectNews>? ProjectNews { get; set; }
     }
     public enum ProjectState
     {
-        Ongoing,Ended
+        Ongoing, Ended
     }
 }

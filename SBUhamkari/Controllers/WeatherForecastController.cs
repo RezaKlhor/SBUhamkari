@@ -1,11 +1,9 @@
 ﻿using DAL;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Models;
 using Models.Models;
 using ServiceStack.Host;
-using System.Linq;
 
 namespace SBUhamkari.Controllers
 {
@@ -21,7 +19,7 @@ namespace SBUhamkari.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly HamkariContext database;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger,HamkariContext databaseContext)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, HamkariContext databaseContext)
         {
             database = databaseContext;
             _logger = logger;
@@ -32,7 +30,7 @@ namespace SBUhamkari.Controllers
         {
             UnitOfWork unitOfWork = new UnitOfWork(database);
             var user = unitOfWork.Users.GetUserByUsername(username);
-            if (user==null)
+            if (user == null)
             {
                 throw new HttpException("sdas");
             }

@@ -2,8 +2,8 @@
 {
     public interface IContactInfoRepository : IRepository<ContactInfo>
     {
-        List<ContactInfo> GetContactInfosByUser(Guid userId,ContactInfoState contactInfoState);
-        
-        
+        List<ContactInfo> GetContactInfosByUser(Guid userId, ContactInfoState contactInfoState);
+
+
     }
 }

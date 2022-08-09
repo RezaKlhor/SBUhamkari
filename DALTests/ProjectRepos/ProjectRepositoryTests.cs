@@ -1,10 +1,7 @@
-﻿using DAL.ProjectRepos;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using Models.Models;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAL.ProjectRepos.Tests
 {
@@ -331,7 +328,7 @@ namespace DAL.ProjectRepos.Tests
             {
                 unitOfWork.WorkFields.GetWorkFieldByName(Constants.SoftwareWorkField).id
 
-            },unitOfWork.Roles.GetRoleID(Constants.StudentRole),ProjectState.Ongoing);
+            }, unitOfWork.Roles.GetRoleID(Constants.StudentRole), ProjectState.Ongoing);
             Assert.IsNotNull(projects);
 
         }

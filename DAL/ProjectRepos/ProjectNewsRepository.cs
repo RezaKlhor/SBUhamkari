@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.ProjectRepos
 {
@@ -22,7 +17,7 @@ namespace DAL.ProjectRepos
             var followings = unitOfWork.UserFollowerFollowings.GetFollowingsByFollowerID(userID);
             foreach (var item in followings)
             {
-                
+
                 var projects = unitOfWork.Projects.GetProjectsByParticipator(item.FollowedID);
                 foreach (var item2 in projects)
                 {

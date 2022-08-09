@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL
+﻿namespace DAL
 {
     public static class Constants
     {
@@ -30,14 +24,14 @@ namespace DAL
         public static readonly string HardwareWorkField = "سخت افزار";
         public static readonly string SoftwareWorkField = "نرم افزار";
         public static readonly string ComplicatedNetworksWorkField = "شبکه‌های پیچیده";
-        
 
 
 
 
 
 
-        
+
+
 
     }
 }

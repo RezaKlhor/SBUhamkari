@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Models.Models
 {
-    
+
     public class EducationRecord : BaseEntity
     {
         public EducationRecord()
@@ -22,14 +17,14 @@ namespace Models.Models
             Person = person;
         }
 
-        
+
 
         [DisplayName("مدرک تحصیلی")]
         public EducationDegree Degree { get; set; }
 
         [DisplayName("وضعیت")]
         public EducationState EducationState { get; set; }
-        
+
         public EducationInstitute EducationInstitute { get; set; }
         public Person? Person { get; set; }
 
@@ -37,7 +32,7 @@ namespace Models.Models
     }
     public enum EducationState
     {
-        Graduated,Studying
+        Graduated, Studying
     }
     public enum EducationDegree
     {

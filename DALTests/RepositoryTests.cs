@@ -1,12 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Tests
 {
@@ -27,7 +21,7 @@ namespace DAL.Tests
             UnitOfWork unitOfWork = new UnitOfWork(database);
             unitOfWork.Projects.Remove(unitOfWork.Projects.GetProjectByName("گلستان"));
             unitOfWork.Complete();
-            
+
         }
     }
 }

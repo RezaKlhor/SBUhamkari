@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL.ProjectRepos
+﻿namespace DAL.ProjectRepos
 {
     public interface IProjectWorkFieldRepository : IRepository<ProjectWorkField>
     {
-        
+        List<ProjectWorkField> GetProjectWorkFieldsByWorkFieldWithProject(Guid workFieldID);
     }
 }

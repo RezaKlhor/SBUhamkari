@@ -18,7 +18,7 @@
             List<T> minCount = lists.ElementAt(0);
             for (int i = 0; i < lists.Count; i++)
             {
-                if (lists.ElementAt(i).Count< minCount.Count)
+                if (lists.ElementAt(i).Count < minCount.Count)
                 {
                     minCount = lists.ElementAt(i);
                 }
@@ -40,8 +40,8 @@
                         }
                     }
                 }
-                
-                if (common==null)
+
+                if (common == null)
                 {
                     break;
                 }
@@ -50,7 +50,7 @@
 
 
         }
-        
+
     }
 
 

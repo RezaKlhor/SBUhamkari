@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.Models
 {
@@ -15,7 +10,7 @@ namespace Models.Models
         {
         }
 
-        
+
 
         [DisplayName("عنوان اطلاعیه")]
         [Required]
@@ -26,7 +21,7 @@ namespace Models.Models
         public string Text { get; set; }
 
 
-        public Project  Project { get; set; }
+        public Project Project { get; set; }
 
     }
 }

@@ -17,7 +17,7 @@ namespace DAL.UserRepos
 
         public List<PersonWorkField> GetPersonWorkFieldsByPersonWithWorkField(Guid personID)
         {
-            return HamkariContext.PersonWorkFields.Where(m=> m.Person.id==personID).Include(m=>m.WorkField).ToList();
+            return HamkariContext.PersonWorkFields.Where(m => m.Person.id == personID).Include(m => m.WorkField).ToList();
         }
     }
 }

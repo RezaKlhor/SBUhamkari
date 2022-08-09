@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models.Models
 {
-    public class Company: User
+    public class Company : User
     {
         public Company()
         {
@@ -21,13 +19,13 @@ namespace Models.Models
         [DisplayName("شماره کسب")]
         public uint CompanyIDnumber { get; set; }
 
-        
+
         [DisplayName("نام شرکت")]
         public string CompanyName { get; set; }
 
 
 
-        
+
 
     }
 }
