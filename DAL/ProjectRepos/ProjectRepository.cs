@@ -102,13 +102,17 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsInSavedBox(Guid userID)
         {
-            var Usersaves = HamkariContext.SavedProjects.Include(m => m.Project).Where(m => m.User.id == userID).ToList();
-            var projects = new List<Project>();
-            foreach (var item in Usersaves)
+            using (UnitOfWork unitOfWork = new UnitOfWork(HamkariContext))
             {
-                projects.Add(item.Project);
+                var Usersaves = unitOfWork.SavedProjects.GetSavedProjectsByUserWithProject(userID);
+                var projects = new List<Project>();
+                foreach (var item in Usersaves)
+                {
+                    projects.Add(item.Project);
+                }
+                return projects;
             }
-            return projects;
+               
         }
 
     }
