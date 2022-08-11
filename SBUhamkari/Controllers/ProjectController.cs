@@ -227,7 +227,7 @@ namespace SBUhamkari.Controllers
             }
 
             var projectToPatch = _mapper.Map<ProjectUpdateDto>(project);
-            patchDoc.ApplyTo(projectToPatch, (Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState);
+            patchDoc.ApplyTo(projectToPatch, ModelState);
 
             if (!TryValidateModel(projectToPatch))
             {
@@ -244,6 +244,21 @@ namespace SBUhamkari.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCommand(Guid id)
+        {
+            var project = _unitOfWork.Projects.Get(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Projects.Remove(project);
+            _unitOfWork.Complete();
+
+            return NoContent();
+        }
+
 
     }
 }

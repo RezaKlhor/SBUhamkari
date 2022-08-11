@@ -17,6 +17,7 @@ namespace SBUhamkari.Profiles
             CreateMap<Project, ProjectReadDto>();
             CreateMap<ProjectCreateDto, Project>();
             CreateMap<ProjectUpdateDto, Project>();
+            CreateMap<Project, ProjectUpdateDto>();
         }
     }
 }
