@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DTO;
+using DTO.ProjectDtos;
 using Models.Models;
 using System;
 using System.Collections.Generic;
@@ -14,8 +14,8 @@ namespace SBUhamkari.Profiles
         public ProjectsProfile()
         {
             //Source-> Dest
-            CreateMap<Project, ProjectDto>();
-            //CreateMap<List<Project>, List<ProjectDto>>();
+            CreateMap<Project, ProjectReadDto>();
+            CreateMap<ProjectCreateDto, Project>();
         }
     }
 }
