@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using DAL;
 using DTO.ProjectDtos;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Models;
 using Models.Models;
 
 namespace SBUhamkari.Controllers
@@ -42,7 +41,7 @@ namespace SBUhamkari.Controllers
                 return NotFound();
             }
         }
-        [HttpGet("GetProjectsById")]
+        [HttpGet("{id}",Name ="GetProjectsById")]
         public ActionResult<ProjectReadDto> GetProjectById(Guid id)
         {
             var project = _unitOfWork.Projects.Get(id);
@@ -188,7 +187,7 @@ namespace SBUhamkari.Controllers
         }
 
         //end of get apis
-
+        //post api
         [HttpPost("ProjectCreate")]
         
         public ActionResult<ProjectReadDto> ProjectCreate(ProjectCreateDto projectCreateDto)
@@ -197,9 +196,54 @@ namespace SBUhamkari.Controllers
             _unitOfWork.Projects.Add(project);
             _unitOfWork.Complete();
             var projectReadDto = _mapper.Map<ProjectReadDto>(project);
-            return CreatedAtRoute(nameof(GetProjectById), new {id=projectReadDto.id},projectReadDto);
+            return CreatedAtRoute("GetProjectsById", new {id=projectReadDto.id},projectReadDto);
 
         }
+        //end of post api
+
+        [HttpPut("{id}")]
+        public ActionResult UpdateProject(Guid id, ProjectUpdateDto projectUpdateDto)
+        {
+            var project = _unitOfWork.Projects.Get(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+            //how can we update?
+            project.Name = projectUpdateDto.Name;
+            project.ProjectExplain = projectUpdateDto.ProjectExplain;
+            project.ProjectState = projectUpdateDto.ProjectState;
+            _unitOfWork.Complete();
+            return NoContent();
+        }
         
+        [HttpPatch("{id}")]
+        public ActionResult PartialProjectUpdate(Guid id, JsonPatchDocument<ProjectUpdateDto> patchDoc)
+        {
+            var project = _unitOfWork.Projects.Get(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            var projectToPatch = _mapper.Map<ProjectUpdateDto>(project);
+            patchDoc.ApplyTo(projectToPatch, (Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState);
+
+            if (!TryValidateModel(projectToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(projectToPatch, project);
+            project.Name = projectToPatch.Name;
+            project.ProjectExplain = projectToPatch.ProjectExplain;
+            project.ProjectState = projectToPatch.ProjectState;
+            _unitOfWork.Complete();
+
+            
+
+            return NoContent();
+        }
+
     }
 }

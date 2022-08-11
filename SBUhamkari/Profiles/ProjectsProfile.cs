@@ -16,6 +16,7 @@ namespace SBUhamkari.Profiles
             //Source-> Dest
             CreateMap<Project, ProjectReadDto>();
             CreateMap<ProjectCreateDto, Project>();
+            CreateMap<ProjectUpdateDto, Project>();
         }
     }
 }
