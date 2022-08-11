@@ -17,14 +17,14 @@ namespace SBUhamkari.Controllers
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        
-        
+
+
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
         public ProjectController(IMapper mapper, IUnitOfWork unitOfWork)
         {
-           
+
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -33,17 +33,17 @@ namespace SBUhamkari.Controllers
         public ActionResult<ProjectReadDto> GetAllProjects()
         {
             var projects = _unitOfWork.Projects.GetAll();
-                if (projects.Count() != 0)
-                {
-                    return Ok(_mapper.Map<IEnumerable< ProjectReadDto>>(projects));
-                }
-                else
-                {
-                    return NotFound();
-                }
+            if (projects.Count() != 0)
+            {
+                return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
+            }
+            else
+            {
+                return NotFound();
+            }
         }
-        [HttpGet("GetProjectById")]
-        public ActionResult<ProjectReadDto> GetProject(Guid id)
+        [HttpGet("GetProjectsById")]
+        public ActionResult<ProjectReadDto> GetProjectById(Guid id)
         {
             var project = _unitOfWork.Projects.Get(id);
     
@@ -54,12 +54,12 @@ namespace SBUhamkari.Controllers
             }
             else
             {
-                return NotFound(Constants.ProjectNotFoundMessage);
+                return NotFound(Constants.PnrojectNotFoundMessage);
             }
         }
 
-        [HttpGet("GetProjectByName")]
-        public ActionResult<ProjectReadDto> GetProject(string name)
+        [HttpGet("GetProjectsByName")]
+        public ActionResult<ProjectReadDto> GetProjectsByName(string name)
         {
             var project = _unitOfWork.Projects.GetProjectByName(name);
 
@@ -73,8 +73,8 @@ namespace SBUhamkari.Controllers
                 return NotFound(Constants.ProjectNotFoundMessage);
             }
         }
-        [HttpGet("GetProjectByManager")]
-        public ActionResult<ProjectReadDto> GetProjectByManager(Guid managerId)
+        [HttpGet("GetProjectsByManager")]
+        public ActionResult<ProjectReadDto> GetProjectsByManager(Guid managerId)
         {
             var project = _unitOfWork.Projects.GetProjectsByManager(managerId);
 
@@ -89,8 +89,8 @@ namespace SBUhamkari.Controllers
             }
         }
 
-        [HttpGet("GetProjectByWorkField")]
-        public ActionResult<ProjectReadDto> GetProjectByWorkField(Guid workFieldId)
+        [HttpGet("GetProjectsByWorkField")]
+        public ActionResult<ProjectReadDto> GetProjectsByWorkField(Guid workFieldId)
         {
             var project = _unitOfWork.Projects.GetProjectsByWorkField(workFieldId);
 
@@ -105,8 +105,8 @@ namespace SBUhamkari.Controllers
             }
         }
 
-        [HttpGet("GetProjectByParticipator")]
-        public ActionResult<ProjectReadDto> GetProjectByParticipator(Guid participatorId)
+        [HttpGet("GetProjectsByParticipator")]
+        public ActionResult<ProjectReadDto> GetProjectsByParticipator(Guid participatorId)
         {
             var project = _unitOfWork.Projects.GetProjectsByParticipator(participatorId);
 
@@ -121,8 +121,8 @@ namespace SBUhamkari.Controllers
             }
         }
 
-        [HttpGet("GetProjectByManagerRole")]
-        public ActionResult<ProjectReadDto> GetProjectByManagerType(Guid roleId)
+        [HttpGet("GetProjectsByManagerRole")]
+        public ActionResult<ProjectReadDto> GetProjectsByManagerType(Guid roleId)
         {
             var project = _unitOfWork.Projects.GetProjectsByManagerType(roleId);
 
@@ -137,12 +137,12 @@ namespace SBUhamkari.Controllers
             }
         }
 
-        [HttpGet("GetProjectByProjectState")]
-        public ActionResult<ProjectReadDto> GetProjectByProjectState(string projectState)
+        [HttpGet("GetProjectsByProjectState")]
+        public ActionResult<ProjectReadDto> GetProjectsByProjectState(string projectState)
         {
             List<Project> project = null;
             if (projectState == Constants.ProjectStateOngoing) {  project = _unitOfWork.Projects.GetProjectsByProjectState(ProjectState.Ongoing); }
-            else { project = _unitOfWork.Projects.GetProjectsByProjectState(ProjectState.Ended); }
+            else if(projectState==Constants.ProjectStateEnded) { project = _unitOfWork.Projects.GetProjectsByProjectState(ProjectState.Ended); }
 
             if (project != null)
             {
@@ -171,8 +171,8 @@ namespace SBUhamkari.Controllers
             }
         }
 
-        [HttpGet("GetProjectByWorkFields")]
-        public ActionResult<ProjectReadDto> GetProjectByWorkFields(List<Guid> workFieldsId)
+        [HttpGet("GetProjectsByWorkFields")]
+        public ActionResult<ProjectReadDto> GetProjectsByWorkFields(List<Guid> workFieldsId)
         {
             var project = _unitOfWork.Projects.GetProjectsByWorkfields(workFieldsId);
 
@@ -197,7 +197,7 @@ namespace SBUhamkari.Controllers
             _unitOfWork.Projects.Add(project);
             _unitOfWork.Complete();
             var projectReadDto = _mapper.Map<ProjectReadDto>(project);
-            return  CreatedAtRoute(nameof(GetProject), new { Id = projectReadDto.id }, projectReadDto);
+            return CreatedAtRoute(nameof(GetProjectById), new {id=projectReadDto.id},projectReadDto);
 
         }
         

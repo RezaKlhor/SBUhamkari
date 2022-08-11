@@ -55,16 +55,13 @@ namespace DAL
             _entities.RemoveRange(entities);
         }
 
-        public IEnumerable<TEntity>  MakeNullIfEmpty(IEnumerable<TEntity> entities)
+        public void MakeNullIfEmpty(IEnumerable<TEntity> entities)
         {
             if (entities.Count()==0)
             {
-                return null;
+                entities = null;
             }
-            else
-            {
-                return entities;
-            }
+            
         }
     }
 }

@@ -17,13 +17,14 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByAll(List<Guid> workFieldsID, Guid ManagerRoleID, ProjectState projectState)
         {
-
-            return (List<Project>)MakeNullIfEmpty( Tools<Project>.FindCommon(new List<List<Project>> {
+            var projects=Tools<Project>.FindCommon(new List<List<Project>> {
                 GetProjectsByWorkfields(workFieldsID),
                 GetProjectsByManagerType(ManagerRoleID),
                 GetProjectsByProjectState(projectState)
 
-            }));
+            });
+            MakeNullIfEmpty(projects);
+            return  projects;
         }
 
         //Tested
@@ -32,14 +33,18 @@ namespace DAL.ProjectRepos
             UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
 
             var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(projectManagerID);
-            return (List<Project>)MakeNullIfEmpty(GetProjectsByManage(projectmanagers));
+            var projects= GetProjectsByManage(projectmanagers);
+            MakeNullIfEmpty(projects);
+            return projects;
         }
 
         public List<Project> GetProjectsByManagerType(Guid roleID)
         {
             UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
             var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerRoleWithProject(roleID);
-            return (List<Project>)MakeNullIfEmpty(GetProjectsByManage(projectmanagers));
+            var projects = GetProjectsByManage(projectmanagers);
+            MakeNullIfEmpty(projects);
+            return projects;
         }
         private List<Project> GetProjectsByManage(List<ProjectManager> projectManagers)
         {
@@ -48,7 +53,8 @@ namespace DAL.ProjectRepos
             {
                 projects.Add(item.Project);
             }
-            return (List<Project>)MakeNullIfEmpty(projects);
+            MakeNullIfEmpty(projects);
+            return projects;
         }
         public List<Project> GetProjectsByParticipator(Guid userID)
         {
@@ -61,7 +67,8 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                return (List<Project>)MakeNullIfEmpty(projects);
+                MakeNullIfEmpty(projects);
+                return projects;
 
 
             }
@@ -69,7 +76,9 @@ namespace DAL.ProjectRepos
 
         public List<Project> GetProjectsByProjectState(ProjectState projectState)
         {
-            return HamkariContext.Projects.Where(m => m.ProjectState == projectState).ToList();
+            var projects= HamkariContext.Projects.Where(m => m.ProjectState == projectState).ToList();
+            MakeNullIfEmpty(projects);
+            return projects;
         }
 
         public List<Project> GetProjectsByWorkField(Guid workFieldID)
@@ -83,7 +92,8 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                return (List<Project>)MakeNullIfEmpty(projects);
+                MakeNullIfEmpty(projects);
+                return projects;
             }
 
         }
@@ -95,7 +105,9 @@ namespace DAL.ProjectRepos
             {
                 projectLists.Add(GetProjectsByWorkField(item));
             }
-            return (List<Project>)MakeNullIfEmpty(Tools<Project>.FindCommon(projectLists));
+            var projects= Tools<Project>.FindCommon(projectLists);
+            MakeNullIfEmpty(projects);
+            return projects;
 
 
         }
@@ -110,7 +122,8 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                return (List<Project>)MakeNullIfEmpty(projects);
+                MakeNullIfEmpty(projects);
+                return projects;
             }
                
         }
