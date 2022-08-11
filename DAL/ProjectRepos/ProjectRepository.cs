@@ -14,16 +14,16 @@ namespace DAL.ProjectRepos
         {
             return HamkariContext.Projects.SingleOrDefault(x => x.Name == name);
         }
-        
+
         public List<Project> GetProjectsByAll(List<Guid> workFieldsID, Guid ManagerRoleID, ProjectState projectState)
         {
-            var projects= Tools<Project>.FindCommon(new List<List<Project>> {
+
+            return (List<Project>)MakeNullIfEmpty( Tools<Project>.FindCommon(new List<List<Project>> {
                 GetProjectsByWorkfields(workFieldsID),
                 GetProjectsByManagerType(ManagerRoleID),
                 GetProjectsByProjectState(projectState)
 
-            });
-            return projects;
+            }));
         }
 
         //Tested
@@ -32,14 +32,14 @@ namespace DAL.ProjectRepos
             UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
 
             var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(projectManagerID);
-            return GetProjectsByManage(projectmanagers);
+            return (List<Project>)MakeNullIfEmpty(GetProjectsByManage(projectmanagers));
         }
 
         public List<Project> GetProjectsByManagerType(Guid roleID)
         {
             UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
             var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerRoleWithProject(roleID);
-            return GetProjectsByManage(projectmanagers);
+            return (List<Project>)MakeNullIfEmpty(GetProjectsByManage(projectmanagers));
         }
         private List<Project> GetProjectsByManage(List<ProjectManager> projectManagers)
         {
@@ -48,7 +48,7 @@ namespace DAL.ProjectRepos
             {
                 projects.Add(item.Project);
             }
-            return projects;
+            return (List<Project>)MakeNullIfEmpty(projects);
         }
         public List<Project> GetProjectsByParticipator(Guid userID)
         {
@@ -61,7 +61,7 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                return projects;
+                return (List<Project>)MakeNullIfEmpty(projects);
 
 
             }
@@ -83,7 +83,7 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                return projects;
+                return (List<Project>)MakeNullIfEmpty(projects);
             }
 
         }
@@ -95,7 +95,7 @@ namespace DAL.ProjectRepos
             {
                 projectLists.Add(GetProjectsByWorkField(item));
             }
-            return Tools<Project>.FindCommon(projectLists);
+            return (List<Project>)MakeNullIfEmpty(Tools<Project>.FindCommon(projectLists));
 
 
         }
@@ -110,7 +110,7 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                return projects;
+                return (List<Project>)MakeNullIfEmpty(projects);
             }
                
         }
