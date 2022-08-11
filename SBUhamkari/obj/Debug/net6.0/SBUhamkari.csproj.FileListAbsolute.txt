@@ -281,3 +281,6 @@ C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\Ser
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\ServiceStack.Common.dll
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\ServiceStack.Interfaces.dll
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\ServiceStack.Text.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\DTO.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\DTO.pdb
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\AutoMapper.dll

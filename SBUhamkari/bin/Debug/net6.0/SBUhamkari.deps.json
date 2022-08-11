@@ -10,6 +10,7 @@
         "dependencies": {
           "DAL": "1.0.0",
           "DALTests": "1.0.0",
+          "DTO": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.7",
           "Microsoft.EntityFrameworkCore.Design": "6.0.7",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.7",
@@ -21,6 +22,17 @@
         },
         "runtime": {
           "SBUhamkari.dll": {}
+        }
+      },
+      "AutoMapper/11.0.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.0.1.0"
+          }
         }
       },
       "coverlet.collector/3.1.2": {},
@@ -1630,6 +1642,15 @@
           "DALTests.dll": {}
         }
       },
+      "DTO/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "DTO.dll": {}
+        }
+      },
       "Models/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.7"
@@ -1645,6 +1666,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/11.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
+      "path": "automapper/11.0.1",
+      "hashPath": "automapper.11.0.1.nupkg.sha512"
     },
     "coverlet.collector/3.1.2": {
       "type": "package",
@@ -2681,6 +2709,11 @@
       "sha512": ""
     },
     "DALTests/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DTO/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

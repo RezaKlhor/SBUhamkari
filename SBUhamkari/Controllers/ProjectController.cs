@@ -1,5 +1,6 @@
-﻿using DAL;
-
+﻿using AutoMapper;
+using DAL;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.Models;
@@ -15,35 +16,33 @@ namespace SBUhamkari.Controllers
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<ProjectController> _logger;
-        private readonly HamkariContext database;
+        
+        private readonly HamkariContext _database;
+        private readonly IMapper _mapper;
 
-        public ProjectController(ILogger<ProjectController> logger, HamkariContext databaseContext)
+        public ProjectController(HamkariContext databaseContext,IMapper mapper)
         {
-            database = databaseContext;
-            _logger = logger;
+            _database = databaseContext;
+            _mapper = mapper;
+            
         }
 
-        [HttpGet]
-        public List<Project> GetAllProjects()
+        [HttpGet("GetAllProjects")]
+        public ActionResult<ProjectDto> GetAllProjects()
         {
-            using(UnitOfWork unitOfWork = new UnitOfWork(database))
+            using(UnitOfWork unitOfWork = new UnitOfWork(_database))
             {
                 var projects= unitOfWork.Projects.GetAll();
+                
                 if (projects.Count() != 0)
                 {
-                    return (List<Project>)projects;
+                    return Ok(_mapper.Map<ProjectDto>(projects));
                 }
                 else
                 {
-                    return null;
+                    return NotFound();
                 }
             }
-
-
-
-
-
         }
     }
 }
