@@ -54,7 +54,7 @@ namespace SBUhamkari.Controllers
             }
             else
             {
-                return NotFound(Constants.PnrojectNotFoundMessage);
+                return NotFound(Constants.ProjectNotFoundMessage);
             }
         }
 
