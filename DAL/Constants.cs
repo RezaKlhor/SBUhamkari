@@ -24,6 +24,14 @@
         public static readonly string HardwareWorkField = "سخت افزار";
         public static readonly string SoftwareWorkField = "نرم افزار";
         public static readonly string ComplicatedNetworksWorkField = "شبکه‌های پیچیده";
+        public static readonly string ProjectNotFoundMessage = "پژوهش مورد نظر یافت نشد";
+        public static readonly string ProjectStateOngoing = "در حال انجام";
+        public static readonly string ProjectStateEnded = "پایان یافته";
+        public static readonly string GetAllProjectAction = "GetAllProjects";
+        public static readonly string GetProjectByIdAction = "GetProjectById";
+
+
+
 
 
 

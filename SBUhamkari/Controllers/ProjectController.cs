@@ -17,31 +17,59 @@ namespace SBUhamkari.Controllers
         };
 
         
-        private readonly HamkariContext _database;
+        
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProjectController(HamkariContext databaseContext,IMapper mapper)
+        public ProjectController(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _database = databaseContext;
+           
             _mapper = mapper;
-            
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet("GetAllProjects")]
         public ActionResult<ProjectDto> GetAllProjects()
         {
-            using(UnitOfWork unitOfWork = new UnitOfWork(_database))
-            {
-                var projects= unitOfWork.Projects.GetAll();
-                
+            var projects = _unitOfWork.Projects.GetAll();
                 if (projects.Count() != 0)
                 {
-                    return Ok(_mapper.Map<ProjectDto>(projects));
+                    return Ok(_mapper.Map<IEnumerable< ProjectDto>>(projects));
                 }
                 else
                 {
                     return NotFound();
                 }
+        }
+        [HttpGet("GetProjectById")]
+        public ActionResult<ProjectDto> GetProject(Guid id)
+        {
+            var project = _unitOfWork.Projects.Get(id);
+    
+            if (project!=null)
+            {
+                return _mapper.Map<ProjectDto>(project);
+
+            }
+            else
+            {
+                return NotFound(Constants.ProjectNotFoundMessage);
+            }
+        }
+
+        [HttpGet("GetProjectByName")]
+        public ActionResult<ProjectDto> GetProject(string name)
+        {
+            var project = _unitOfWork.Projects.GetProjectByName(name);
+
+            if (project != null)
+            {
+                return _mapper.Map<ProjectDto>(project);
+
+            }
+            else
+            {
+                return NotFound(Constants.ProjectNotFoundMessage);
             }
         }
     }

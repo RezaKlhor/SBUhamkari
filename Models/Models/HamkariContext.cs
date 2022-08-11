@@ -12,7 +12,9 @@ namespace Models
 
         }
 
-
+        public HamkariContext()
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -284,3 +284,4 @@ C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\Ser
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\DTO.dll
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\DTO.pdb
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\SBUhamkari\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

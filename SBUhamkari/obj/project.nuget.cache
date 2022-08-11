@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "n0Xq7sFOTnDW/mVaPoo092M+EupFcIYjRdAmmMSiZAianWPRLSYXymalG6pX4RHa5fG2+c10A8MgXN+q7OzPag==",
+  "dgSpecHash": "yveT1hndruW0erJi2Mo/RjJoAc780TblJk1P9oA4wsdHb8I5Hj83Eneq3Y0WACg4FXm5wlbUfc5PE3DTGt42rQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\SBUhamkari\\SBUhamkari.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rezak\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\rezak\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\rezak\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\rezak\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\rezak\\.nuget\\packages\\microsoft.codecoverage\\17.2.0\\microsoft.codecoverage.17.2.0.nupkg.sha512",

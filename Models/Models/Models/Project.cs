@@ -31,6 +31,7 @@ namespace Models.Models
     }
     public enum ProjectState
     {
+        
         Ongoing, Ended
     }
 }
