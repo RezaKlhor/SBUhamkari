@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DAL;
 using DTO.ProjectDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
@@ -29,6 +30,8 @@ namespace SBUhamkari.Controllers
         }
         //Get Api
         [HttpGet("GetAllProjects")]
+        [Authorize(Roles =$"{Constants.ProfessorRole},{Constants.StudentRole}")]
+        
         public ActionResult<ProjectReadDto> GetAllProjects()
         {
             var projects = _unitOfWork.Projects.GetAll();

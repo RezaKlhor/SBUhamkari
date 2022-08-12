@@ -31,9 +31,8 @@ namespace Models.Models
         }
 
         [Required]
-        [RegularExpression(@"({A-Za-z})+({A-Za-z}|(_)|(\.))*")]
+        [RegularExpression(@"([A-Za-z])+([A-Za-z]|(_)|(\.))*")]
         [DisplayName("نام کاربری")]
-
         public String Username { get; set; }
 
 

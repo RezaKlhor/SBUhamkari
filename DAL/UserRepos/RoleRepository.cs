@@ -10,9 +10,9 @@ namespace DAL.UserRepos
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
-        public Guid GetRoleID(string role)
+        public Role GetRole(string role)
         {
-            return SingleOrDefault(m => m.Name == role).id;
+            return SingleOrDefault(m => m.Name == role);
         }
     }
 }

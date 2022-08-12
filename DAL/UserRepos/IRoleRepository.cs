@@ -2,6 +2,6 @@
 {
     public interface IRoleRepository : IRepository<Role>
     {
-        Guid GetRoleID(string role);
+        Role GetRole(string role);
     }
 }

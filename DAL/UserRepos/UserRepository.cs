@@ -23,5 +23,10 @@ namespace DAL.UserRepos
         {
             return HamkariContext.Users.SingleOrDefault(m => m.Username == username);
         }
+
+        public User GetUserByUsernameWithRole(string username)
+        {
+            return HamkariContext.Users.Include(m=>m.Role).SingleOrDefault(m => m.Username == username);
+        }
     }
 }

@@ -70,6 +70,7 @@ namespace Models
             modelBuilder.Entity<Company>().HasIndex(m => m.CompanyIDnumber).IsUnique();
             modelBuilder.Entity<User>().HasIndex(m => m.Username).IsUnique();
             modelBuilder.Entity<Person>().HasIndex(m => m.NationalIdNum).IsUnique();
+            modelBuilder.Entity<Student>().HasIndex(m => m.StudentID).IsUnique();
             modelBuilder.Entity<User>().HasMany<ParticipationInvitation>(m => m.ParticipationInvitations).WithOne(m => m.InvitedUser).OnDelete(DeleteBehavior.NoAction);
 
 
