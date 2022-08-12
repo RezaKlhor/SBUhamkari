@@ -16,6 +16,9 @@ builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddControllers().AddNewtonsoftJson(s => {
     s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 });
+//For identity
+builder.Services.AddIdentity
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

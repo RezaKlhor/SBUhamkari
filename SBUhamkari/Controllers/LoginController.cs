@@ -12,7 +12,7 @@ namespace SBUhamkari.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly string _key
+        private readonly string _key;
 
         public LoginController(IUnitOfWork unitOfWork, IMapper mapper,string _key)
         {
