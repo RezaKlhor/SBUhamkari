@@ -23,7 +23,10 @@ namespace DAL.ProjectRepos
                 GetProjectsByProjectState(projectState)
 
             });
-            MakeNullIfEmpty(projects);
+            if (projects.Count==0)
+            {
+                return null;
+            }
             return  projects;
         }
 
@@ -34,7 +37,10 @@ namespace DAL.ProjectRepos
 
             var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(projectManagerID);
             var projects= GetProjectsByManage(projectmanagers);
-            MakeNullIfEmpty(projects);
+            if (projects.Count == 0)
+            {
+                return null;
+            }
             return projects;
         }
 
@@ -43,7 +49,10 @@ namespace DAL.ProjectRepos
             UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
             var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerRoleWithProject(roleID);
             var projects = GetProjectsByManage(projectmanagers);
-            MakeNullIfEmpty(projects);
+            if (projects.Count == 0)
+            {
+                return null;
+            }
             return projects;
         }
         private List<Project> GetProjectsByManage(List<ProjectManager> projectManagers)
@@ -53,7 +62,10 @@ namespace DAL.ProjectRepos
             {
                 projects.Add(item.Project);
             }
-            MakeNullIfEmpty(projects);
+            if (projects.Count == 0)
+            {
+                return null;
+            }
             return projects;
         }
         public List<Project> GetProjectsByParticipator(Guid userID)
@@ -67,7 +79,10 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                MakeNullIfEmpty(projects);
+                if (projects.Count == 0)
+                {
+                    return null;
+                }
                 return projects;
 
 
@@ -77,7 +92,10 @@ namespace DAL.ProjectRepos
         public List<Project> GetProjectsByProjectState(ProjectState projectState)
         {
             var projects= HamkariContext.Projects.Where(m => m.ProjectState == projectState).ToList();
-            MakeNullIfEmpty(projects);
+            if (projects.Count == 0)
+            {
+                return null;
+            }
             return projects;
         }
 
@@ -92,7 +110,10 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                MakeNullIfEmpty(projects);
+                if (projects.Count == 0)
+                {
+                    return null;
+                }
                 return projects;
             }
 
@@ -106,7 +127,10 @@ namespace DAL.ProjectRepos
                 projectLists.Add(GetProjectsByWorkField(item));
             }
             var projects= Tools<Project>.FindCommon(projectLists);
-            MakeNullIfEmpty(projects);
+            if (projects.Count == 0)
+            {
+                return null;
+            }
             return projects;
 
 
@@ -122,7 +146,10 @@ namespace DAL.ProjectRepos
                 {
                     projects.Add(item.Project);
                 }
-                MakeNullIfEmpty(projects);
+                if (projects.Count == 0)
+                {
+                    return null;
+                }
                 return projects;
             }
                

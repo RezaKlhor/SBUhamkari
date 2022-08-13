@@ -43,7 +43,8 @@ namespace SBUhamkari.Controllers
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role,user.Role.Name),
-                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti,user.id.ToString()),
+                
             };
             var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
             var token = new JwtSecurityToken(issuer: _configuration["JWT:ValidIssuer"],

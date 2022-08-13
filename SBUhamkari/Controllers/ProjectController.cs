@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace SBUhamkari.Controllers
 {
@@ -30,8 +32,6 @@ namespace SBUhamkari.Controllers
         }
         //Get Api
         [HttpGet("GetAllProjects")]
-        [Authorize(Roles =$"{Constants.ProfessorRole},{Constants.StudentRole}")]
-        
         public ActionResult<ProjectReadDto> GetAllProjects()
         {
             var projects = _unitOfWork.Projects.GetAll();
@@ -51,7 +51,7 @@ namespace SBUhamkari.Controllers
     
             if (project!=null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
+                return Ok(_mapper.Map<ProjectReadDto>(project));
 
             }
             else
@@ -60,14 +60,14 @@ namespace SBUhamkari.Controllers
             }
         }
 
-        [HttpGet("GetProjectsByName")]
-        public ActionResult<ProjectReadDto> GetProjectsByName(string name)
+        [HttpGet("GetProjectByName")]
+        public ActionResult<ProjectReadDto> GetProjectByName(string name)
         {
             var project = _unitOfWork.Projects.GetProjectByName(name);
 
             if (project != null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
+                return Ok( _mapper.Map<ProjectReadDto>(project));
 
             }
             else
@@ -78,12 +78,11 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetProjectsByManager")]
         public ActionResult<ProjectReadDto> GetProjectsByManager(Guid managerId)
         {
-            var project = _unitOfWork.Projects.GetProjectsByManager(managerId);
+            var projects = _unitOfWork.Projects.GetProjectsByManager(managerId);
 
-            if (project != null)
+            if (projects != null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
-
+                return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
             }
             else
             {
@@ -94,11 +93,11 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetProjectsByWorkField")]
         public ActionResult<ProjectReadDto> GetProjectsByWorkField(Guid workFieldId)
         {
-            var project = _unitOfWork.Projects.GetProjectsByWorkField(workFieldId);
+            var projects = _unitOfWork.Projects.GetProjectsByWorkField(workFieldId);
 
-            if (project != null)
+            if (projects != null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
+                return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
 
             }
             else
@@ -110,11 +109,11 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetProjectsByParticipator")]
         public ActionResult<ProjectReadDto> GetProjectsByParticipator(Guid participatorId)
         {
-            var project = _unitOfWork.Projects.GetProjectsByParticipator(participatorId);
+            var projects = _unitOfWork.Projects.GetProjectsByParticipator(participatorId);
 
-            if (project != null)
+            if (projects != null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
+                return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
 
             }
             else
@@ -126,11 +125,11 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetProjectsByManagerRole")]
         public ActionResult<ProjectReadDto> GetProjectsByManagerType(Guid roleId)
         {
-            var project = _unitOfWork.Projects.GetProjectsByManagerType(roleId);
+            var projects = _unitOfWork.Projects.GetProjectsByManagerType(roleId);
 
-            if (project != null)
+            if (projects != null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
+                return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
 
             }
             else
@@ -142,13 +141,13 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetProjectsByProjectState")]
         public ActionResult<ProjectReadDto> GetProjectsByProjectState(string projectState)
         {
-            List<Project> project = null;
-            if (projectState == Constants.ProjectStateOngoing) {  project = _unitOfWork.Projects.GetProjectsByProjectState(ProjectState.Ongoing); }
-            else if(projectState==Constants.ProjectStateEnded) { project = _unitOfWork.Projects.GetProjectsByProjectState(ProjectState.Ended); }
+            List<Project> projects = null;
+            if (projectState == Constants.ProjectStateOngoing) {  projects = _unitOfWork.Projects.GetProjectsByProjectState(ProjectState.Ongoing); }
+            else if(projectState==Constants.ProjectStateEnded) { projects = _unitOfWork.Projects.GetProjectsByProjectState(ProjectState.Ended); }
 
-            if (project != null)
+            if (projects != null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
+                return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
 
             }
             else
@@ -157,20 +156,67 @@ namespace SBUhamkari.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("GetProjectsInSavebox")]
-        public ActionResult<ProjectReadDto> GetProjectInSavebox(Guid userId)
+        public ActionResult<ProjectReadDto> GetProjectInSavebox()
         {
-            var project = _unitOfWork.Projects.GetProjectsInSavedBox(userId);
-
-            if (project != null)
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            
+            if (identity != null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value;
+                var projects = _unitOfWork.Projects.GetProjectsInSavedBox(new Guid(userId));
+
+                if (projects != null)
+                {
+                    return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
+
+                }
+                else
+                {
+                    return NotFound(Constants.ProjectNotFoundMessage);
+                }
+
 
             }
             else
             {
-                return NotFound(Constants.ProjectNotFoundMessage);
+                return Unauthorized("ابتدا وارد حساب کاربری خود شوید");
             }
+           
+           
+        }
+
+        [Authorize]
+        [HttpPost("PutProjectInSavebox")]
+        public ActionResult<ProjectReadDto> PutProjectInSavebox(Guid projectId)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var userId = new Guid(claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value);
+                try
+                {
+                    _unitOfWork.SavedProjects.Add(new SavedProject { Project = _unitOfWork.Projects.Get(projectId), User = _unitOfWork.Users.Get(userId) });
+                    _unitOfWork.Complete();
+                    return Ok("پروژه ذخیره شد");
+                }catch(Exception ex) {
+                    return StatusCode(503, new Response { Status = "database error", Message = ex.InnerException.Message }); 
+                }
+                   
+                
+
+
+            }
+            else
+            {
+                return Unauthorized("ابتدا وارد حساب کاربری خود شوید");
+            }
+
+
         }
 
         [HttpGet("GetProjectsByWorkFields")]
@@ -191,27 +237,36 @@ namespace SBUhamkari.Controllers
 
         //end of get apis
         //post api
+        [Authorize]
         [HttpPost("ProjectCreate")]
-        
         public ActionResult<ProjectReadDto> ProjectCreate(ProjectCreateDto projectCreateDto)
         {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IEnumerable<Claim> claims = identity.Claims;
+            var userId = new Guid(claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value);
             var project = _mapper.Map<Project>(projectCreateDto);
             _unitOfWork.Projects.Add(project);
+            _unitOfWork.ProjectManagers.Add(new ProjectManager { Project = project, User = _unitOfWork.Users.Get(userId) });
             _unitOfWork.Complete();
             var projectReadDto = _mapper.Map<ProjectReadDto>(project);
             return CreatedAtRoute("GetProjectsById", new {id=projectReadDto.id},projectReadDto);
-
         }
         //end of post api
 
+        [Authorize]
         [HttpPut("{id}")]
         public ActionResult UpdateProject(Guid id, ProjectUpdateDto projectUpdateDto)
         {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IEnumerable<Claim> claims = identity.Claims;
+            var userId = new Guid(claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value);
+            _unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(userId);
             var project = _unitOfWork.Projects.Get(id);
             if (project == null)
             {
                 return NotFound();
             }
+            
             //how can we update?
             project.Name = projectUpdateDto.Name;
             project.ProjectExplain = projectUpdateDto.ProjectExplain;
