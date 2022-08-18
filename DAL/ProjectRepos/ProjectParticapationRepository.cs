@@ -14,7 +14,7 @@ namespace DAL.ProjectRepos
         public List<ProjectParticapation> GetProjectParticapationsByProjectWithUser(Guid projectId)
         {
             return HamkariContext.ProjectParticapations.
-                Where<ProjectParticapation>(m => m.Project.id == projectId).Include(m => m.User).ToList();
+                Where<ProjectParticapation>(m => m.Project.id == projectId).Include(m => m.User).Include(m=>m.User.Role).ToList();
         }
 
         public List<ProjectParticapation> GetProjectParticapationsByUserWithProject(Guid userID)

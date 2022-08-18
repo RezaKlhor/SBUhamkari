@@ -30,5 +30,6 @@ namespace DTO.UserDtos
 
         public string CompanyIDnumber { get; set; }
         public string CompanyName { get; set; }
+        public DateTime? BirthDate { get; set; }
     }
 }

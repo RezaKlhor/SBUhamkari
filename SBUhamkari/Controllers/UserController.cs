@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 
 namespace SBUhamkari.Controllers
 {
@@ -40,7 +41,7 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetUserById")]
         public ActionResult GetUserById(Guid id)
         {
-            var user = _unitOfWork.Users.Get(id);
+            var user = _unitOfWork.Users.GetUsersByIdWithRole(id);
             if (user == null)
             {
                 return NotFound("کاربر مورد نظر وجود ندارد");
@@ -93,6 +94,85 @@ namespace SBUhamkari.Controllers
             return Ok(userDtos);
             
         }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public ActionResult DeleteUser(Guid id)
+        {
+            var userId = GetUserId();
+            if (userId != id)
+            {
+                return Unauthorized("صاحب اکانت میتونه حذف کنه");
+            }
+            var user = _unitOfWork.Users.Get(id);
+           
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.Users.Remove(user);
+            _unitOfWork.Complete();
+
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public ActionResult UpdateProject(Guid id, UserUpdateDto userUpdateDto)
+        {
+            var userId = GetUserId();
+            if (userId!=userId)
+            {
+                return Unauthorized("صاحب اکانت میتونه ویرایش کنه");
+            }
+            var user = _unitOfWork.Users.GetUsersByIdWithRole(id);
+           
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.Avatar =Encoding.ASCII.GetBytes( userUpdateDto.Avatar);
+            user.Username = userUpdateDto.Username;
+            _unitOfWork.Complete();
+            switch (user.Role.Name)
+            {
+                case Constants.StudentRole:
+                    var student = _unitOfWork.Students.Get(id);
+                    student.Firstname = userUpdateDto.Firstname;
+                    student.Lastname = userUpdateDto.Lastname;
+                    student.gender = userUpdateDto.gender;
+                    student.NationalIdNum = UInt32.Parse( userUpdateDto.NationalIdNum);
+                    student.StudentID = UInt32.Parse(userUpdateDto.StudentID);
+                    student.BirthDate = userUpdateDto.BirthDate;
+                    
+                    
+                    break;
+                case Constants.ProfessorRole:
+                    var professor = _unitOfWork.Professors.Get(id);
+                    professor.Firstname = userUpdateDto.Firstname;
+                    professor.Lastname = userUpdateDto.Lastname;
+                    professor.gender = userUpdateDto.gender;
+                    professor.NationalIdNum = UInt32.Parse(userUpdateDto.NationalIdNum);
+                    professor.BirthDate = userUpdateDto.BirthDate;
+                    professor.PersonnelID = UInt32.Parse(userUpdateDto.PersonnelID);
+                    
+
+
+                    break;
+                case Constants.CompanyRole:
+                    var company = _unitOfWork.Companies.Get(id);
+                    company.CompanyName=userUpdateDto.CompanyName;
+                    company.CompanyIDnumber = UInt32.Parse(userUpdateDto.CompanyIDnumber);
+                    break;
+                default:
+                    return null;
+            }
+            //how can we update?
+
+            _unitOfWork.Complete();
+            return NoContent();
+        }
+
         private Guid GetUserId()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

@@ -19,7 +19,7 @@ namespace DAL.UserRepos
 
         public User GetUserByUsername(string username)
         {
-            return HamkariContext.Users.SingleOrDefault(m => m.Username == username);
+            return HamkariContext.Users.Include(m=>m.Role).SingleOrDefault(m => m.Username == username);
         }
 
         public User GetUserByUsernameWithRole(string username)
@@ -33,6 +33,11 @@ namespace DAL.UserRepos
             var projectParticipations = unitOfWork.ProjectParticapations.GetProjectParticapationsByProjectWithUser(projectId);
             var users = projectParticipations.Select(m => m.User).ToList();
             return users;
+        }
+
+        public User GetUsersByIdWithRole(Guid id)
+        {
+            return HamkariContext.Users.Include(m => m.Role).Where(m => m.id == id).FirstOrDefault();
         }
     }
 }
