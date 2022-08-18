@@ -15,6 +15,10 @@
         }
         public static List<T> FindCommon(List<List<T>> lists)
         {
+            if (lists==null|| lists.Count==0)
+            {
+                return null;
+            }
             List<T> minCount = lists.ElementAt(0);
             for (int i = 0; i < lists.Count; i++)
             {

@@ -4,8 +4,8 @@
     {
         User GetUserByUsername(string username);
         User GetUserByUsernameWithRole(string username);
-
-        void AddUserInit();
+        List<User> GetUsersByProject(Guid projectId);
+        
 
 
     }

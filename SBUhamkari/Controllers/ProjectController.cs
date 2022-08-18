@@ -44,7 +44,7 @@ namespace SBUhamkari.Controllers
                 return NotFound();
             }
         }
-        [HttpGet("{id}",Name ="GetProjectsById")]
+        [HttpGet("{id}",Name ="GetProjectsById")] // this should be get project
         public ActionResult<ProjectReadDto> GetProjectById(Guid id)
         {
             var project = _unitOfWork.Projects.Get(id);
@@ -160,30 +160,19 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetProjectsInSavebox")]
         public ActionResult<ProjectReadDto> GetProjectInSavebox()
         {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            
-            if (identity != null)
+
+            var userId = GetUserId();
+            var projects = _unitOfWork.Projects.GetProjectsInSavedBox(userId);
+            if (projects != null)
             {
-                IEnumerable<Claim> claims = identity.Claims;
-                var userId = claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value;
-                var projects = _unitOfWork.Projects.GetProjectsInSavedBox(new Guid(userId));
-
-                if (projects != null)
-                {
-                    return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
-
-                }
-                else
-                {
-                    return NotFound(Constants.ProjectNotFoundMessage);
-                }
-
-
+               return Ok(_mapper.Map<IEnumerable<ProjectReadDto>>(projects));
             }
             else
             {
-                return Unauthorized("ابتدا وارد حساب کاربری خود شوید");
+               return NotFound(Constants.ProjectNotFoundMessage);
             }
+
+
            
            
         }
@@ -257,10 +246,12 @@ namespace SBUhamkari.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateProject(Guid id, ProjectUpdateDto projectUpdateDto)
         {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            IEnumerable<Claim> claims = identity.Claims;
-            var userId = new Guid(claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value);
-            _unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(userId);
+            var userId = GetUserId();
+            var projectManager = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(userId, id);
+            if (projectManager==null)
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان ویرایش اطلاعات را دارد");
+            }
             var project = _unitOfWork.Projects.Get(id);
             if (project == null)
             {
@@ -274,11 +265,18 @@ namespace SBUhamkari.Controllers
             _unitOfWork.Complete();
             return NoContent();
         }
-        
+
+        [Authorize]
         [HttpPatch("{id}")]
         public ActionResult PartialProjectUpdate(Guid id, JsonPatchDocument<ProjectUpdateDto> patchDoc)
         {
+            var userId = GetUserId();
             var project = _unitOfWork.Projects.Get(id);
+            var projectManager = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(userId, id);
+            if (projectManager==null)
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان ویرایش اطلاعات را دارد");
+            }
             if (project == null)
             {
                 return NotFound();
@@ -303,10 +301,17 @@ namespace SBUhamkari.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteCommand(Guid id)
         {
+            var userId = GetUserId();
             var project = _unitOfWork.Projects.Get(id);
+            var projectManager = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(userId, id);
+            if (projectManager == null)
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان ویرایش اطلاعات را دارد");
+            }
             if (project == null)
             {
                 return NotFound();
@@ -315,6 +320,14 @@ namespace SBUhamkari.Controllers
             _unitOfWork.Complete();
 
             return NoContent();
+        }
+
+        private Guid GetUserId()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IEnumerable<Claim> claims = identity.Claims;
+            var userId = new Guid(claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value);
+            return userId;
         }
 
 

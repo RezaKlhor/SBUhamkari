@@ -4,7 +4,7 @@
     {
         List<ProjectManager> GetProjectManagersByManagerWithProject(Guid managerID);
         List<ProjectManager> GetProjectManagersByManagerRoleWithProject(Guid roleID);
-        //ProjectManager GetProjectManagerByUserAndProject(Guid userId, Guid projectId);
+        ProjectManager GetProjectManagerByUserAndProject(Guid userId, Guid projectId);
 
     }
 }

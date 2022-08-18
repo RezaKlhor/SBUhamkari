@@ -8,16 +8,14 @@ namespace DAL.UserRepos
     {
         public UserRepository(DbContext context) : base(context)
         {
+            
         }
 
 
-
+        private readonly IUnitOfWork _unitOfWork;
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
-        public void AddUserInit()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public User GetUserByUsername(string username)
         {
@@ -27,6 +25,14 @@ namespace DAL.UserRepos
         public User GetUserByUsernameWithRole(string username)
         {
             return HamkariContext.Users.Include(m=>m.Role).SingleOrDefault(m => m.Username == username);
+        }
+
+        public List<User> GetUsersByProject(Guid projectId)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
+            var projectParticipations = unitOfWork.ProjectParticapations.GetProjectParticapationsByProjectWithUser(projectId);
+            var users = projectParticipations.Select(m => m.User).ToList();
+            return users;
         }
     }
 }

@@ -18,6 +18,11 @@ namespace SBUhamkari.Profiles
             CreateMap<StudentRegisterDto, Student>();
             CreateMap<ProfessorRegisterDto, Professor>();
             CreateMap<CompanyRegisterDto, Company>();
+            CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>();
+            CreateMap<Person, UserDto>();
+            CreateMap<Student, UserDto>();
+            CreateMap<Professor, UserDto>();
             
         }
     }

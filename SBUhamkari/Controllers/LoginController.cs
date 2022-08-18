@@ -55,9 +55,12 @@ namespace SBUhamkari.Controllers
                 );
             return Ok(new
             {
-                token=new JwtSecurityTokenHandler().WriteToken(token)
+                token=new JwtSecurityTokenHandler().WriteToken(token),
+                role= user.Role.Name
 
             });
         }
+
+        // logout
     }
 }

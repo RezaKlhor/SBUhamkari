@@ -37,10 +37,7 @@ namespace DAL.ProjectRepos
 
             var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(projectManagerID);
             var projects= GetProjectsByManage(projectmanagers);
-            if (projects.Count == 0)
-            {
-                return null;
-            }
+            
             return projects;
         }
 
@@ -49,10 +46,7 @@ namespace DAL.ProjectRepos
             UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
             var projectmanagers = unitOfWork.ProjectManagers.GetProjectManagersByManagerRoleWithProject(roleID);
             var projects = GetProjectsByManage(projectmanagers);
-            if (projects.Count == 0)
-            {
-                return null;
-            }
+            
             return projects;
         }
         private List<Project> GetProjectsByManage(List<ProjectManager> projectManagers)
@@ -124,13 +118,15 @@ namespace DAL.ProjectRepos
             var projectLists = new List<List<Project>>();
             foreach (var item in workfields)
             {
-                projectLists.Add(GetProjectsByWorkField(item));
+                var temp = GetProjectsByWorkField(item);
+                if (temp!=null)
+                {
+                    projectLists.Add(GetProjectsByWorkField(item));
+                }
+               
             }
+            
             var projects= Tools<Project>.FindCommon(projectLists);
-            if (projects.Count == 0)
-            {
-                return null;
-            }
             return projects;
 
 

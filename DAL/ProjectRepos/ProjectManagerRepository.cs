@@ -11,6 +11,11 @@ namespace DAL.ProjectRepos
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
+        public ProjectManager GetProjectManagerByUserAndProject(Guid userId, Guid projectId)
+        {
+            return HamkariContext.ProjectManagers.Where(m => m.User.id == userId && m.Project.id == projectId).FirstOrDefault();
+        }
+
         public List<ProjectManager> GetProjectManagersByManagerRoleWithProject(Guid roleID)
         {
             return HamkariContext.ProjectManagers.Where<ProjectManager>
