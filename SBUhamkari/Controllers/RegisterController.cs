@@ -86,7 +86,7 @@ namespace SBUhamkari.Controllers
             try
             {
                 var company = _mapper.Map<Company>(companyRegisterDto);
-            company.Role = _unitOfWork.Roles.GetRole(Constants.ProfessorRole);
+            company.Role = _unitOfWork.Roles.GetRole(Constants.CompanyRole);
             _unitOfWork.Companies.Add(company);
            
                 _unitOfWork.Complete();

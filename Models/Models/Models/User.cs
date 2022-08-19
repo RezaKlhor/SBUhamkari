@@ -12,6 +12,7 @@ namespace Models.Models
     {
         public User()
         {
+           
         }
 
         public User(string username, string password, Faculty faculty)

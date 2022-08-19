@@ -6,7 +6,8 @@
         User GetUserByUsernameWithRole(string username);
         List<User> GetUsersByProject(Guid projectId);
         User GetUsersByIdWithRole(Guid Id);
-        
+
+        List<User> GetAllUsersWithRole();
 
 
     }

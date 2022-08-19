@@ -148,32 +148,32 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("afd71194-7960-42b8-b8bd-f3a8da659045"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3773),
+                            id = new Guid("52ce4066-d31b-4d30-8f37-ddd8ca3bf98c"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4425),
                             Name = "دانشگاه شهید بهشتی"
                         },
                         new
                         {
-                            id = new Guid("3704af32-771e-4f3e-8ceb-945051acc04c"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3857),
+                            id = new Guid("da8f4e68-5f04-4182-b1ac-a763bfdc1c51"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4520),
                             Name = "دانشگاه تهران"
                         },
                         new
                         {
-                            id = new Guid("3775d682-118b-4af1-8460-af92c362a1fa"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3863),
+                            id = new Guid("818834d9-23b7-477b-97e1-2a1ff9788e58"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4532),
                             Name = "دانشگاه صنعتی امیرکبیر"
                         },
                         new
                         {
-                            id = new Guid("b74abef7-fe30-419b-9326-49437d848c95"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3868),
+                            id = new Guid("eaa0ae02-fe5c-4506-bc9d-e78d010ec37c"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4541),
                             Name = "دانشگاه علم و صنعت"
                         },
                         new
                         {
-                            id = new Guid("996d684a-adb7-49c6-af2b-5aefced9d8fe"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3899),
+                            id = new Guid("87a17bc2-1dc3-4b5d-8cf0-28668ce006b5"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4550),
                             Name = "دانشگاه صنعتی صنعتی شریف"
                         });
                 });
@@ -234,32 +234,32 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("1b9070d5-9f62-496f-940a-d1a0e389f6c7"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4008),
+                            id = new Guid("fcc4cefc-ded5-4b06-8e13-1a096e411387"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4741),
                             Name = "دانشکده برق و کامپیوتر"
                         },
                         new
                         {
-                            id = new Guid("598e0b26-195f-4dac-80d7-49f7ebb3505e"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4038),
+                            id = new Guid("3f898554-86eb-4dfd-a8a2-af7252da82ad"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4785),
                             Name = "دانشکده حقوق"
                         },
                         new
                         {
-                            id = new Guid("12e5dafa-e36f-488f-817a-7d57f4a50923"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4043),
+                            id = new Guid("7f178235-6c59-4698-b532-90fc05e83377"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4796),
                             Name = "دانشکده رواشناسی و علوم تربیتی"
                         },
                         new
                         {
-                            id = new Guid("cbbc4f09-c4e6-48bb-bdfa-9e06f7db714c"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4048),
+                            id = new Guid("38909d71-d414-4c71-a978-06bac57d2c0b"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4804),
                             Name = "دانشکده معماری"
                         },
                         new
                         {
-                            id = new Guid("24ea6d16-9dd9-417f-af45-1503f307b053"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4052),
+                            id = new Guid("517c645c-1b7a-47a4-b378-c502cabbfa77"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(4813),
                             Name = "دانشکده علوم پایه"
                         });
                 });
@@ -640,26 +640,26 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("3e01eab9-f4af-4633-bd14-9a5b0e1d4a11"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4130),
+                            id = new Guid("fe067fab-0836-4383-975c-a0435a3204ac"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5127),
                             Name = "Admin"
                         },
                         new
                         {
-                            id = new Guid("25352780-90bc-465d-b553-8d1297d8d542"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4145),
+                            id = new Guid("5f0bdb02-a5ae-4eac-91d9-bfabc3bf51ec"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5159),
                             Name = "Student"
                         },
                         new
                         {
-                            id = new Guid("0665dccc-4bcc-4e39-82f7-267f4351c335"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4157),
+                            id = new Guid("cd908276-ad81-480c-be4e-5cab53b47e52"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5170),
                             Name = "Professor"
                         },
                         new
                         {
-                            id = new Guid("a75d09d8-87ce-4cb0-8e35-fe0c46ce5082"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4162),
+                            id = new Guid("cda3a357-e8b5-482f-b866-ab89c57924c2"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5194),
                             Name = "Company"
                         });
                 });
@@ -854,50 +854,50 @@ namespace SBUhamkari.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("996e0d44-04b2-441e-beb0-7713fbf26d4a"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4231),
+                            id = new Guid("fc71ce27-a641-4eda-b633-91c6f381dc29"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5320),
                             Name = "هوش مصنوعی"
                         },
                         new
                         {
-                            id = new Guid("65a19480-af21-4b3e-9c99-8a65f9c5fbd8"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4284),
+                            id = new Guid("35ed1382-324b-43dc-94c7-d1138f53b441"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5389),
                             Name = "نرم افزار"
                         },
                         new
                         {
-                            id = new Guid("1991447e-45c1-4485-958f-0942197878ce"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4289),
+                            id = new Guid("676c1440-c0a9-447a-9c89-dc530d614f63"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5401),
                             Name = "سخت افزار"
                         },
                         new
                         {
-                            id = new Guid("a6d24e89-dd08-4890-bf76-671c9472b979"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4293),
+                            id = new Guid("1bd01eeb-a153-4e50-8e1d-1012ac0367b2"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5410),
                             Name = "علوم داده"
                         },
                         new
                         {
-                            id = new Guid("04ec3066-9ae6-4358-8248-056c15a6ff4a"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4298),
+                            id = new Guid("faf1cc68-cb5c-4868-ae53-ba9d4f3c07a4"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5418),
                             Name = "شبکه"
                         },
                         new
                         {
-                            id = new Guid("a2248217-ad07-4163-8ce2-a3dc1a3532c5"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4305),
+                            id = new Guid("a02ae718-4581-4fe0-8fec-d58280288f69"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5434),
                             Name = "هوش مصنوعی"
                         },
                         new
                         {
-                            id = new Guid("ff4d0570-3cbf-4061-b382-a358f5b9be1b"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4316),
+                            id = new Guid("374812af-d2c2-44e9-8e46-29cb54d08e18"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5442),
                             Name = "شبکه‌های پیچیده"
                         },
                         new
                         {
-                            id = new Guid("2820cce5-ec38-4d5d-91c5-45e3325052bf"),
-                            CreateTime = new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4321),
+                            id = new Guid("dcca56cf-7bf6-4375-b425-bb596fc4fb01"),
+                            CreateTime = new DateTime(2022, 8, 19, 13, 0, 17, 36, DateTimeKind.Local).AddTicks(5463),
                             Name = "فناوری اطلاعات"
                         });
                 });
@@ -906,9 +906,10 @@ namespace SBUhamkari.Migrations
                 {
                     b.HasBaseType("Models.Models.User");
 
-                    b.Property<long>("CompanyIDnumber")
+                    b.Property<string>("CompanyIDnumber")
+                        .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("bigint");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()

@@ -4,5 +4,6 @@
     {
         List<PersonWorkField> GetPersonWorkFieldsByPersonWithWorkField(Guid personID);
         List<PersonWorkField> GetAllPersonWorkFieldsByWorkFieldWithPerson(Guid WorkFieldID);
+        PersonWorkField GetAllPersonWorkFieldsByWorkFieldAndPerson(Guid personId, Guid workFieldID);
     }
 }

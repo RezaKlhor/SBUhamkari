@@ -39,5 +39,11 @@ namespace DAL.UserRepos
         {
             return HamkariContext.Users.Include(m => m.Role).Where(m => m.id == id).FirstOrDefault();
         }
+
+        
+        public List<User> GetAllUsersWithRole()
+        {
+            return HamkariContext.Users.Include(m => m.Role).ToList();
+        }
     }
 }

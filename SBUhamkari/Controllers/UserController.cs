@@ -118,7 +118,7 @@ namespace SBUhamkari.Controllers
 
         [Authorize]
         [HttpPut("{id}")]
-        public ActionResult UpdateProject(Guid id, UserUpdateDto userUpdateDto)
+        public ActionResult UpdateUser(Guid id, UserUpdateDto userUpdateDto)
         {
             var userId = GetUserId();
             if (userId!=userId)
@@ -162,7 +162,7 @@ namespace SBUhamkari.Controllers
                 case Constants.CompanyRole:
                     var company = _unitOfWork.Companies.Get(id);
                     company.CompanyName=userUpdateDto.CompanyName;
-                    company.CompanyIDnumber = UInt32.Parse(userUpdateDto.CompanyIDnumber);
+                    company.CompanyIDnumber = userUpdateDto.CompanyIDnumber;
                     break;
                 default:
                     return null;
@@ -173,6 +173,22 @@ namespace SBUhamkari.Controllers
             return NoContent();
         }
 
+        [HttpGet("GetAllUsers")]
+        public ActionResult GetAllUsers()
+        {
+            var users = _unitOfWork.Users.GetAllUsersWithRole();
+            if (users == null)
+            {
+                return NotFound("کاربر مورد نظر وجود ندارد");
+
+            }
+            var userDtos = new List<UserDto>();
+            foreach (var item in users)
+            {
+                userDtos.Add(MapUserProfile(item));
+            }
+            return Ok(userDtos);
+        }
         private Guid GetUserId()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

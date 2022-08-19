@@ -11,9 +11,15 @@ namespace DAL.ProjectRepos
 
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
+        public ProjectWorkField GetProjectWorkFieldsByWorkFieldAndProject(Guid projectId, Guid workFieldID)
+        {
+            return GetProjectWorkFieldsByWorkFieldWithProject(workFieldID).Where(m => m.Project.id == projectId).FirstOrDefault();
+        }
+
         public List<ProjectWorkField> GetProjectWorkFieldsByWorkFieldWithProject(Guid workFieldID)
         {
-            return HamkariContext.ProjectWorkFields.Include(m => m.Project).Where<ProjectWorkField>(m => m.WorkField.id == workFieldID).ToList();
+            
+            return HamkariContext.ProjectWorkFields.Include(m => m.Project).Include(m=> m.WorkField).Where<ProjectWorkField>(m => m.WorkField.id == workFieldID).ToList();
         }
     }
 }

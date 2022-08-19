@@ -9,7 +9,7 @@ namespace Models.Models
         {
         }
 
-        public Company(uint companyIDnumber, string companyName)
+        public Company(string companyIDnumber, string companyName)
         {
             CompanyIDnumber = companyIDnumber;
             CompanyName = companyName;
@@ -17,7 +17,7 @@ namespace Models.Models
 
         [StringLength(10, MinimumLength = 10, ErrorMessage = "طول شماره کسب شرکت باید ده رقم باشد")]
         [DisplayName("شماره کسب")]
-        public uint CompanyIDnumber { get; set; }
+        public string CompanyIDnumber { get; set; }
 
 
         [DisplayName("نام شرکت")]
