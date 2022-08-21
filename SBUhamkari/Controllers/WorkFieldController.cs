@@ -111,11 +111,10 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetProjectWorkFields")]
         public ActionResult<WorkFieldReadDto> GetProjectWorkFields(Guid id)
         {
-            var work = _unitOfWork.ProjectWorkFields.GetProjectWorkFieldsByWorkFieldWithProject(id);
-
+            var work = _unitOfWork.ProjectWorkFields.GetProjectWorkFieldsByProjectWithWorkField(id);
             if (work != null)
             {
-                return Ok(_mapper.Map<IEnumerable<WorkFieldReadDto>>(work.Select(m => m.WorkField)));
+                return Ok(_mapper.Map<IEnumerable<WorkFieldReadDto>>(work.Select(m=> m.WorkField)));
 
             }
             else

@@ -27,7 +27,7 @@ namespace DTO.UserDtos
         [Required]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "طول کد ملی باید ده رقم باشد")]
        
-        public uint NationalIdNum { get; set; }
+        public string NationalIdNum { get; set; }
 
         [Required]
        

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SBUhamkari.Migrations
 {
-    public partial class init : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -135,16 +135,16 @@ namespace SBUhamkari.Migrations
                     Facultyid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Roleid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIDnumber = table.Column<long>(type: "bigint", maxLength: 10, nullable: true),
+                    CompanyIDnumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Firstname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Lastname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    NationalIdNum = table.Column<long>(type: "bigint", maxLength: 10, nullable: true),
+                    NationalIdNum = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     gender = table.Column<int>(type: "int", nullable: true),
                     CV = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     PersonnelID = table.Column<long>(type: "bigint", maxLength: 8, nullable: true),
-                    StudentID = table.Column<long>(type: "bigint", maxLength: 8, nullable: true),
+                    StudentID = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -169,8 +169,9 @@ namespace SBUhamkari.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    WorkfieldID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    projectRelatedforeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProjectID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WorkfieldID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -178,11 +179,16 @@ namespace SBUhamkari.Migrations
                 {
                     table.PrimaryKey("PK_ProjectWorkFields", x => x.id);
                     table.ForeignKey(
-                        name: "FK_ProjectWorkFields_Projects_WorkfieldID",
-                        column: x => x.WorkfieldID,
+                        name: "FK_ProjectWorkFields_Projects_projectRelatedforeignKey",
+                        column: x => x.projectRelatedforeignKey,
                         principalTable: "Projects",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProjectWorkFields_Projects_WorkfieldID",
+                        column: x => x.WorkfieldID,
+                        principalTable: "Projects",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_ProjectWorkFields_WorkFields_ProjectID",
                         column: x => x.ProjectID,
@@ -609,11 +615,11 @@ namespace SBUhamkari.Migrations
                 columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("3704af32-771e-4f3e-8ceb-945051acc04c"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3857), null, "دانشگاه تهران" },
-                    { new Guid("3775d682-118b-4af1-8460-af92c362a1fa"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3863), null, "دانشگاه صنعتی امیرکبیر" },
-                    { new Guid("996d684a-adb7-49c6-af2b-5aefced9d8fe"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3899), null, "دانشگاه صنعتی صنعتی شریف" },
-                    { new Guid("afd71194-7960-42b8-b8bd-f3a8da659045"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3773), null, "دانشگاه شهید بهشتی" },
-                    { new Guid("b74abef7-fe30-419b-9326-49437d848c95"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(3868), null, "دانشگاه علم و صنعت" }
+                    { new Guid("158b444c-61db-4c49-9986-151695f1dc01"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3155), null, "دانشگاه تهران" },
+                    { new Guid("389d1aba-1f44-4154-bc36-92c877418b80"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3091), null, "دانشگاه شهید بهشتی" },
+                    { new Guid("3cebf69c-e28c-4ea5-a140-91e93ed27b8f"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3161), null, "دانشگاه صنعتی امیرکبیر" },
+                    { new Guid("a4f9d2ee-5812-42e5-9fcc-1f40ac85c0bc"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3166), null, "دانشگاه علم و صنعت" },
+                    { new Guid("cb8c6661-2d59-4c3b-bdbf-f9aec7c2d26e"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3194), null, "دانشگاه صنعتی صنعتی شریف" }
                 });
 
             migrationBuilder.InsertData(
@@ -621,11 +627,11 @@ namespace SBUhamkari.Migrations
                 columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("12e5dafa-e36f-488f-817a-7d57f4a50923"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4043), null, "دانشکده رواشناسی و علوم تربیتی" },
-                    { new Guid("1b9070d5-9f62-496f-940a-d1a0e389f6c7"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4008), null, "دانشکده برق و کامپیوتر" },
-                    { new Guid("24ea6d16-9dd9-417f-af45-1503f307b053"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4052), null, "دانشکده علوم پایه" },
-                    { new Guid("598e0b26-195f-4dac-80d7-49f7ebb3505e"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4038), null, "دانشکده حقوق" },
-                    { new Guid("cbbc4f09-c4e6-48bb-bdfa-9e06f7db714c"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4048), null, "دانشکده معماری" }
+                    { new Guid("2b08f140-bcdc-42b8-9fcb-7ba399f75e44"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3275), null, "دانشکده برق و کامپیوتر" },
+                    { new Guid("5b9315a2-c6da-4563-8686-3bc7bded8c01"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3293), null, "دانشکده رواشناسی و علوم تربیتی" },
+                    { new Guid("643fde80-5db4-49f2-97b3-f8ea68dc1439"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3302), null, "دانشکده علوم پایه" },
+                    { new Guid("9cce9244-f42e-4751-b563-a4e37ea52161"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3288), null, "دانشکده حقوق" },
+                    { new Guid("e7c3b96e-8519-41da-8378-078730c32fa9"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3297), null, "دانشکده معماری" }
                 });
 
             migrationBuilder.InsertData(
@@ -633,10 +639,10 @@ namespace SBUhamkari.Migrations
                 columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0665dccc-4bcc-4e39-82f7-267f4351c335"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4157), null, "Professor" },
-                    { new Guid("25352780-90bc-465d-b553-8d1297d8d542"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4145), null, "Student" },
-                    { new Guid("3e01eab9-f4af-4633-bd14-9a5b0e1d4a11"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4130), null, "Admin" },
-                    { new Guid("a75d09d8-87ce-4cb0-8e35-fe0c46ce5082"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4162), null, "Company" }
+                    { new Guid("35da13d9-0d4e-44bf-ab72-0577676bea91"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3396), null, "Company" },
+                    { new Guid("694c3813-8507-45cb-b2a4-13caff16c759"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3381), null, "Student" },
+                    { new Guid("93e857a3-e721-4d2d-a078-421e70f07481"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3368), null, "Admin" },
+                    { new Guid("ca84ef32-4a94-493f-b67c-af9f87b8f169"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3391), null, "Professor" }
                 });
 
             migrationBuilder.InsertData(
@@ -644,14 +650,14 @@ namespace SBUhamkari.Migrations
                 columns: new[] { "id", "CreateTime", "DeleteTime", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("04ec3066-9ae6-4358-8248-056c15a6ff4a"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4298), null, "شبکه" },
-                    { new Guid("1991447e-45c1-4485-958f-0942197878ce"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4289), null, "سخت افزار" },
-                    { new Guid("2820cce5-ec38-4d5d-91c5-45e3325052bf"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4321), null, "فناوری اطلاعات" },
-                    { new Guid("65a19480-af21-4b3e-9c99-8a65f9c5fbd8"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4284), null, "نرم افزار" },
-                    { new Guid("996e0d44-04b2-441e-beb0-7713fbf26d4a"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4231), null, "هوش مصنوعی" },
-                    { new Guid("a2248217-ad07-4163-8ce2-a3dc1a3532c5"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4305), null, "هوش مصنوعی" },
-                    { new Guid("a6d24e89-dd08-4890-bf76-671c9472b979"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4293), null, "علوم داده" },
-                    { new Guid("ff4d0570-3cbf-4061-b382-a358f5b9be1b"), new DateTime(2022, 8, 18, 0, 35, 58, 877, DateTimeKind.Local).AddTicks(4316), null, "شبکه‌های پیچیده" }
+                    { new Guid("06892e90-0b52-4602-a345-21b6c5cff37b"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3481), null, "شبکه" },
+                    { new Guid("0a640c6b-dd50-41ed-af76-ce12b93f4924"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3472), null, "سخت افزار" },
+                    { new Guid("6a7d441a-5dce-4794-984e-96f086408dbf"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3501), null, "فناوری اطلاعات" },
+                    { new Guid("6d3ec4fb-720e-4894-b7c8-7939148698a8"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3456), null, "هوش مصنوعی" },
+                    { new Guid("93796950-4678-420e-888f-85d392f78fb3"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3467), null, "نرم افزار" },
+                    { new Guid("b219811d-337d-48ff-8913-5bb08eade936"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3487), null, "هوش مصنوعی" },
+                    { new Guid("fe2d7cb9-abf1-439c-968f-c41c4f77dda7"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3476), null, "علوم داده" },
+                    { new Guid("fe4acd48-b82f-4fc1-a0d8-13d09a4126d7"), new DateTime(2022, 8, 22, 0, 42, 53, 633, DateTimeKind.Local).AddTicks(3496), null, "شبکه‌های پیچیده" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -768,6 +774,11 @@ namespace SBUhamkari.Migrations
                 name: "IX_ProjectWorkFields_ProjectID",
                 table: "ProjectWorkFields",
                 column: "ProjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectWorkFields_projectRelatedforeignKey",
+                table: "ProjectWorkFields",
+                column: "projectRelatedforeignKey");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectWorkFields_WorkfieldID",

@@ -141,8 +141,8 @@ namespace SBUhamkari.Controllers
                     student.Firstname = userUpdateDto.Firstname;
                     student.Lastname = userUpdateDto.Lastname;
                     student.gender = userUpdateDto.gender;
-                    student.NationalIdNum = UInt32.Parse( userUpdateDto.NationalIdNum);
-                    student.StudentID = UInt32.Parse(userUpdateDto.StudentID);
+                    student.NationalIdNum = userUpdateDto.NationalIdNum;
+                    student.StudentID = userUpdateDto.StudentID;
                     student.BirthDate = userUpdateDto.BirthDate;
                     
                     
@@ -152,7 +152,7 @@ namespace SBUhamkari.Controllers
                     professor.Firstname = userUpdateDto.Firstname;
                     professor.Lastname = userUpdateDto.Lastname;
                     professor.gender = userUpdateDto.gender;
-                    professor.NationalIdNum = UInt32.Parse(userUpdateDto.NationalIdNum);
+                    professor.NationalIdNum = userUpdateDto.NationalIdNum;
                     professor.BirthDate = userUpdateDto.BirthDate;
                     professor.PersonnelID = UInt32.Parse(userUpdateDto.PersonnelID);
                     

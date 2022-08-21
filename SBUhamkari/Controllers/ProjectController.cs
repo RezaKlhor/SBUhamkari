@@ -2,6 +2,7 @@
 using DAL;
 using DTO.ProjectDtos;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
@@ -10,6 +11,7 @@ using System.Security.Claims;
 
 namespace SBUhamkari.Controllers
 {
+    
     [ApiController]
     [Route("[controller]")]
     public class ProjectController : ControllerBase

@@ -18,7 +18,7 @@ namespace Models.Models
         [Required]
         public ProjectState ProjectState { get; set; }
 
-        [ForeignKey("WorkfieldID")]
+        //[ForeignKey("WorkfieldID")]
         public List<ProjectWorkField>? ProjectWorkFields { get; set; }
         public List<ProjectParticapation>? ProjectParticipants { get; set; }
         public List<Feedback>? Feedbacks { get; set; }

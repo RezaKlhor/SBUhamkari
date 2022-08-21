@@ -4,6 +4,7 @@
     {
         List<ProjectWorkField> GetProjectWorkFieldsByWorkFieldWithProject(Guid workFieldID);
         ProjectWorkField GetProjectWorkFieldsByWorkFieldAndProject(Guid projectId,Guid workFieldID);
+        List<ProjectWorkField> GetProjectWorkFieldsByProjectWithWorkField(Guid projectId);
 
     }
 }

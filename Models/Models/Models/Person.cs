@@ -10,23 +10,9 @@ namespace Models.Models
         {
         }
 
-        public Person(string username, string password, Faculty faculty, string firstname, string lastname, uint nationalIdNum, Gender gender) : base(username, password, faculty)
-        {
-            Firstname = firstname;
-            Lastname = lastname;
-            NationalIdNum = nationalIdNum;
-            this.gender = gender;
-        }
+        
 
-        public Person(DateTime birthDate, string firstname, string lastname, uint nationalIdNum, Gender gender, byte[] cV)
-        {
-            BirthDate = birthDate;
-            Firstname = firstname;
-            Lastname = lastname;
-            NationalIdNum = nationalIdNum;
-            this.gender = gender;
-            CV = cV;
-        }
+       
 
         [DisplayName("تاریخ تولد")]
         public DateTime? BirthDate { get; set; }
@@ -44,7 +30,7 @@ namespace Models.Models
         [Required]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "طول کد ملی باید ده رقم باشد")]
         [DisplayName("کد ملی")]
-        public uint NationalIdNum { get; set; }
+        public string NationalIdNum { get; set; }
 
         [Required]
         [DisplayName("جنسیت")]
@@ -54,7 +40,7 @@ namespace Models.Models
         public Byte[]? CV { get; set; }
         public List<Skill>? skills { get; set; }
 
-        [ForeignKey("WorkfieldID")]
+        //[ForeignKey("WorkfieldID")]
         public List<PersonWorkField> PersonWorkFields { get; set; }
 
         public List<EducationRecord>? EducationRecords { get; set; }
