@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DTO.UserDtos
 {
-    public class CompanyRegisterDto : UserRegisterDto
+    public record CompanyRegisterDto : UserRegisterDto
     {
         [StringLength(10, MinimumLength = 10, ErrorMessage = "طول شماره کسب شرکت باید ده رقم باشد")]
         [DisplayName("شماره کسب")]

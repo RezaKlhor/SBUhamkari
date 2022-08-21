@@ -2,7 +2,7 @@
 
 namespace DTO
 {
-    public class BaseDto
+    public record BaseDto
     {
 
         [Key]

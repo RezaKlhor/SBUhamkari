@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO.WorkFieldDto
 {
-    public class WorkFieldCreateDto
+    public record WorkFieldCreateDto
     {
         [Required]
         public string Name { get; set; }

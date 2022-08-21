@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DTO.UserDtos
 {
-    public class UserRegisterDto
+    public record UserRegisterDto
     {
         [Required]
         [RegularExpression(@"([A-Za-z])+([A-Za-z]|(_)|(\.))*")]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DTO.WorkFieldDto
 {
-    public class WorkFieldReadDto : BaseDto
+    public record WorkFieldReadDto : BaseDto
     {
         [Required]
         public string Name { get; set; }

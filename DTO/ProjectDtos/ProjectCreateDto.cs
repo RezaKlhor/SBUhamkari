@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DTO.ProjectDtos
 {
-    public class ProjectCreateDto
+    public record ProjectCreateDto
     {
         [DisplayName("عنوان پژوهش")]
         [Required]

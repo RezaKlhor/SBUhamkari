@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO.UserDtos
 {
-    public class StudentDto : PersonDto
+    public record StudentDto : PersonDto
     {
       
 

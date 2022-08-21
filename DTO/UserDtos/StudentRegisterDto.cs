@@ -2,7 +2,7 @@
 
 namespace DTO.UserDtos
 {
-    public class StudentRegisterDto : PersonRegisterDto
+    public record StudentRegisterDto : PersonRegisterDto
     {
         [Required]
         [StringLength(8, MinimumLength = 8, ErrorMessage = "طول شماره دانشجویی باید 8 رقم باشد")]

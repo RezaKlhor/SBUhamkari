@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DTO.ProjectDtos
 {
-    public class ProjectUpdateDto
+    public record ProjectUpdateDto
     {
         [Required]
         public string Name { get; set; }

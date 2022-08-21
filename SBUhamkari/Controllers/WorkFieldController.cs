@@ -63,7 +63,7 @@ namespace SBUhamkari.Controllers
 
         
         [HttpPut("{id}")]
-        public ActionResult UpdateProject(Guid id, WorkFieldCreateDto workRead)
+        public ActionResult UpdateWorkField(Guid id, WorkFieldCreateDto workRead)
         {
             
             var work = _unitOfWork.WorkFields.Get(id);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO.UserDtos
 {
-    public class AdminRegisterDto
+    public record AdminRegisterDto
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DTO.UserDtos
 {
-    public class ProfessorRegisterDto : PersonRegisterDto
+    public record ProfessorRegisterDto : PersonRegisterDto
     {
         [Required]
         [StringLength(8, MinimumLength = 8, ErrorMessage = "طول شماره پرسنلی باید 8 رقم باشد")]

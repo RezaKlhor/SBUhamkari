@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DTO.ProjectDtos
 {
-    public class ProjectReadDto : BaseDto
+    public record ProjectReadDto : BaseDto
     {
 
 

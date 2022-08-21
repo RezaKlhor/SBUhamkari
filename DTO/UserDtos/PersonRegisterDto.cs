@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DTO.UserDtos
 {
-    public class PersonRegisterDto : UserRegisterDto
+    public record PersonRegisterDto : UserRegisterDto
     {
         [Required]
         [StringLength(20, ErrorMessage = "طول نام بیشتر از حد مجاز میباشد")]

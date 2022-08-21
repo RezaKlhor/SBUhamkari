@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DTO.UserDtos
 {
-    public class PersonDto : UserDto
+    public record PersonDto : UserDto
     {
        
 
