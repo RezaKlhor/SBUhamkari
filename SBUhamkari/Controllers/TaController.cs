@@ -112,19 +112,20 @@ namespace SBUhamkari.Controllers
 
         [Authorize(Roles = Constants.StudentRole)]
         [HttpPost("CreateTaApplication")]
-        public ActionResult CreateTaApp(TaRequestCreateDto taRequestCreateDto)
+        public ActionResult CreateTaApp(TaAppCreateDto taAppCreateDto)
         {
             var userId = GetUserId();
-            _unitOfWork.TArequests.Add(new Models.Models.TArequest()
+            _unitOfWork.TAapplications.Add(new Models.Models.TAapplication()
             {
-                Tittle = taRequestCreateDto.Tittle,
-                Text = taRequestCreateDto.Text,
-                Professor = _unitOfWork.Professors.Get(userId)
+                Student = _unitOfWork.Students.Get(userId),
+                Resume = taAppCreateDto.Resume,
+                text = taAppCreateDto.text,
+                Tarequest = _unitOfWork.TArequests.Get(taAppCreateDto.TarequestId)
             });
             try
             {
                 _unitOfWork.Complete();
-                return Created("درخواست شما ثبت شد", null);
+                return Ok("درخواست  شما ثبت شد");
 
             }
             catch (Exception ex)
@@ -133,6 +134,22 @@ namespace SBUhamkari.Controllers
             }
         }
 
+        [HttpGet("GetTaAppsForRequest")]
+        public ActionResult GetTaAppsForRequest(Guid requestId)
+        {
+            var taApps = _unitOfWork.TAapplications.GetTAapplicationsByTArequestWithStudent(requestId);
+            if (taApps==null)
+            {
+                return NotFound("درخواستی ثبت نشده است");
+            }
+            return Ok(taApps.Select(m=> new TaAppReadDto()
+            {
+                StudentId=m.Student.id,
+                Resume=m.Resume,
+                TarequestId=requestId,
+                text=m.text
+            }).ToList());
+        }
 
 
 

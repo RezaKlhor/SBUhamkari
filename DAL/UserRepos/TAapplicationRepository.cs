@@ -15,9 +15,9 @@ namespace DAL.UserRepos
             return HamkariContext.TAapplications.Where(m => m.Student.id == studentID).Include(m => m.Tarequest).ToList();
         }
 
-        public List<TAapplication> GetTAapplicationsByTArequest(Guid tareqID)
+        public List<TAapplication> GetTAapplicationsByTArequestWithStudent(Guid tareqID)
         {
-            return Find(m => m.Tarequest.id == tareqID).ToList();
+            return HamkariContext.TAapplications.Include(m=> m.Student).Where(m=> m.Tarequest.id==tareqID).ToList();
         }
     }
 }
