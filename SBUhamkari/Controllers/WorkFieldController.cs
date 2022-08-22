@@ -99,6 +99,10 @@ namespace SBUhamkari.Controllers
 
             if (work != null)
             {
+                if (work.Count==0)
+                {
+                    return NotFound("زمینه کاری وجود ندارد");
+                }
                 return Ok(_mapper.Map<IEnumerable<WorkFieldReadDto>>(work.Select(m=> m.WorkField)));
 
             }

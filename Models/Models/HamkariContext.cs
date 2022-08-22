@@ -85,7 +85,7 @@ namespace Models
         public DbSet<CoAnnouncement> CoAnnouncements { get; set; }
         public DbSet<CoApplication> CoApplications { get; set; }
         public DbSet<ContactInfo> ContactInfos { get; set; }
-        public DbSet<EducationInstitute> EducationInstitutes { get; set; }
+        
         public DbSet<EducationRecord> EducationRecords { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }

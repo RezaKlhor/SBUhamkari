@@ -34,5 +34,10 @@ namespace DAL.ProjectRepos
         {
             return HamkariContext.ProjectNews.Where(m => m.Project.id == projectID).ToList();
         }
+
+        public ProjectNews GetProjectNewsWithProject(Guid id)
+        {
+            return HamkariContext.ProjectNews.Include(m => m.Project).Where(m => m.id == id).FirstOrDefault();
+        }
     }
 }

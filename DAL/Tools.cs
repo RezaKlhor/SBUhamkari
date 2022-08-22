@@ -15,6 +15,10 @@
         }
         public static List<T> FindCommon(List<List<T>> lists)
         {
+            if (lists.Any(m=> m==null))
+            {
+                return null;
+            }
             if (lists==null|| lists.Count==0)
             {
                 return null;

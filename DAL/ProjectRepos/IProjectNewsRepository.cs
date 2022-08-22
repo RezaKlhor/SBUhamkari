@@ -4,6 +4,7 @@
     {
         List<ProjectNews> GetProjectNewsByFollow(Guid userID);
         List<ProjectNews> GetProjectNewsByProject(Guid projectID);
-
+        ProjectNews GetProjectNewsWithProject(Guid id);
+        
     }
 }

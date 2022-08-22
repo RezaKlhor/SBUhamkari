@@ -13,9 +13,9 @@ namespace DTO.UserDtos
         {
         }
 
-        
 
-       
+
+        public string Bio { get; set; }
         public string Role { get; set; }
         public String Username { get; set; }
         public string? Avatar { get; set; }
@@ -24,12 +24,16 @@ namespace DTO.UserDtos
         public Gender gender { get; set; }
         public string PersonnelID { get; set; }
         public string StudentID { get; set; }
-        public Faculty Faculty { get; set; }
+        public string Faculty { get; set; }
         public string NationalIdNum { get; set; }
         public string? CV { get; set; }
 
         public string CompanyIDnumber { get; set; }
         public string CompanyName { get; set; }
         public DateTime? BirthDate { get; set; }
+
+        
+
+
     }
 }

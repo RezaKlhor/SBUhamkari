@@ -12,7 +12,7 @@ namespace Models.Models
     {
         public User()
         {
-           
+            
         }
 
         public User(string username, string password, Faculty faculty)
@@ -46,7 +46,7 @@ namespace Models.Models
         [DisplayName("تصویر نمایه")]
         public Byte[]? Avatar { get; set; }
 
-
+        public string? Bio { get; set; }
 
         public List<ContactInfo>? contactInfos { get; set; }
         public List<Notification>? notifications { get; set; }

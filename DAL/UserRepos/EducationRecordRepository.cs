@@ -15,6 +15,11 @@ namespace DAL.UserRepos
             return SingleOrDefault(m => m.EducationState == EducationState.Studying);
         }
 
+        public EducationRecord GetEducationRecordByIdAndPersonId(Guid eduId, Guid personId)
+        {
+            return HamkariContext.EducationRecords.Where(m => m.id == eduId && m.Person.id == personId).FirstOrDefault();
+        }
+
         public List<EducationRecord> GetEducationRecordsByPerson(Guid personID)
         {
             return Find(m => m.Person.id == personID).ToList();

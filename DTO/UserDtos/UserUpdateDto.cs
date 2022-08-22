@@ -21,7 +21,7 @@ namespace DTO.UserDtos
         public String Firstname { get; set; }
         public String Lastname { get; set; }
 
-
+        public string Bio { get; set; }
         public Gender gender { get; set; }
 
         public string PersonnelID { get; set; }
@@ -31,5 +31,6 @@ namespace DTO.UserDtos
 
         public string CompanyIDnumber { get; set; }
         public string CompanyName { get; set; }
+        public Guid FacultyId { get; set; }
     }
 }

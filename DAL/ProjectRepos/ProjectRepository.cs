@@ -23,7 +23,7 @@ namespace DAL.ProjectRepos
                 GetProjectsByProjectState(projectState)
 
             });
-            if (projects.Count==0)
+            if (projects==null)
             {
                 return null;
             }
@@ -64,9 +64,8 @@ namespace DAL.ProjectRepos
         }
         public List<Project> GetProjectsByParticipator(Guid userID)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(HamkariContext))
-            {
 
+            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
                 var projectParticipation = unitOfWork.ProjectParticapations.GetProjectParticapationsByUserWithProject(userID);
                 var projects = new List<Project>();
                 foreach (var item in projectParticipation)
@@ -80,7 +79,7 @@ namespace DAL.ProjectRepos
                 return projects;
 
 
-            }
+            
         }
 
         public List<Project> GetProjectsByProjectState(ProjectState projectState)
@@ -96,9 +95,9 @@ namespace DAL.ProjectRepos
         public List<Project> GetProjectsByWorkField(Guid workFieldID)
         {
 
-            using (UnitOfWork unitOfWork = new UnitOfWork(HamkariContext))
-            {
-                var target = unitOfWork.ProjectWorkFields.GetProjectWorkFieldsByWorkFieldWithProject(workFieldID);
+            
+                
+                var target = GetProjectWorkFieldsByWorkFieldWithProject(workFieldID);
                 var projects = new List<Project>();
                 foreach (var item in target)
                 {
@@ -109,10 +108,14 @@ namespace DAL.ProjectRepos
                     return null;
                 }
                 return projects;
-            }
+            
 
         }
+        private List<ProjectWorkField> GetProjectWorkFieldsByWorkFieldWithProject(Guid workFieldID)
+        {
 
+            return HamkariContext.ProjectWorkFields.Include(m => m.Project).Include(m => m.WorkField).Where<ProjectWorkField>(m => m.WorkField.id == workFieldID).ToList();
+        }
         public List<Project> GetProjectsByWorkfields(List<Guid> workfields)
         {
             var projectLists = new List<List<Project>>();

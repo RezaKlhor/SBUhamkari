@@ -9,14 +9,7 @@ namespace Models.Models
         {
         }
 
-        public EducationRecord(EducationDegree degree, EducationState educationState, EducationInstitute educationInstitute, Person person)
-        {
-            Degree = degree;
-            EducationState = educationState;
-            EducationInstitute = educationInstitute;
-            Person = person;
-        }
-
+       
 
 
         [DisplayName("مدرک تحصیلی")]
@@ -25,7 +18,8 @@ namespace Models.Models
         [DisplayName("وضعیت")]
         public EducationState EducationState { get; set; }
 
-        public EducationInstitute EducationInstitute { get; set; }
+        [DisplayName("نام موسسه آموزشی")]
+        public string EducationInstitueName { get; set; }
         public Person? Person { get; set; }
 
 

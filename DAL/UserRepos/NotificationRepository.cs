@@ -12,7 +12,7 @@ namespace DAL.UserRepos
 
         public List<Notification> GetNotificationsByReciever(Guid userID)
         {
-            return Find(m => m.Reciever.id == userID).ToList();
+            return HamkariContext.Notifications.Include(m=> m.Sender).Include(m=> m.Reciever).Where(m => m.Reciever.id == userID).ToList();
         }
     }
 }

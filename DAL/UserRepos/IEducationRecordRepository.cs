@@ -4,5 +4,6 @@
     {
         List<EducationRecord> GetEducationRecordsByPerson(Guid personID);
         EducationRecord GetCurrentEducationRecord(Guid personID);
+        EducationRecord GetEducationRecordByIdAndPersonId(Guid eduId, Guid personId);
     }
 }

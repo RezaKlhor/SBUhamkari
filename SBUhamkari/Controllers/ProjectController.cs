@@ -33,6 +33,21 @@ namespace SBUhamkari.Controllers
             _unitOfWork = unitOfWork;
         }
         //Get Api
+
+        [HttpGet("GetAllRoles")]
+        public ActionResult<Role> GetAllRoles()
+        {
+            var roles = _unitOfWork.Roles.GetAll();
+            if (roles.Count() != 0)
+            {
+                return Ok(roles);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpGet("GetAllProjects")]
         public ActionResult<ProjectReadDto> GetAllProjects()
         {
@@ -69,7 +84,36 @@ namespace SBUhamkari.Controllers
 
             if (project != null)
             {
-                return Ok( _mapper.Map<ProjectReadDto>(project));
+                return Ok(_mapper.Map<ProjectReadDto>(project));
+
+            }
+            else
+            {
+                return NotFound(Constants.ProjectNotFoundMessage);
+            }
+        }
+
+        [HttpGet("GetProjectsByFilter")]
+        public ActionResult<ProjectReadDto> GetProjectsByFilter([FromBody]ProjectFilterDto projectFilterDto)
+        {
+            var projects = _unitOfWork.Projects.GetProjectsByAll(projectFilterDto.WorkFieldsId,_unitOfWork.Roles.GetRole(projectFilterDto.ManagerRole).id,projectFilterDto.ProjectState);
+
+            if (projectFilterDto.NeedState==NeedState.NEED)
+            {
+                projects.Where(m => _unitOfWork.CoAnnouncements.GetCoAnnouncementsByProject(m.id) != null).ToList();
+            }
+            if (projects != null)
+            {
+                return Ok(
+                    projects.Select(m=> new ProjectReadDto()
+                    {
+                        ProjectState= m.ProjectState,
+                        Name=m.Name,
+                        ProjectExplain=m.ProjectExplain,
+                        id=m.id,
+                        CreateTime=m.CreateTime
+                    })
+                    );
 
             }
             else
@@ -125,9 +169,9 @@ namespace SBUhamkari.Controllers
         }
 
         [HttpGet("GetProjectsByManagerRole")]
-        public ActionResult<ProjectReadDto> GetProjectsByManagerType(Guid roleId)
+        public ActionResult<ProjectReadDto> GetProjectsByManagerType(string role)
         {
-            var projects = _unitOfWork.Projects.GetProjectsByManagerType(roleId);
+            var projects = _unitOfWork.Projects.GetProjectsByManagerType(_unitOfWork.Roles.GetAll().Where(m=> m.Name==role).FirstOrDefault().id);
 
             if (projects != null)
             {
@@ -217,7 +261,13 @@ namespace SBUhamkari.Controllers
 
             if (project != null)
             {
-                return _mapper.Map<ProjectReadDto>(project);
+                return Ok(project.Select(m=> 
+                new ProjectReadDto()
+                {
+                    ProjectState=m.ProjectState,
+                    Name=m.Name,
+                    ProjectExplain= m.ProjectExplain
+                }).ToList());
 
             }
             else

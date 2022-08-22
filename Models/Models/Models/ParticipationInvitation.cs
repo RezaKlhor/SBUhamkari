@@ -18,5 +18,5 @@
         public User InvitedUser { get; set; }
 
     }
-    public enum InvitationState { Accepted, Declined }
+    public enum InvitationState { Accepted, Declined,Pending }
 }
