@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO.TaDtos
 {
-    public record TaRequestReadDto
+    public record TaRequestReadDto :BaseDto
     {
         public Guid id { get; set; }
 

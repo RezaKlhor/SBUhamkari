@@ -16,10 +16,8 @@ namespace DAL.UserRepos
 
         public Faculty GetFacultyByUserId(Guid userID)
         {
-            UnitOfWork unitOfWork = new UnitOfWork(HamkariContext);
-            var user = unitOfWork.Users.Get(userID);
-            user.Faculty = new Faculty();
-            return user.Faculty;
+            
+            return HamkariContext.Faculties.Where(m=> m.id==HamkariContext.Users.Include(m=> m.Faculty).Where(m=> m.id==userID).FirstOrDefault().id).FirstOrDefault();
         }
     }
 }

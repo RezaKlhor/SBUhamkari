@@ -22,21 +22,38 @@ namespace SBUhamkari.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("{id}", Name = "GetTaReqById")]
+        public ActionResult GetTaReqById(Guid id)
+        {
+            var taReq = _unitOfWork.TArequests.GetWithProfessor(id);
+
+            if (taReq != null)
+            {
+                return Ok(new TaRequestReadDto() { CreateTime = taReq.CreateTime, DeleteTime = taReq.DeleteTime, id = taReq.id, Text = taReq.Text, Tittle = taReq.Tittle,ProfessorId=taReq.Professor.id });
+
+            }
+            else
+            {
+                return NotFound("خبر مورد نظر وجود ندارد");
+            }
+        }
+
         [Authorize(Roles ="Professor")]
         [HttpPost("CreateTaRequest")]
-        public ActionResult CreateTaRequest(TaRequestCreateDto taRequestCreateDto)
+        public ActionResult CreateTaRequest([FromBody]TaRequestCreateDto taRequestCreateDto)
         {
             var userId = GetUserId();
-            _unitOfWork.TArequests.Add(new Models.Models.TArequest()
+            var taReq = new Models.Models.TArequest()
             {
-                Tittle= taRequestCreateDto.Tittle,
-                Text= taRequestCreateDto.Text,
-                Professor= _unitOfWork.Professors.Get(userId)
-            });
+                Tittle = taRequestCreateDto.Tittle,
+                Text = taRequestCreateDto.Text,
+                Professor = _unitOfWork.Professors.Get(userId)
+            };
+            _unitOfWork.TArequests.Add(taReq);
             try
             {
                 _unitOfWork.Complete();
-                return Created("درخواست شما ثبت شد",null);
+                return CreatedAtRoute("GetTaReqById", new { id = taReq.id }, new TaRequestReadDto() { CreateTime = taReq.CreateTime, DeleteTime = taReq.DeleteTime, id = taReq.id, Text = taReq.Text, Tittle = taReq.Tittle, ProfessorId = taReq.Professor.id });
 
             }catch(Exception ex)
             {
@@ -54,7 +71,10 @@ namespace SBUhamkari.Controllers
                 ProfessorId = x.Professor.id,
                 Text = x.Text,
                 Tittle = x.Tittle,
-                id=x.id
+                id=x.id,
+                CreateTime=x.CreateTime,
+                DeleteTime=x.DeleteTime
+                
 
 
             }).ToList();
@@ -112,7 +132,7 @@ namespace SBUhamkari.Controllers
 
         [Authorize(Roles = Constants.StudentRole)]
         [HttpPost("CreateTaApplication")]
-        public ActionResult CreateTaApp(TaAppCreateDto taAppCreateDto)
+        public ActionResult CreateTaApp([FromBody]TaAppCreateDto taAppCreateDto)
         {
             var userId = GetUserId();
             _unitOfWork.TAapplications.Add(new Models.Models.TAapplication()
@@ -125,7 +145,7 @@ namespace SBUhamkari.Controllers
             try
             {
                 _unitOfWork.Complete();
-                return Ok("درخواست  شما ثبت شد");
+                return Created("",null);
 
             }
             catch (Exception ex)
@@ -147,7 +167,10 @@ namespace SBUhamkari.Controllers
                 StudentId=m.Student.id,
                 Resume=m.Resume,
                 TarequestId=requestId,
-                text=m.text
+                text=m.text,
+                id= m.id,
+                CreateTime=m.CreateTime
+                
             }).ToList());
         }
 

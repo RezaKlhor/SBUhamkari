@@ -35,6 +35,7 @@ namespace DAL
         IProjectWorkFieldRepository ProjectWorkFields { get; }
         IRoleRepository Roles { get; }
         IInvitationRepository Invitations  { get; }
+        IFeedbackRepository Feedbacks { get; }
 
 
 

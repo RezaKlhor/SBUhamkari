@@ -528,19 +528,19 @@ namespace SBUhamkari.Controllers
             {
                 case Constants.StudentRole:
                     var student = _mapper.Map<UserDto>(_unitOfWork.Students.Get(user.id));
-                    student.Faculty = _unitOfWork.FacultyRecords.GetFacultyByUserId(user.id).Name;
+                    student.Faculty = user.Faculty == null ? "" : user.Faculty.Name;
                     student.Role = user.Role.Name;
                     return student;
                     break;
                 case Constants.ProfessorRole:
                     var professor = _mapper.Map<UserDto>(_unitOfWork.Professors.Get(user.id));
-                    professor.Faculty = _unitOfWork.FacultyRecords.GetFacultyByUserId(user.id).Name;
+                    professor.Faculty = user.Faculty==null?"":user.Faculty.Name;
                     professor.Role = user.Role.Name;
                     return professor;
                     break;
                 case Constants.CompanyRole:
                     var compnay = _mapper.Map<UserDto>(_unitOfWork.Companies.Get(user.id));
-                    compnay.Faculty = _unitOfWork.FacultyRecords.GetFacultyByUserId(user.id).Name;
+                    compnay.Faculty = user.Faculty == null ? "" : user.Faculty.Name; 
                     compnay.Role = user.Role.Name;
                     return compnay;
                     break;

@@ -10,5 +10,6 @@ namespace DTO
     {
         public string Tittle { get; set; }
         public string Text { get; set; }
+        public List<ApplicationReadDto> Applications { get; set; }
     }
 }

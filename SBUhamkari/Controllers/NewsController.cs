@@ -23,6 +23,22 @@ namespace SBUhamkari.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("{id}",Name ="GetNewsById")] 
+        public ActionResult GetNewsById(Guid id)
+        {
+            var news = _unitOfWork.ProjectNews.Get(id);
+
+            if (news != null)
+            {
+                return Ok(new NewsReadDto() { CreateTime=news.CreateTime,DeleteTime=news.DeleteTime,id=news.id,Text=news.Text,Tittle=news.Tittle});
+
+            }
+            else
+            {
+                return NotFound("خبر مورد نظر وجود ندارد");
+            }
+        }
+
         [Authorize]
         [HttpPost("CreateNews")]
         public ActionResult CreateNews(NewsCreateDto newsCreateDto)
@@ -38,16 +54,25 @@ namespace SBUhamkari.Controllers
             {
                 return Unauthorized("فقط مدیر پژوهش قادر به ایجاد خبر می‌باشد");
             }
-            _unitOfWork.ProjectNews.Add(new ProjectNews()
+            var news = new ProjectNews()
             {
-               Project= project,
-               Text= newsCreateDto.Text,
-               Tittle= newsCreateDto.Tittle
-            });
+                Project = project,
+                Text = newsCreateDto.Text,
+                Tittle = newsCreateDto.Tittle
+            };
+            _unitOfWork.ProjectNews.Add(news);
             try
             {
                 _unitOfWork.Complete();
-                return Created("درخواست شما ثبت شد", null);
+               
+                return CreatedAtRoute("GetNewsById", new {id=news.id},new NewsReadDto()
+                {
+                    id=news.id,
+                    CreateTime=news.CreateTime,
+                    DeleteTime=news.DeleteTime,
+                    Text= news.Text,
+                    Tittle= news.Tittle
+                });
 
             }
             catch (Exception ex)
@@ -55,6 +80,35 @@ namespace SBUhamkari.Controllers
                 return StatusCode(503, new Response { Status = "database error", Message = ex.InnerException.Message });
             }
         }
+
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public ActionResult UpdateNews(Guid id,NewsUpdateDto newsUpdateDto)
+        {
+            var userId = GetUserId();
+            var news = _unitOfWork.ProjectNews.GetProjectNewsWithProject(id);
+            if (news == null)
+            {
+                return NotFound();
+            }
+            if (!_unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(userId).Select(m=> m.Project).Contains(news.Project))
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان ویرایش آگهی را دارد");
+            }
+
+
+
+            //how can we update?
+            news.Tittle = newsUpdateDto.Tittle;
+            news.Text = newsUpdateDto.Text;
+
+
+
+            _unitOfWork.Complete();
+            return NoContent();
+        }
+
 
         [HttpGet("GetAllNews")]
         public ActionResult GetAllNews()

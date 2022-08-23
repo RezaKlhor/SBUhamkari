@@ -93,7 +93,7 @@ namespace SBUhamkari.Controllers
             }
         }
 
-        [HttpGet("GetProjectsByFilter")]
+        [HttpPost("GetProjectsByFilter")]
         public ActionResult<ProjectReadDto> GetProjectsByFilter([FromBody]ProjectFilterDto projectFilterDto)
         {
             
@@ -255,7 +255,7 @@ namespace SBUhamkari.Controllers
 
         }
 
-        [HttpGet("GetProjectsByWorkFields")]
+        [HttpPost("GetProjectsByWorkFields")]
         public ActionResult<ProjectReadDto> GetProjectsByWorkFields(List<Guid> workFieldsId)
         {
             var project = _unitOfWork.Projects.GetProjectsByWorkfields(workFieldsId);

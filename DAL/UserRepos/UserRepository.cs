@@ -19,12 +19,12 @@ namespace DAL.UserRepos
 
         public User GetUserByUsername(string username)
         {
-            return HamkariContext.Users.Include(m=>m.Role).SingleOrDefault(m => m.Username == username);
+            return HamkariContext.Users.Include(m=>m.Role).Include(m => m.Faculty).SingleOrDefault(m => m.Username == username);
         }
 
         public User GetUserByUsernameWithRole(string username)
         {
-            return HamkariContext.Users.Include(m=>m.Role).SingleOrDefault(m => m.Username == username);
+            return HamkariContext.Users.Include(m=> m.Faculty).Include(m=> m.Role).SingleOrDefault(m => m.Username == username);
         }
 
         public List<User> GetUsersByProject(Guid projectId)
@@ -37,13 +37,13 @@ namespace DAL.UserRepos
 
         public User GetUsersByIdWithRole(Guid id)
         {
-            return HamkariContext.Users.Include(m => m.Role).Where(m => m.id == id).FirstOrDefault();
+            return HamkariContext.Users.Include(m => m.Role).Include(m=> m.Faculty).Where(m => m.id == id).FirstOrDefault();
         }
 
         
         public List<User> GetAllUsersWithRole()
         {
-            return HamkariContext.Users.Include(m => m.Role).ToList();
+            return HamkariContext.Users.Include(m => m.Role).Include(m=> m.Faculty).ToList();
         }
     }
 }

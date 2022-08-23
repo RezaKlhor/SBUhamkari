@@ -22,6 +22,23 @@ namespace SBUhamkari.Controllers
             _unitOfWork = unitOfWork;
         }
 
+
+        [HttpGet("{id}", Name = "GetAnnounceById")]
+        public ActionResult GetAnnounceById(Guid id)
+        {
+            var ann = _unitOfWork.CoAnnouncements.Get(id);
+
+            if (ann != null)
+            {
+                return Ok(new AnnouncementReadDto() { CreateTime = ann.CreateTime, DeleteTime = ann.DeleteTime, id = ann.id, Text = ann.Text, Tittle = ann.Tittle });
+
+            }
+            else
+            {
+                return NotFound("آگهی مورد نظر وجود ندارد");
+            }
+        }
+
         [Authorize]
         [HttpPost("CreateCoAnnouncement")]
         public ActionResult CreateCoAnnouncement(AnnouncementCreateDto announcementCreateDto)
@@ -37,17 +54,25 @@ namespace SBUhamkari.Controllers
             {
                 return Unauthorized("فقط مدیر پژوهش قادر به ایجاد آگهی می‌باشد");
             }
-            _unitOfWork.CoAnnouncements.Add(new CoAnnouncement()
+            var ann = new CoAnnouncement()
             {
                 Creator = projectMnager,
-                State= State.Open,
-                Text=announcementCreateDto.Text,
-                Tittle= announcementCreateDto.Tittle,
-            });
+                State = State.Open,
+                Text = announcementCreateDto.Text,
+                Tittle = announcementCreateDto.Tittle,
+            };
+            _unitOfWork.CoAnnouncements.Add(ann);
             try
             {
                 _unitOfWork.Complete();
-                return Created("درخواست شما ثبت شد", null);
+                return CreatedAtRoute("GetAnnounceById", new { id = ann.id }, new AnnouncementReadDto()
+                {
+                    id = ann.id,
+                    CreateTime = ann.CreateTime,
+                    DeleteTime = ann.DeleteTime,
+                    Text = ann.Text,
+                    Tittle = ann.Tittle
+                });
 
             }
             catch (Exception ex)
@@ -70,11 +95,12 @@ namespace SBUhamkari.Controllers
             {
                 return Unauthorized("فقط مدیر پژوهش امکان ویرایش آگهی را دارد");
             }
-           
-            
+
+
 
             //how can we update?
-            
+            announc.Tittle = announcementUpdateDto.Tittle;
+            announc.Text = announcementUpdateDto.Text;
 
 
 
@@ -83,11 +109,12 @@ namespace SBUhamkari.Controllers
         }
 
 
-        [HttpGet("GetAnnouncementsForProject")]
-        public ActionResult GetTaAppsForRequest(Guid projectId)
+        [HttpGet("GetAnnouncementsForProjectWithApplications")]
+        public ActionResult GetAnnouncementsForProjectWithApplications(Guid projectId)
         {
             
             var coAnnounce = _unitOfWork.CoAnnouncements.GetProjectsCoAnnouncement(projectId);
+            
             if (coAnnounce == null)
             {
                 return NotFound("آگهی ثبت نشده است");
@@ -98,9 +125,15 @@ namespace SBUhamkari.Controllers
                 DeleteTime = m.DeleteTime,
                 id = m.id,
                 Text = m.Text,
-                Tittle = m.Tittle
-            }).ToList();
-            if (annoncs.Count==0)
+                Tittle = m.Tittle,
+                Applications = _unitOfWork.CoApplications.GetCoApplicationsByAnnouncementWithApplicant(m.id).Select(m => new ApplicationReadDto()
+                {
+                    CV = m.CV,
+                    Text = m.Text,
+                    UserId = m.Applicant.id
+                }).ToList()
+            }); 
+            if (annoncs.Count() ==0)
             {
                 return NotFound("آگهی ای یافت نشد");
             }
@@ -122,7 +155,13 @@ namespace SBUhamkari.Controllers
                 DeleteTime = m.DeleteTime,
                 id = m.id,
                 Text = m.Text,
-                Tittle = m.Tittle
+                Tittle = m.Tittle,
+                Applications = _unitOfWork.CoApplications.GetCoApplicationsByAnnouncementWithApplicant(m.id).Select(m => new ApplicationReadDto()
+                {
+                    CV = m.CV,
+                    Text = m.Text,
+                    UserId = m.Applicant.id
+                }).ToList()
             }).ToList();
             if (anncs.Count==0)
             {
@@ -130,7 +169,7 @@ namespace SBUhamkari.Controllers
             }
             return Ok(anncs);
         }
-
+        
 
         [Authorize]
         [HttpPost("Apply")]
