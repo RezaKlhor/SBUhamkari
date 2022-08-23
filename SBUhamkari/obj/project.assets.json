@@ -1750,6 +1750,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "DTO": "1.0.0",
           "Models": "1.0.0"
         },
         "compile": {

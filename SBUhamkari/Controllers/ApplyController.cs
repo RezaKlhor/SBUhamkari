@@ -56,6 +56,33 @@ namespace SBUhamkari.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPut("{id}")]
+        public ActionResult UpdateAnnouncemnet(Guid id, AnnouncementUpdateDto announcementUpdateDto)
+        {
+            var userId = GetUserId();
+            var announc = _unitOfWork.CoAnnouncements.GetCoAnnouncementByIdWithProjManager(id);
+            if (announc==null)
+            {
+                return NotFound();
+            }
+            if (!_unitOfWork.ProjectManagers.GetProjectManagersByManagerWithProject(userId).Contains(announc.Creator))
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان ویرایش آگهی را دارد");
+            }
+           
+            
+
+            //how can we update?
+            
+
+
+
+            _unitOfWork.Complete();
+            return NoContent();
+        }
+
+
         [HttpGet("GetAnnouncementsForProject")]
         public ActionResult GetTaAppsForRequest(Guid projectId)
         {

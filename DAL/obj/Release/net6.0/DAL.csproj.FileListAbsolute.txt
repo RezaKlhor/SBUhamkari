@@ -13,3 +13,5 @@ C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Release\net6.0\DAL.dll
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Release\net6.0\refint\DAL.dll
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Release\net6.0\DAL.pdb
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\obj\Release\net6.0\ref\DAL.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\bin\Release\net6.0\DTO.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DAL\bin\Release\net6.0\DTO.pdb

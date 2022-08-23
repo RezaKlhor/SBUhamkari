@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DTO.ProjectDtos;
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace DAL.ProjectRepos
@@ -15,12 +16,53 @@ namespace DAL.ProjectRepos
             return HamkariContext.Projects.SingleOrDefault(x => x.Name == name);
         }
 
-        public List<Project> GetProjectsByAll(List<Guid> workFieldsID, Guid ManagerRoleID, ProjectState projectState)
+        public List<Project> GetProjectsByAll(List<Guid> workFieldsID, string ManagerRole
+            , ProjectStateFilter projectState)
         {
+            var byWorkFields = new List<Project>();
+            var byManagerRole= new List<Project>();
+            var byProjectState = new List<Project>();
+            if (workFieldsID.Count==0)
+            {
+                byWorkFields = HamkariContext.Projects.ToList();
+            }
+            else
+            {
+                byWorkFields = GetProjectsByWorkfields(workFieldsID);
+            }
+
+            if (ManagerRole.ToString().Length == 0)
+            {
+                byManagerRole = HamkariContext.Projects.ToList();
+            }
+            else
+            {
+                byManagerRole = GetProjectsByManagerType(HamkariContext.Roles.Where(m=> m.Name==ManagerRole).FirstOrDefault().id);
+            }
+
+            if (projectState == ProjectStateFilter.DONTCARE)
+            {
+                byProjectState = HamkariContext.Projects.ToList();
+            }
+            else
+            {
+                if (projectState==ProjectStateFilter.Ongoing)
+                {
+                byProjectState = GetProjectsByProjectState(ProjectState.Ongoing);
+
+                }
+                else
+                {
+                    byProjectState = GetProjectsByProjectState(ProjectState.Ended);
+                }
+            }
+
+
+
             var projects=Tools<Project>.FindCommon(new List<List<Project>> {
-                GetProjectsByWorkfields(workFieldsID),
-                GetProjectsByManagerType(ManagerRoleID),
-                GetProjectsByProjectState(projectState)
+                byWorkFields,
+               byManagerRole,
+                byProjectState
 
             });
             if (projects==null)

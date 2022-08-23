@@ -6,6 +6,7 @@
         List<CoAnnouncement> GetCoAnnouncementsByWorkField(Guid WorkFieldID);
         List<CoAnnouncement> GetCoAnnouncementsByFollow(Guid userID);
         List<CoAnnouncement> GetCoAnnouncementsByProject(Guid projectID);
+        CoAnnouncement GetCoAnnouncementByIdWithProjManager(Guid id);
 
 
 

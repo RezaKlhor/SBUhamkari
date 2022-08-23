@@ -8,12 +8,25 @@
     ".NETCoreApp,Version=v6.0": {
       "DAL/1.0.0": {
         "dependencies": {
+          "DTO": "1.0.0",
           "Models": "1.0.0"
         },
         "runtime": {
           "DAL.dll": {}
         }
       },
+      "AutoMapper/11.0.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.0.1.0"
+          }
+        }
+      },
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.EntityFrameworkCore/6.0.7": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": "6.0.7",
@@ -143,6 +156,15 @@
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
+      "DTO/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "DTO.dll": {}
+        }
+      },
       "Models/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.7"
@@ -158,6 +180,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/11.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WIadGC1pIwbnyTubvI577p3F++Bsj9q2Q3OaAc1I0QS+JhupN1xkdrPBhI9bPIeg63zM81tZplUNYkqU1HE5jQ==",
+      "path": "automapper/11.0.1",
+      "hashPath": "automapper.11.0.1.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/6.0.7": {
       "type": "package",
@@ -256,6 +292,11 @@
       "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
       "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    },
+    "DTO/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Models/1.0.0": {
       "type": "project",

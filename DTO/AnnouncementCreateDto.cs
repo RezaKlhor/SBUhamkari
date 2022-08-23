@@ -10,7 +10,7 @@ namespace DTO
     {
         public string Tittle { get; set; }
 
-      
+
         public string Text { get; set; }
         public Guid projectId { get; set; }
     }

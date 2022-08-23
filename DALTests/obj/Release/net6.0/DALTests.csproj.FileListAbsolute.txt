@@ -143,3 +143,6 @@ C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Release\net6.0\ref
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Release\net6.0\DALTests.pdb
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Release\net6.0\DALTests.genruntimeconfig.cache
 C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\obj\Release\net6.0\ref\DALTests.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\bin\Release\net6.0\AutoMapper.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\bin\Release\net6.0\DTO.dll
+C:\Users\rezak\source\repos\RezaKlhor\SBUhamkari\DALTests\bin\Release\net6.0\DTO.pdb

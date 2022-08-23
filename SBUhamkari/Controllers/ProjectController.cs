@@ -96,7 +96,8 @@ namespace SBUhamkari.Controllers
         [HttpGet("GetProjectsByFilter")]
         public ActionResult<ProjectReadDto> GetProjectsByFilter([FromBody]ProjectFilterDto projectFilterDto)
         {
-            var projects = _unitOfWork.Projects.GetProjectsByAll(projectFilterDto.WorkFieldsId,_unitOfWork.Roles.GetRole(projectFilterDto.ManagerRole).id,projectFilterDto.ProjectState);
+            
+            var projects = _unitOfWork.Projects.GetProjectsByAll(projectFilterDto.WorkFieldsId,projectFilterDto.ManagerRole,projectFilterDto.ProjectState);
 
             if (projectFilterDto.NeedState==NeedState.NEED)
             {
@@ -288,6 +289,7 @@ namespace SBUhamkari.Controllers
             var project = _mapper.Map<Project>(projectCreateDto);
             _unitOfWork.Projects.Add(project);
             _unitOfWork.ProjectManagers.Add(new ProjectManager { Project = project, User = _unitOfWork.Users.Get(userId) });
+            _unitOfWork.ProjectParticapations.Add(new ProjectParticapation() { Project=project,User=_unitOfWork.Users.Get(userId) });
             _unitOfWork.Complete();
             var projectReadDto = _mapper.Map<ProjectReadDto>(project);
             return CreatedAtRoute("GetProjectsById", new {id=projectReadDto.id},projectReadDto);

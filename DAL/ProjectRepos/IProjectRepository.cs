@@ -1,4 +1,6 @@
-﻿namespace DAL.ProjectRepos
+﻿using DTO.ProjectDtos;
+
+namespace DAL.ProjectRepos
 {
     public interface IProjectRepository : IRepository<Project>
     {
@@ -10,7 +12,7 @@
         List<Project> GetProjectsByProjectState(ProjectState projectState);
         List<Project> GetProjectsInSavedBox(Guid userID);
         List<Project> GetProjectsByManagerType(Guid roleID);
-        List<Project> GetProjectsByAll(List<Guid> workFieldsID, Guid ManagerRoleID, ProjectState projectState);
+        List<Project> GetProjectsByAll(List<Guid> workFieldsID, string ManagerRole, ProjectStateFilter projectState);
         Project GetProjectByName(string name);
 
 

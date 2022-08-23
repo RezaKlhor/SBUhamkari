@@ -1191,6 +1191,7 @@
       },
       "DAL/1.0.0": {
         "dependencies": {
+          "DTO": "1.0.0",
           "Models": "1.0.0"
         },
         "runtime": {

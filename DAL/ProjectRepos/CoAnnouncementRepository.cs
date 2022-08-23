@@ -10,6 +10,11 @@ namespace DAL.ProjectRepos
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
+        public CoAnnouncement GetCoAnnouncementByIdWithProjManager(Guid id)
+        {
+            return HamkariContext.CoAnnouncements.Include(m => m.Creator).Where(m => m.id == id).FirstOrDefault();
+        }
+
         public List<CoAnnouncement> GetCoAnnouncementsByFollow(Guid userID)
         {
             var projectAnnouncements = new List<CoAnnouncement>();

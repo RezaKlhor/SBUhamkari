@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "sJlks1x6eVmRqgW8dtcLvJ9+dgpNjTl4xc0AnW6kkxS0NtOKSDx0AolAUxCNoHmkJFS2MZt611SScsUPTDnRZA==",
+  "dgSpecHash": "itYqM8BKtPbc2g87tnETv+UJAjrviM17cG8vod3Jjzu4ootuyog3ZDFPcRFH3341RXwvEOLQy/WYmHQ6PvJyBg==",
   "success": true,
   "projectFilePath": "C:\\Users\\rezak\\source\\repos\\RezaKlhor\\SBUhamkari\\DALTests\\DALTests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\rezak\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\rezak\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\rezak\\.nuget\\packages\\microsoft.codecoverage\\17.2.0\\microsoft.codecoverage.17.2.0.nupkg.sha512",
-    "C:\\Users\\rezak\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\rezak\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\rezak\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\rezak\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\rezak\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.7\\microsoft.entityframeworkcore.6.0.7.nupkg.sha512",
