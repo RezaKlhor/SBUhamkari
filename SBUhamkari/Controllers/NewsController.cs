@@ -30,7 +30,7 @@ namespace SBUhamkari.Controllers
 
             if (news != null)
             {
-                return Ok(new NewsReadDto() { CreateTime=news.CreateTime,DeleteTime=news.DeleteTime,id=news.id,Text=news.Text,Tittle=news.Tittle});
+                return Ok(new CoAnnouncementReadDto() { CreateTime=news.CreateTime,DeleteTime=news.DeleteTime,id=news.id,Text=news.Text,Tittle=news.Tittle});
 
             }
             else
@@ -65,7 +65,7 @@ namespace SBUhamkari.Controllers
             {
                 _unitOfWork.Complete();
                
-                return CreatedAtRoute("GetNewsById", new {id=news.id},new NewsReadDto()
+                return CreatedAtRoute("GetNewsById", new {id=news.id},new CoAnnouncementReadDto()
                 {
                     id=news.id,
                     CreateTime=news.CreateTime,

@@ -48,6 +48,16 @@ namespace SBUhamkari.Controllers
             }
         }
 
+
+
+        
+
+
+
+
+
+
+
         [HttpGet("GetAllProjects")]
         public ActionResult<ProjectReadDto> GetAllProjects()
         {
@@ -96,13 +106,23 @@ namespace SBUhamkari.Controllers
         [HttpPost("GetProjectsByFilter")]
         public ActionResult<ProjectReadDto> GetProjectsByFilter([FromBody]ProjectFilterDto projectFilterDto)
         {
-            
-            var projects = _unitOfWork.Projects.GetProjectsByAll(projectFilterDto.WorkFieldsId,projectFilterDto.ManagerRole,projectFilterDto.ProjectState);
 
+            var projects = _unitOfWork.Projects.GetProjectsByAll(projectFilterDto.WorkFieldsId, projectFilterDto.ManagerRole, projectFilterDto.ProjectState);
+            if (projects==null)
+            {
+
+                return NotFound(Constants.ProjectNotFoundMessage);
+            }
+          
+            var needProjects = projects.Where(m => _unitOfWork.CoAnnouncements.GetCoAnnouncementsByProject(m.id).Count != 0).ToList();
             if (projectFilterDto.NeedState==NeedState.NEED)
             {
-                projects.Where(m => _unitOfWork.CoAnnouncements.GetCoAnnouncementsByProject(m.id) != null).ToList();
+                projects = needProjects;
             }
+            else if (projectFilterDto.NeedState==NeedState.DONTNEED)
+            {
+                projects=projects.Where(m=> !needProjects.Contains(m)).ToList();
+            } 
             if (projects != null)
             {
                 return Ok(
@@ -375,6 +395,64 @@ namespace SBUhamkari.Controllers
 
             return NoContent();
         }
+
+
+        [Authorize]
+        [HttpPost("AddFileToProject")]
+        public ActionResult AddFileToProject(ProjectFileCreateDto projectFileCreateDto)
+        {
+            var userId = GetUserId();
+            var project = _unitOfWork.Projects.Get(projectFileCreateDto.projectId);
+            var projectManager = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(userId, projectFileCreateDto.projectId);
+            if (projectManager == null)
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان ویرایش اطلاعات را دارد");
+            }
+            if (project == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                _unitOfWork.Files.Add(new ProjectFile { Project = project, bytes = projectFileCreateDto.File });
+                _unitOfWork.Complete();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(503, new Response { Status = "database error", Message = ex.InnerException.Message });
+            }
+
+        }
+
+        [Authorize]
+        [HttpGet("GetProjectFile")]
+        public ActionResult GetProjectFile(Guid projectId)
+        {
+            var userId = GetUserId();
+            var project = _unitOfWork.Projects.Get(projectId);
+            var projectManager = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(userId, projectId);
+            if (projectManager == null)
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان ویرایش اطلاعات را دارد");
+            }
+            if (project == null)
+            {
+                return NotFound();
+            }
+            var files = _unitOfWork.Files.GetProjectFilesByProject(projectId);
+            if (files == null)
+            {
+                return NotFound();
+            }
+            if (files.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(files.Select(m => new ProjectFileReadDto { CreateTime = m.CreateTime, DeleteTime = m.DeleteTime, File = m.bytes, id = m.id }));
+
+        }
+
 
         private Guid GetUserId()
         {

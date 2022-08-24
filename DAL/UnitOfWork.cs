@@ -95,6 +95,7 @@ namespace DAL
         public IInvitationRepository Invitations { get;private set; }
 
         public IFeedbackRepository Feedbacks { get; private set; }
+        public IFileRepository Files { get; private set; }
 
         public int Complete()
         {

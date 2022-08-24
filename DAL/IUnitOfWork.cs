@@ -36,6 +36,7 @@ namespace DAL
         IRoleRepository Roles { get; }
         IInvitationRepository Invitations  { get; }
         IFeedbackRepository Feedbacks { get; }
+        IFileRepository Files { get; }
 
 
 

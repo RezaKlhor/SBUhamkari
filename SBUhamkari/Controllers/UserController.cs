@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DAL;
+using DTO.ProjectDtos;
 using DTO.TaDtos;
 using DTO.UserDtos;
 using Microsoft.AspNetCore.Authorization;
@@ -514,6 +515,76 @@ namespace SBUhamkari.Controllers
             }
             return Ok(false);
         }
+        [Authorize]
+        [HttpGet("GetMyWorldNews")]
+        public ActionResult GetMyWorldNews()
+        {
+            //var projects = new List<Project>();
+            var news = new List<ProjectNews>();
+            var userId = GetUserId();
+            var follows = _unitOfWork.UserFollowerFollowings.GetFollowingsByFollowerID(userId).Select(m => _unitOfWork.Users.Get(m.id)).ToList();
+            foreach (var item in follows)
+            {
+                var projects = _unitOfWork.ProjectParticapations.GetProjectParticapationsByUserWithProject(userId).Select(m => m.Project).ToList();
+                if (projects == null)
+                {
+                    continue;
+                }
+                foreach (var item2 in projects)
+                {
+                    news.AddRange(_unitOfWork.ProjectNews.GetProjectNewsByProject(item2.id));
+                }
+            }
+            //var news = projects.Select(m => _unitOfWork.ProjectNews.GetProjectNewsByProject(m.id)).ToList();
+            //var annons = projects.Select(m=> _unitOfWork.CoAnnouncements.GetCoAnnouncementsByProject(m.id)).ToList();
+            news = news.DistinctBy(m => m.id).ToList();
+            return Ok(news.Select(m => new CoAnnouncementReadDto()
+            {
+                CreateTime = m.CreateTime,
+                DeleteTime = m.DeleteTime,
+                id = m.id,
+                Text = m.Text,
+                Tittle = m.Tittle
+            }));
+
+        }
+
+
+        [Authorize]
+        [HttpGet("GetMyWorldAnnounce")]
+        public ActionResult GetMyWorldAnnounce()
+        {
+            //var projects = new List<Project>();
+            var anns = new List<CoAnnouncement>();
+            var userId = GetUserId();
+            var follows = _unitOfWork.UserFollowerFollowings.GetFollowingsByFollowerID(userId).Select(m => _unitOfWork.Users.Get(m.id)).ToList();
+            foreach (var item in follows)
+            {
+                var projects = _unitOfWork.ProjectParticapations.GetProjectParticapationsByUserWithProject(userId).Select(m => m.Project).ToList();
+                if (projects == null)
+                {
+                    continue;
+                }
+                foreach (var item2 in projects)
+                {
+                    anns.AddRange(_unitOfWork.CoAnnouncements.GetCoAnnouncementsByProject(item2.id));
+                }
+            }
+            //var news = projects.Select(m => _unitOfWork.ProjectNews.GetProjectNewsByProject(m.id)).ToList();
+            //var annons = projects.Select(m=> _unitOfWork.CoAnnouncements.GetCoAnnouncementsByProject(m.id)).ToList();
+            anns = anns.DistinctBy(m => m.id).ToList();
+            return Ok(anns.Select(m => new CoAnnouncementReadDto()
+            {
+                CreateTime = m.CreateTime,
+                DeleteTime = m.DeleteTime,
+                id = m.id,
+                Text = m.Text,
+                Tittle = m.Tittle
+            }));
+
+        }
+
+
 
         private Guid GetUserId()
         {

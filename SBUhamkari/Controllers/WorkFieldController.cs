@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using DAL;
 using DTO.WorkFieldDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace SBUhamkari.Controllers
 {
@@ -155,22 +158,41 @@ namespace SBUhamkari.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpPost("AddWorkFieldToPerson")]
-        public ActionResult AddWorkFieldToPerson(Guid personId,Guid workId)
+        public ActionResult AddWorkFieldToPerson(Guid workId)
         {
-
+            var personId = GetUserId();
             _unitOfWork.PersonWorkFields.Add(new PersonWorkField() { Person = _unitOfWork.People.Get(personId), WorkField = _unitOfWork.WorkFields.Get(workId) });
             _unitOfWork.Complete();
             return Ok("با موفقیت اضافه شد");
         }
 
+        [Authorize]
         [HttpPost("AddWorkFieldToProject")]
         public ActionResult AddWorkFieldToProject(Guid projectId, Guid workId)
         {
-
+            var userId = GetUserId();
+            var project = _unitOfWork.Projects.Get(projectId);
+            var projectManager = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(userId, projectId);
+            if (projectManager == null)
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان ویرایش اطلاعات را دارد");
+            }
+            if (project == null)
+            {
+                return NotFound();
+            }
             _unitOfWork.ProjectWorkFields.Add(new ProjectWorkField() { Project = _unitOfWork.Projects.Get(projectId), WorkField = _unitOfWork.WorkFields.Get(workId) });
             _unitOfWork.Complete();
             return Ok("با موفقیت اضافه شد");
+        }
+        private Guid GetUserId()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            IEnumerable<Claim> claims = identity.Claims;
+            var userId = new Guid(claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value);
+            return userId;
         }
     }
 }

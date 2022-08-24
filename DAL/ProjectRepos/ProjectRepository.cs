@@ -196,5 +196,16 @@ namespace DAL.ProjectRepos
                
         }
 
+       
+
+        public List<ProjectNews> GetProjectNewsByFolloweId(Guid followerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CoAnnouncement> GetCoAnnouncementsByFolloweId(Guid followerId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

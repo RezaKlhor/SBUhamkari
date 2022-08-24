@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DTO.ProjectDtos
 {
-    public record NewsReadDto : BaseDto
+    public record CoAnnouncementReadDto : BaseDto
     {
         [Required]
         public string Tittle { get; set; }
