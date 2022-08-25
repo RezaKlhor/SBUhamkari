@@ -163,6 +163,12 @@ namespace SBUhamkari.Controllers
             {
                 return Unauthorized("فقط مدیر پژوهش امکان ویرایش اطلاعات را دارد");
             }
+            var existCeck = _unitOfWork.ProjectParticapations.GetProjectParticapationsByProjectWithUser(projectId).Where(m => m.User.id == userId).FirstOrDefault();
+            if (existCeck!=null)
+            {
+                return BadRequest("این کاربر قبلا به پژوهش اضافه شده است");
+            }
+
             try
             {
                 var projectParticipation = new ProjectParticapation
@@ -270,7 +276,7 @@ namespace SBUhamkari.Controllers
                 default:
                     return null;
             }
-            //how can we update?
+            
 
             _unitOfWork.Complete();
             return NoContent();

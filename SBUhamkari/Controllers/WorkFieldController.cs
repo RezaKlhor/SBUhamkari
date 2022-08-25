@@ -75,7 +75,7 @@ namespace SBUhamkari.Controllers
                 return NotFound();
             }
 
-            //how can we update?
+           
             work.Name = workRead.Name;
             _unitOfWork.Complete();
             return NoContent();

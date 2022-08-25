@@ -11,9 +11,9 @@ namespace DAL.ProjectRepos
         }
         public HamkariContext HamkariContext { get { return Context as HamkariContext; } }
 
-        public Project GetProjectByName(string name)
+        public List<Project> GetProjectByName(string name)
         {
-            return HamkariContext.Projects.SingleOrDefault(x => x.Name == name);
+            return HamkariContext.Projects.Where(m=> m.Name==name).ToList();
         }
 
         public List<Project> GetProjectsByAll(List<Guid> workFieldsID, string ManagerRole

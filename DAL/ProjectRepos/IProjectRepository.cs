@@ -13,7 +13,7 @@ namespace DAL.ProjectRepos
         List<Project> GetProjectsInSavedBox(Guid userID);
         List<Project> GetProjectsByManagerType(Guid roleID);
         List<Project> GetProjectsByAll(List<Guid> workFieldsID, string ManagerRole, ProjectStateFilter projectState);
-        Project GetProjectByName(string name);
+       List< Project> GetProjectByName(string name);
         List<CoAnnouncement> GetCoAnnouncementsByFolloweId(Guid followerId);
         List<ProjectNews> GetProjectNewsByFolloweId(Guid followerId);
 

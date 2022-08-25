@@ -15,13 +15,13 @@ namespace DAL.Tests
             database = new HamkariContext(options.Options);
         }
 
-        [TestMethod()]
-        public void RemoveTest()
-        {
-            UnitOfWork unitOfWork = new UnitOfWork(database);
-            unitOfWork.Projects.Remove(unitOfWork.Projects.GetProjectByName("گلستان"));
-            unitOfWork.Complete();
+        //[TestMethod()]
+        //public void RemoveTest()
+        //{
+        //    UnitOfWork unitOfWork = new UnitOfWork(database);
+        //    unitOfWork.Projects.Remove(unitOfWork.Projects.GetProjectByName("گلستان"));
+        //    unitOfWork.Complete();
 
-        }
+        //}
     }
 }

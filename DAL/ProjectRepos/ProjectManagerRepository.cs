@@ -27,5 +27,10 @@ namespace DAL.ProjectRepos
             var projectmanager = HamkariContext.ProjectManagers.Include(m=> m.User).Where(m=>m.User.id==managerID).ToList();
             return HamkariContext.ProjectManagers.Where(m => m.User.id == managerID).Include(m => m.Project).ToList();
         }
+
+        public List<User> GetProjectManagersByProject(Guid projectId)
+        {
+            return HamkariContext.ProjectManagers.Include(m => m.User).Include(m => m.Project).Where(m => m.Project.id == projectId).Select(m => m.User).ToList();
+        }
     }
 }

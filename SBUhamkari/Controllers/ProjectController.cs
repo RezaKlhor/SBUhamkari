@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using DAL;
 using DTO.ProjectDtos;
+using DTO.UserDtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -71,7 +73,7 @@ namespace SBUhamkari.Controllers
                 return NotFound();
             }
         }
-        [HttpGet("{id}",Name ="GetProjectsById")] // this should be get project
+        [HttpGet("{id}",Name ="GetProjectsById")] 
         public ActionResult<ProjectReadDto> GetProjectById(Guid id)
         {
             var project = _unitOfWork.Projects.Get(id);
@@ -92,15 +94,17 @@ namespace SBUhamkari.Controllers
         {
             var project = _unitOfWork.Projects.GetProjectByName(name);
 
-            if (project != null)
+            
+            if (project==null)
             {
-                return Ok(_mapper.Map<ProjectReadDto>(project));
+                return NotFound(Constants.ProjectNotFoundMessage);
 
             }
-            else
+            if (project.Count==0)
             {
                 return NotFound(Constants.ProjectNotFoundMessage);
             }
+            return Ok(_mapper.Map<List<ProjectReadDto>>(project));
         }
 
         [HttpPost("GetProjectsByFilter")]
@@ -303,16 +307,22 @@ namespace SBUhamkari.Controllers
         [HttpPost("ProjectCreate")]
         public ActionResult<ProjectReadDto> ProjectCreate(ProjectCreateDto projectCreateDto)
         {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            IEnumerable<Claim> claims = identity.Claims;
-            var userId = new Guid(claims.Where(m => m.Type == JwtRegisteredClaimNames.Jti).First().Value);
+            var userId = GetUserId();
             var project = _mapper.Map<Project>(projectCreateDto);
             _unitOfWork.Projects.Add(project);
             _unitOfWork.ProjectManagers.Add(new ProjectManager { Project = project, User = _unitOfWork.Users.Get(userId) });
             _unitOfWork.ProjectParticapations.Add(new ProjectParticapation() { Project=project,User=_unitOfWork.Users.Get(userId) });
-            _unitOfWork.Complete();
-            var projectReadDto = _mapper.Map<ProjectReadDto>(project);
-            return CreatedAtRoute("GetProjectsById", new {id=projectReadDto.id},projectReadDto);
+            try
+            {
+                _unitOfWork.Complete();
+                var projectReadDto = _mapper.Map<ProjectReadDto>(project);
+                return CreatedAtRoute("GetProjectsById", new { id = projectReadDto.id }, projectReadDto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(503, new Response { Status = "database error", Message = ex.InnerException.Message });
+            }
+            
         }
         //end of post api
 
@@ -377,7 +387,7 @@ namespace SBUhamkari.Controllers
 
         [Authorize]
         [HttpDelete("{id}")]
-        public ActionResult DeleteCommand(Guid id)
+        public ActionResult DeleteProject(Guid id)
         {
             var userId = GetUserId();
             var project = _unitOfWork.Projects.Get(id);
@@ -425,7 +435,73 @@ namespace SBUhamkari.Controllers
 
         }
 
+
         [Authorize]
+        [HttpPost("AddManagerToProject")]
+        public ActionResult AddManagerToProject(Guid projectId,Guid userId )
+        {
+            var currentUserId = GetUserId();
+            var project = _unitOfWork.Projects.Get(projectId);
+            var projectManager = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(currentUserId,projectId);
+            if (projectManager == null)
+            {
+                return Unauthorized("فقط مدیر پژوهش امکان اضافه کردن مدیر را دارد");
+            }
+            if (project == null)
+            {
+                return NotFound("پژوهش مورد نظر وجود ندارد");
+            }
+            var managerExist = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(userId, projectId);
+            if (managerExist!=null)
+            {
+                return BadRequest("این کاربر مدیر پژوهش است");
+            }
+            var newManager = _unitOfWork.Users.Get(userId);
+            try
+            {
+
+                _unitOfWork.ProjectManagers.Add(new ProjectManager()
+                {
+                    Project = project,
+                    User=newManager
+                });
+                _unitOfWork.Complete();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(503, new Response { Status = "database error", Message = ex.InnerException.Message });
+            }
+
+        }
+
+
+
+       
+        [HttpGet("GetProjectManagers")]
+        public ActionResult GetProjectManagers(Guid projectId)
+        {
+            var project= _unitOfWork.Projects.Get(projectId);
+            if (project == null)
+            {
+                return NotFound();
+            }
+            var managers = _unitOfWork.ProjectManagers.GetProjectManagersByProject(projectId);
+            if (managers == null)
+            {
+                return NotFound();
+            }
+            if (managers.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(_mapper.Map<List<UserDto>>(managers));
+
+        }
+
+
+
+        
         [HttpGet("GetProjectFile")]
         public ActionResult GetProjectFile(Guid projectId)
         {
