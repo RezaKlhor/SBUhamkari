@@ -242,6 +242,7 @@ namespace SBUhamkari.Controllers
             user.Avatar = Encoding.ASCII.GetBytes(userUpdateDto.Avatar);
             user.Username = userUpdateDto.Username;
             user.Faculty = _unitOfWork.FacultyRecords.Get(userUpdateDto.FacultyId);
+            user.Bio = userUpdateDto.Bio;
             _unitOfWork.Complete();
             switch (user.Role.Name)
             {

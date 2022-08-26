@@ -160,10 +160,14 @@ namespace SBUhamkari.Controllers
 
         [Authorize]
         [HttpPost("AddWorkFieldToPerson")]
-        public ActionResult AddWorkFieldToPerson(Guid workId)
+        public ActionResult AddWorkFieldToPerson(Guid Id)
         {
             var personId = GetUserId();
-            _unitOfWork.PersonWorkFields.Add(new PersonWorkField() { Person = _unitOfWork.People.Get(personId), WorkField = _unitOfWork.WorkFields.Get(workId) });
+            if (_unitOfWork.PersonWorkFields.GetAllPersonWorkFieldsByWorkFieldAndPerson(personId,Id)!=null)
+            {
+                return BadRequest("این زمینه کاری قبلا اضافه شده است");
+            }
+            _unitOfWork.PersonWorkFields.Add(new PersonWorkField() { Person = _unitOfWork.People.Get(personId), WorkField = _unitOfWork.WorkFields.Get(Id) });
             _unitOfWork.Complete();
             return Ok("با موفقیت اضافه شد");
         }
@@ -173,6 +177,10 @@ namespace SBUhamkari.Controllers
         public ActionResult AddWorkFieldToProject(Guid projectId, Guid workId)
         {
             var userId = GetUserId();
+            if (_unitOfWork.ProjectWorkFields.GetProjectWorkFieldsByWorkFieldAndProject(projectId,workId)!=null)
+            {
+                return BadRequest("این زمینه کاری قبلا اضافه شده است");
+            }
             var project = _unitOfWork.Projects.Get(projectId);
             var projectManager = _unitOfWork.ProjectManagers.GetProjectManagerByUserAndProject(userId, projectId);
             if (projectManager == null)

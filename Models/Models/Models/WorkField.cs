@@ -19,7 +19,6 @@ namespace Models.Models
         public string Name { get; set; }
 
         [JsonIgnore]
-        [ForeignKey("PersonID")]
         public List<PersonWorkField>? PersonWorkFields { get; set; }
 
         [ForeignKey("ProjectID")]
